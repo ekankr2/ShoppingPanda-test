@@ -10,7 +10,7 @@ import { RootState } from '../../store';
 import {setError} from "../../store/actions/pageActions";
 
 const SignIn: FC = () => {
-  const [email, setEmail] = useState('');
+  const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const SignIn: FC = () => {
       dispatch(setError(''));
     }
     setLoading(true);
-    dispatch(signin({ email, password }, () => setLoading(false)));
+    dispatch(signin({ account, password }, () => setLoading(false)));
   }
 
   return(
@@ -42,8 +42,8 @@ const SignIn: FC = () => {
           <Input 
             type="email"
             name="email"
-            value={email}
-            onChange={(e) => setEmail(e.currentTarget.value)}
+            value={account}
+            onChange={(e) => setAccount(e.currentTarget.value)}
             placeholder="Email address"
             label="Email address"
           />

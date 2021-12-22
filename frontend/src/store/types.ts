@@ -58,7 +58,7 @@ export interface SignUpData {
 }
 
 export interface SignInData {
-    email: string
+    account: string
     password: string
 }
 
