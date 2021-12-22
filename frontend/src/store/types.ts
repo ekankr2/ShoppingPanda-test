@@ -1,5 +1,8 @@
+export const SET_USER = 'SET_USER'
+export const SIGN_OUT = 'SIGN_OUt'
 export const SET_LOADING = 'SET_LOADING'
 export const SET_ERROR = 'SET_ERROR'
+export const NEED_VERIFICATION = 'NEED_VERIFICATION'
 export const SET_SUCCESS = 'SET_SUCCESS'
 export const SET_SUBMITTED = 'SET_SUBMITTED'
 
@@ -34,3 +37,45 @@ interface setSubmittedAction {
 
 export type PageAction = SetLoadingAction | SetErrorAction | SetSuccessAction | setSubmittedAction
 
+// Auth Types
+export interface User {
+    firstName: string
+    email: string
+    id: string
+    createdAt: any
+}
+
+export interface AuthState {
+    user: User | null
+    authenticated: boolean
+    needVerification: boolean
+}
+
+export interface SignUpData {
+    firstName: string
+    email: string
+    password: string
+}
+
+export interface SignInData {
+    email: string
+    password: string
+}
+
+// Auth Actions
+interface SetUserAction {
+    type: typeof SET_USER
+    payload: User
+}
+
+
+
+interface SignOutAction {
+    type: typeof SIGN_OUT
+}
+
+interface NeedVerificationAction {
+    type: typeof NEED_VERIFICATION
+}
+
+export type AuthAction = SetUserAction | SetLoadingAction | SignOutAction | SetErrorAction | NeedVerificationAction | SetSuccessAction;

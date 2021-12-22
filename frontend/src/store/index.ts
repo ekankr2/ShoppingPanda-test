@@ -3,9 +3,11 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import pageReducer from "./reducers/pageReducer";
+import authReducer from "./reducers/authReducer";
 
 const rootReducer = combineReducers({
     page: pageReducer,
+    auth: authReducer
 });
 
 const store = createStore(
