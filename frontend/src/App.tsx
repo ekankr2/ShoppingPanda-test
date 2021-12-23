@@ -13,6 +13,8 @@ import PublicRoute from './components/auth/PublicRoute';
 import Loader from './components/UI/Loader';
 import { RootState } from './store';
 import {setLoading} from "./store/actions/pageActions";
+import PandaMyPage from "./components/pages/mypage/panda/PandaMyPage";
+import PandaDashboard from "./components/pages/mypage/panda/PandaDashboard";
 
 const App: FC = () => {
   const dispatch = useDispatch();
@@ -48,6 +50,8 @@ const App: FC = () => {
           <PublicRoute path="/" component={Homepage} exact />
           <PublicRoute path="/signup" component={SignUp} exact />
           <PublicRoute path="/signin" component={SignIn} exact />
+          <PublicRoute path="/mypage" component={PandaMyPage} exact />
+          <PublicRoute path="/panda" component={PandaDashboard} exact />
           <PrivateRoute path="/dashboard" component={Dashboard} exact />
         </Switch>
       </BrowserRouter>

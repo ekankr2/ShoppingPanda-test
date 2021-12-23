@@ -1,13 +1,12 @@
-import React from 'react'
+import React, {FC} from 'react'
 
-import './layout.css'
+import './pandaMyPage.css'
 
 import { BrowserRouter, Route } from 'react-router-dom'
-import Sidebar from "../sections/Sidebar";
-import Routes from "../Routes";
-import Header from "../sections/Header";
+import Sidebar from "../../../sections/Sidebar";
+import Routes from "../../../Routes";
 
-const Layout = () => {
+const PandaMyPage:FC = () => {
 
     return (
         <BrowserRouter>
@@ -15,7 +14,6 @@ const Layout = () => {
                 <div className={`layout theme-mode-light theme-color-blue`}>
                     <Sidebar {...props}/>
                     <div className="layout__content">
-                        <Header/>
                         <div className="layout__content-main">
                             <Routes/>
                         </div>
@@ -26,4 +24,4 @@ const Layout = () => {
     )
 }
 
-export default Layout
+export default PandaMyPage

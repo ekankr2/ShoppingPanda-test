@@ -1,7 +1,7 @@
 [
     {
         "display_name": "Dashboard",
-        "route": "/",
+        "route": "/panda",
         "icon": "bx bx-category-alt"
     },
     {

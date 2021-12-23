@@ -15,10 +15,6 @@ const Header: FC = () => {
     dispatch(signout());
   }
 
-  const check = () => {
-    dispatch(getUser());
-  }
-
   return(
     <nav className="navbar is-spaced has-shadow">
       <div className="container">
@@ -35,7 +31,6 @@ const Header: FC = () => {
               :
               <Button text="Sign out" onClick={logoutClickHandler} />
             }
-            <Button text="Check" onClick={check} />
           </div>
         </div>
       </div>
