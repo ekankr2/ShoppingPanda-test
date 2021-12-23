@@ -6,13 +6,13 @@ import { Link } from 'react-router-dom'
 
 import notifications from '../../assets/JsonData/notification.json'
 
-import user_image from '../../assets/images/tuat.png'
+import user_image from '../../assets/images/귤.jpg'
 
 import user_menu from '../../assets/JsonData/user_menus.json'
 import Dropdown from "../UI/dropdown/Dropdown";
 
 const curr_user = {
-    display_name: 'Tuat Tran',
+    display_name: 'EKaN',
     image: user_image
 }
 
