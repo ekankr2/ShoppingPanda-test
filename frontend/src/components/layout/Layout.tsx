@@ -10,6 +10,8 @@ import { BrowserRouter, Route } from 'react-router-dom'
 
 import { useSelector, useDispatch } from 'react-redux'
 import Sidebar from "../sections/Sidebar";
+import TopNav from "../sections/TopNav";
+import Routes from "../Routes";
 
 // import ThemeAction from '../../redux/actions/ThemeAction'
 
