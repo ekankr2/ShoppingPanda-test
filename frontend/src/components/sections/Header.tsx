@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Button from '../UI/Button';
 import { RootState } from '../../store';
-import { signout } from '../../store/actions/authActions';
+import {getUser, signout} from '../../store/actions/authActions';
 
 const Header: FC = () => {
   const history = useHistory();
@@ -15,12 +15,15 @@ const Header: FC = () => {
     dispatch(signout());
   }
 
+  const check = () => {
+    dispatch(getUser());
+  }
+
   return(
     <nav className="navbar is-spaced has-shadow">
       <div className="container">
         <div className="navbar-brand">
-          <Link className="navbar-item" to={!authenticated ? "/" : "/dashboard"}>Yagada</Link>
-          <Button text="board" onClick={() => history.push('/register')} />
+          <Link className="navbar-item" to={!authenticated ? "/" : "/dashboard"}>name</Link>
         </div>
 
         <div className="navbar-end">
@@ -32,6 +35,7 @@ const Header: FC = () => {
               :
               <Button text="Sign out" onClick={logoutClickHandler} />
             }
+            <Button text="Check" onClick={check} />
           </div>
         </div>
       </div>

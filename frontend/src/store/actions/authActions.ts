@@ -53,3 +53,18 @@ export const signout = (): ThunkAction<void, RootState, null, AuthAction> => {
     }
 }
 
+// getuser
+export const getUser = (): ThunkAction<void, RootState, null, AuthAction> => {
+    return async dispatch => {
+        try {
+            const res = await axios.get('http://localhost:8080/api/auth/check')
+            if(res.data){
+                console.log(res.data)
+            }
+        }catch (err) {
+            console.log(err)
+            dispatch(setLoading(false))
+        }
+    }
+}
+
