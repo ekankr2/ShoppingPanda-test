@@ -12,7 +12,7 @@
     padding: 30px;
 }
 
-@media screen and (max-width : 768px) {
+@media screen and (max-width : 1024px) {
     .layout__content {
         padding-left: 70px;
         background-color: var(--second-bg);

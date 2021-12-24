@@ -57,20 +57,6 @@ const Sidebar : FC<SidebarProps> = props => {
                     ))
                 }
             </div>
-            {/*<div className='sidebarSm is-hidden-desktop is-hidden-tablet'>*/}
-            {/*    <div className="sidebar__logo">*/}
-            {/*    </div>*/}
-            {/*    {*/}
-            {/*        sidebar_items.map((item, index) => (*/}
-            {/*            <Link to={item.route} key={index}>*/}
-            {/*                <SidebarItem*/}
-            {/*                    icon={item.icon}*/}
-            {/*                    active={index === activeItem}*/}
-            {/*                />*/}
-            {/*            </Link>*/}
-            {/*        ))*/}
-            {/*    }*/}
-            {/*</div>*/}
         </>
     )
 }
