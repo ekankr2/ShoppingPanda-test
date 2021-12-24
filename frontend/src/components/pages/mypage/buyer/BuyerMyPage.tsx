@@ -6,7 +6,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import Sidebar from "../../../sections/Sidebar";
 import Routes from "../../../Routes";
 
-const PandaMyPage:FC = () => {
+const BuyerMyPage:FC = () => {
 
     return (
         <BrowserRouter>
@@ -24,4 +24,4 @@ const PandaMyPage:FC = () => {
     )
 }
 
-export default PandaMyPage
+export default BuyerMyPage

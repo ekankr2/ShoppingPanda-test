@@ -1,47 +1,37 @@
 [
     {
         "display_name": "Dashboard",
-        "route": "/panda",
+        "route": "/mypage",
         "icon": "bx bx-category-alt"
     },
     {
-        "display_name": "Customers",
+        "display_name": "주문 / 배송",
         "route": "/customers",
-        "icon": "bx bx-user-pin"
-    },
-    {
-        "display_name": "Products",
-        "route": "/products",
         "icon": "bx bx-package"
     },
     {
-        "display_name": "Orders",
+        "display_name": "취소 / 반품",
+        "route": "/products",
+        "icon": "bx bx-info-square"
+    },
+    {
+        "display_name": "찜 목록",
         "route": "/orders",
+        "icon": "bx bx-happy-heart-eyes"
+    },
+    {
+        "display_name": "장바구니",
+        "route": "/analytics",
         "icon": "bx bx-cart"
     },
     {
-        "display_name": "Analytics",
-        "route": "/analytics",
-        "icon": "bx bx-bar-chart-alt"
-    },
-    {
-        "display_name": "categories",
+        "display_name": "문의 내역",
         "route": "/categories",
-        "icon": "bx bx-list-ol"
+        "icon": "bx bx-message-dots"
     },
     {
-        "display_name": "discount",
+        "display_name": "설정",
         "route": "/discount",
-        "icon": "bx bx-gift"
-    },
-    {
-        "display_name": "inventory",
-        "route": "/inventory",
-        "icon": "bx bx-store-alt"
-    },
-    {
-        "display_name": "settings",
-        "route": "/settings",
         "icon": "bx bx-cog"
     }
 ]

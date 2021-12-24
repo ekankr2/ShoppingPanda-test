@@ -3,7 +3,7 @@ import statusCards from '../../../../assets/JsonData/status-card-data.json'
 import StatusCard from "../../../UI/cards/StatusCard";
 
 
-const PandaDashboard: FC = () => {
+const BuyerDashboard: FC = () => {
 
 
 
@@ -35,4 +35,4 @@ const PandaDashboard: FC = () => {
     )
 }
 
-export default PandaDashboard
+export default BuyerDashboard
