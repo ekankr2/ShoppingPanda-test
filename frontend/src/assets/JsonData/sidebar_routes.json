@@ -12,7 +12,7 @@
     {
         "display_name": "취소 / 반품",
         "route": "/products",
-        "icon": "bx bx-info-square"
+        "icon": "bx bx bx-x-circle"
     },
     {
         "display_name": "찜 목록",

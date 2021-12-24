@@ -13,7 +13,7 @@
     },
     {
         "link": "/",
-        "icon": "bx bx-info-square",
+        "icon": "bx bx-x-circle",
         "count": "0",
         "title": "취소 / 반품"
     },
