@@ -8,7 +8,7 @@ interface Props{
 
 const Badge: FC<Props> = ({type, content}) => {
     return (
-        <span className={`badge badge-${type}`}>
+        <span className={`tableBadge badge-${type}`}>
             {content}
         </span>
     )

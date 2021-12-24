@@ -22,35 +22,35 @@ const BuyerDashboard: FC = () => {
                 user: "john doe",
                 date: "17 Jun 2021",
                 price: "$900",
-                status: "shipping"
+                status: "완료"
             },
             {
                 id: "#OD1712",
                 user: "frank iva",
                 date: "1 Jun 2021",
                 price: "$400",
-                status: "paid"
+                status: "배송중"
             },
             {
                 id: "#OD1713",
                 user: "anthony baker",
                 date: "27 Jun 2021",
                 price: "$200",
-                status: "pending"
+                status: "취소중"
             },
             {
                 id: "#OD1712",
                 user: "frank iva",
                 date: "1 Jun 2021",
                 price: "$400",
-                status: "paid"
+                status: "배송중"
             },
             {
                 id: "#OD1713",
                 user: "anthony baker",
                 date: "27 Jun 2021",
                 price: "$200",
-                status: "refund"
+                status: "반품"
             }
         ]
     }
@@ -60,10 +60,10 @@ const BuyerDashboard: FC = () => {
     }
 
     const orderStatus: T = {
-        "shipping": "primary",
-        "pending": "warning",
-        "paid": "success",
-        "refund": "danger"
+        "완료": "primary",
+        "취소중": "warning",
+        "배송중": "success",
+        "반품": "danger"
     }
 
     const renderOrderHead = (item:any, index:number) => (
@@ -110,10 +110,7 @@ const BuyerDashboard: FC = () => {
                 </div>
 
                 <div className="row">
-                    <div className="col-lg-4 col-sm-12">
-                        dummy
-                    </div>
-                    <div className="col-lg-8 col-sm-12">
+                    <div className="col-12">
                         <div className="card">
                             <div className="card__header">
                                 <h3>최근 주문 현황</h3>

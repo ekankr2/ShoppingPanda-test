@@ -15,9 +15,11 @@ thead {
 tr {
     text-align: left;
 }
-
-th,
-td {
+.table-wrapper th {
+    text-transform: capitalize;
+    padding: 15px 10px;
+}
+.table-wrapper td {
     text-transform: capitalize;
     padding: 15px 10px;
 }
