@@ -17,7 +17,7 @@
     {
         "display_name": "찜 목록",
         "route": "/orders",
-        "icon": "bx bx-happy-heart-eyes"
+        "icon": "bx bx-heart"
     },
     {
         "display_name": "장바구니",

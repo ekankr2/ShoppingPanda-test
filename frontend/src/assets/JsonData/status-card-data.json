@@ -1,25 +1,25 @@
 [
     {
         "link": "/",
-        "icon": "bx bx-shopping-bag",
+        "icon": "bx bxs-truck",
         "count": "0",
         "title": "배송중"
     },
     {
         "link": "/",
-        "icon": "bx bx-cart",
+        "icon": "bx bx-package",
         "count": "0",
         "title": "배송 완료"
     },
     {
         "link": "/",
-        "icon": "bx bx-dollar-circle",
+        "icon": "bx bx-info-square",
         "count": "0",
         "title": "취소 / 반품"
     },
     {
         "link": "/",
-        "icon": "bx bx-receipt",
+        "icon": "bx bx-cart",
         "count": "0",
         "title": "장바구니"
     }
