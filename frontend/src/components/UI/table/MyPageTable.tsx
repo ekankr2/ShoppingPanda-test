@@ -1,5 +1,5 @@
 import React, {FC, useState} from "react";
-import './table.css'
+import './myPageTable.css'
 
 interface Props{
     limit?: string
