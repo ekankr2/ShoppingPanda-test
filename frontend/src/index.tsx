@@ -5,8 +5,6 @@ import App from './App';
 import 'bulma/css/bulma.min.css'
 import store from "./store";
 import {BrowserRouter} from "react-router-dom";
-
-import './assets/boxicons-2.1.1/css/boxicons.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/theme.css'
 import './assets/css/index.css'
