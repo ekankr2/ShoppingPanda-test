@@ -64,8 +64,9 @@ const MyPageTable: FC<Props> = ({limit, bodyData, headData, renderHead, renderBo
                     <div className="table__pagination">
                         {
                             range.map((item, index:number) => (
-                                <div key={index} className={`table__pagination-item 
-                                ${currPage === index ? 'active' : ''}`} onClick={() => selectPage(index)}>
+                                <div key={index} className={`table__pagination-item ${currPage === index ?
+                                    'active' : ''}`} onClick={() => selectPage(index)}>
+                                    {item + 1}
                                 </div>
                             ))
                         }

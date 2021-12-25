@@ -21,7 +21,7 @@
     },
     {
         "display_name": "장바구니",
-        "route": "/analytics",
+        "route": "/cart",
         "icon": "bx bx-cart"
     },
     {
