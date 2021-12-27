@@ -13,6 +13,7 @@
 }
 
 .product-content{
+    padding: 10px;
     margin: auto;
 }
 
@@ -26,19 +27,22 @@
 }
 
 .product-right{
+    padding: 50px;
     text-align: center;
     margin: auto;
 }
 
 @media screen and (max-width: 768px){
-    .product-container{
 
+    .product-content{
+        min-width: 100%;
+        text-align: center;
     }
 
     .product-right{
-        margin-top: 20px;
-        padding-top: 20px;
-        width: 100%;
+        min-width: 130px;
+        padding: 10px 0 0;
+        border-top: 1px solid #c0c2c7;
     }
 }
 

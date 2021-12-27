@@ -26,7 +26,7 @@ const ProductCard: FC<Props> = ({id, title, content, image, price, seller, selle
         backgroundPosition: "center",
         display: "inline-block",
         verticalAlign: "top",
-        margin: "auto 0"
+        margin: "auto"
     }
 
     return (
