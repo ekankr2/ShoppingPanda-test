@@ -1,3 +1,7 @@
+.order-card{
+    max-width: 1000px;
+    margin: 0 auto;
+}
 
 .order_calculator dl{
     margin: auto;

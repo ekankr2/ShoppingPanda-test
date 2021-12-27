@@ -1,36 +1,24 @@
-import React, {FC} from 'react';
-import MyPageTable from "../../UI/table/MyPageTable";
-import customerList from '../../../assets/JsonData/customers-list.json'
+import React, {FC, useEffect, useState} from 'react';
 import Button from "../../UI/Button";
 import "./cart.css"
-import {Link} from "react-router-dom";
+import axios from "axios";
+import {Simulate} from "react-dom/test-utils";
+import error = Simulate.error;
 
-const cartTableHead = [
-    '',
-    '상품명',
-    '가격',
-    '수량'
-]
+const CartPage: FC = () => {
+    const [cartItems, setCartItems] = useState([])
 
-interface Item {
-    [index:string]: string
-}
+    useEffect(()=>{
+        axios.get('/api/mycart')
+            .then((result)=>{
+                if(result.data.dtos){
+                    setCartItems(result.data.dtos)
+                }
+            }).catch((error)=> {
+                console.log(error)
+        })
+    },[])
 
-const renderHead = (item:Item, index:number) => <th key={index}>{item}</th>
-const renderBody = (item:Item, index:number) => (
-    <tr key={index}>
-        <td>{++index}</td>
-        <td>{item.email}</td>
-        <td>{item.total_spend}</td>
-        <td>{item.location}</td>
-    </tr>
-)
-
-interface Props{
-
-}
-
-const Cart: FC<Props> = ({}) => {
     return (
         <>
             <div className="container">
@@ -38,18 +26,12 @@ const Cart: FC<Props> = ({}) => {
                 <div className="row">
                     <div className="col-12">
                         <div className="card">
-                            <MyPageTable
-                                limit='5'
-                                headData={cartTableHead}
-                                renderHead={(item:Item, index:number) => renderHead(item,index)}
-                                bodyData={customerList}
-                                renderBody={(item:Item, index:number) => renderBody(item,index)}
-                            />
+
                         </div>
                     </div>
 
                     <div className="col-12">
-                        <div className="card">
+                        <div className="card order-card">
                                 <hr/>
                                 <div className="row order_calculator">
                                     <dl className="col-2">
@@ -81,4 +63,4 @@ const Cart: FC<Props> = ({}) => {
     );
 };
 
-export default Cart;
+export default CartPage;
