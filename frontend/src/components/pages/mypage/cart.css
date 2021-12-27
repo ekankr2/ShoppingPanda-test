@@ -1,0 +1,16 @@
+
+.order_calculator dl{
+    margin: auto;
+    width: 20%;
+    text-align: center;
+}
+.order_calculator dt{
+    margin-top: 10px;
+}
+.order_calculator i{
+    font-size: 30px;
+    color: #c0c2c7;
+}
+.cart_buy{
+    border-left: 1px solid #c0c2c7;
+}

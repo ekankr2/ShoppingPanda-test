@@ -1,6 +1,8 @@
 import React, {FC} from 'react';
 import MyPageTable from "../../UI/table/MyPageTable";
 import customerList from '../../../assets/JsonData/customers-list.json'
+import Button from "../../UI/Button";
+import "./cart.css"
 
 const cartTableHead = [
     '',
@@ -31,12 +33,12 @@ const Cart: FC<Props> = ({}) => {
     return (
         <>
             <div className="container">
-                <h2 className="page-header">장바구니</h2>
+                <h3 className="page-header">장바구니</h3>
                 <div className="row">
                     <div className="col-12">
                         <div className="card">
                             <MyPageTable
-                                limit='10'
+                                limit='5'
                                 headData={cartTableHead}
                                 renderHead={(item:Item, index:number) => renderHead(item,index)}
                                 bodyData={customerList}
@@ -46,7 +48,30 @@ const Cart: FC<Props> = ({}) => {
                     </div>
 
                     <div className="col-12">
-                        결제창
+                        <div className="card">
+                                <hr/>
+                                <div className="row order_calculator">
+                                    <dl>
+                                        <dt>총 상품 금액</dt>
+                                        <dd><span>25000원</span></dd>
+                                    </dl>
+                                    <dl>
+                                        <i className='bx bx-plus-circle'></i>
+                                    </dl>
+                                    <dl >
+                                        <dt>배송비</dt>
+                                        <dd><span>2500원</span></dd>
+                                    </dl>
+                                    <dl>
+                                        <i className='bx bx-chevron-right'></i>
+                                    </dl>
+                                    <dl>
+                                        <dt>총 주문 금액</dt>
+                                        <dd><span>2500원</span></dd>
+                                    </dl>
+                                </div>
+                                <hr/>
+                        </div>
                     </div>
                 </div>
             </div>
