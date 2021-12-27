@@ -2,7 +2,7 @@ import React, {FC} from "react";
 
 interface MessageProps {
     msg: string
-    type: 'danger' | 'success'
+    type: 'danger' | 'success' | 'info'
 }
 
 const Message: FC<MessageProps> = ({ msg, type }) => {
@@ -14,6 +14,10 @@ const Message: FC<MessageProps> = ({ msg, type }) => {
 
     if(type === 'success') {
         typeClass = 'is-success'
+    }
+
+    if(type === 'info') {
+        typeClass = 'is-info'
     }
 
     return (
