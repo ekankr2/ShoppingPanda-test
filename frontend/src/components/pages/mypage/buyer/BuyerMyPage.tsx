@@ -1,6 +1,6 @@
 import React, {FC} from 'react'
 
-import './pandaMyPage.css'
+import './buyerMyPage.css'
 
 import { BrowserRouter, Route } from 'react-router-dom'
 import Sidebar from "../../../sections/Sidebar";

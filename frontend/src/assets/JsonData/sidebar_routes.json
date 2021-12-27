@@ -6,7 +6,7 @@
     },
     {
         "display_name": "주문 / 배송",
-        "route": "/customers",
+        "route": "/orderList",
         "icon": "bx bx-package"
     },
     {

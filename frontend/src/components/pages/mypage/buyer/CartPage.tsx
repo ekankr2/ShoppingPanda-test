@@ -1,9 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
-import Button from "../../UI/Button";
-import "./cart.css"
+import Button from "../../../UI/Button";
+import "./cartPage.css"
 import axios from "axios";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
 
 const CartPage: FC = () => {
     const [cartItems, setCartItems] = useState([])
