@@ -3,6 +3,7 @@ import MyPageTable from "../../UI/table/MyPageTable";
 import customerList from '../../../assets/JsonData/customers-list.json'
 import Button from "../../UI/Button";
 import "./cart.css"
+import {Link} from "react-router-dom";
 
 const cartTableHead = [
     '',
@@ -51,26 +52,27 @@ const Cart: FC<Props> = ({}) => {
                         <div className="card">
                                 <hr/>
                                 <div className="row order_calculator">
-                                    <dl>
+                                    <dl className="col-2">
                                         <dt>총 상품 금액</dt>
                                         <dd><span>25000원</span></dd>
                                     </dl>
-                                    <dl>
+                                    <dl className="col-1">
                                         <i className='bx bx-plus-circle'></i>
                                     </dl>
-                                    <dl >
+                                    <dl className="col-2">
                                         <dt>배송비</dt>
                                         <dd><span>2500원</span></dd>
                                     </dl>
-                                    <dl>
+                                    <dl className="col-1">
                                         <i className='bx bx-chevron-right'></i>
                                     </dl>
-                                    <dl>
+                                    <dl className="col-4">
                                         <dt>총 주문 금액</dt>
-                                        <dd><span>2500원</span></dd>
+                                        <dd><span>25555원</span></dd>
                                     </dl>
                                 </div>
                                 <hr/>
+                            <Button text="주문하기" className="is-primary cart_buy_btn"/>
                         </div>
                     </div>
                 </div>

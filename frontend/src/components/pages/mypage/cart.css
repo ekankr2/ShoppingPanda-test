@@ -1,7 +1,6 @@
 
 .order_calculator dl{
     margin: auto;
-    width: 20%;
     text-align: center;
 }
 .order_calculator dt{
@@ -11,6 +10,7 @@
     font-size: 30px;
     color: #c0c2c7;
 }
-.cart_buy{
-    border-left: 1px solid #c0c2c7;
+.cart_buy_btn{
+    width: 250px;
+    margin: 0 auto;
 }
