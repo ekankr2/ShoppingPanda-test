@@ -41,7 +41,7 @@ const ProductCard: FC<Props> = ({id, title, content, image, price, seller, selle
                     <p className="price">{price}원</p>
                     <p className="status">{status}</p>
                 </li>
-                <li className="product-seller col-3">
+                <li className="product-right col-3">
                     {children}
                 </li>
             </ul>

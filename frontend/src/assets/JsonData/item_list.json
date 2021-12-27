@@ -14,7 +14,7 @@
         "image": "https://www.wikihow.com/images/thumb/f/fd/Draw-a-Snowman-Step-8.jpg/aid232280-v4-1200px-Draw-a-Snowman-Step-8.jpg",
         "content": "this is a wonderful fishing rod",
         "price": 6500,
-        "seller": "Brian",
+        "seller": "김진동",
         "sellerNum": "010-1234-5678",
         "status": "배송완료",
         "date": "2021. 12. 27"
@@ -24,9 +24,9 @@
         "image": "http://image.yes24.com/goods/92742567/XL",
         "content": "모던 자바스크립트 문법을 배워보자",
         "price": 40500,
-        "seller": "예스24",
+        "seller": "김진은",
         "sellerNum": "010-1234-5678",
-        "status": "배송완료",
+        "status": "상품준비중",
         "date": "2021. 12. 27"
 
     },
@@ -35,7 +35,7 @@
         "image": "http://image.auction.co.kr/itemimage/1f/db/a7/1fdba7a0c6.jpg",
         "content": "맛있는 맑은 샘물",
         "price": 12500,
-        "seller": "스파클",
+        "seller": "김진금",
         "sellerNum": "010-1234-5678",
         "status": "배송완료",
         "date": "2021. 12. 27"

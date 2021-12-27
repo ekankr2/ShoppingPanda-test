@@ -25,10 +25,21 @@
     font-size: 0.7em;
 }
 
-.product-seller{
+.product-right{
     text-align: center;
     margin: auto;
-    padding-top: 45px;
+}
+
+@media screen and (max-width: 768px){
+    .product-container{
+
+    }
+
+    .product-right{
+        margin-top: 20px;
+        padding-top: 20px;
+        width: 100%;
+    }
 }
 
 
