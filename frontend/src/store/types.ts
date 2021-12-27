@@ -5,6 +5,9 @@ export const SET_ERROR = 'SET_ERROR'
 export const NEED_VERIFICATION = 'NEED_VERIFICATION'
 export const SET_SUCCESS = 'SET_SUCCESS'
 export const SET_SUBMITTED = 'SET_SUBMITTED'
+export const ADD_CART = 'ADD_CART'
+export const FETCH_CART_LIST = 'FETCH_CART_LIST'
+export const DELETE_CART = 'DELETE_CART'
 
 // Page State
 export interface PageState {
@@ -79,3 +82,49 @@ interface NeedVerificationAction {
 }
 
 export type AuthAction = SetUserAction | SetLoadingAction | SignOutAction | SetErrorAction | NeedVerificationAction | SetSuccessAction;
+
+//cart types
+interface CartOption {
+    optionId: number
+    optionCount: number
+    originPrice: number
+    optionName: string
+    detailedId: number
+    pandaName: null | string
+}
+
+interface CartProduct {
+    productId: number
+    productName: string
+    thumbNail: string
+    do: CartOption
+}
+
+export interface Cart {
+    shopId: number
+    shopName: string
+    freePrice: number
+    shipPrice: number
+    dp: CartProduct
+}
+
+export interface CartState {
+    cartItems: Cart[]
+}
+
+interface AddCart {
+    type: typeof ADD_CART
+    payload: Cart
+}
+
+interface FetchCartList {
+    type: typeof FETCH_CART_LIST
+    payload: Cart[]
+}
+
+interface DeleteCart {
+    type: typeof DELETE_CART
+    payload: Cart
+}
+
+export type CartAction = AddCart | FetchCartList | DeleteCart
