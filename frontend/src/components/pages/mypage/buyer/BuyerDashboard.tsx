@@ -1,69 +1,14 @@
 import {FC} from "react";
 import { Link } from 'react-router-dom'
-import statusCards from '../../../../assets/JsonData/status-card-data.json'
+import {dashboardCard} from "./buyerTypes";
 import StatusCard from "../../../UI/cards/StatusCard";
 import MyPageTable from "../../../UI/table/MyPageTable";
 import Badge from "../../../UI/badge/Badge";
-
+import {latestOrders} from "./buyerTypes";
 
 const BuyerDashboard: FC = () => {
 
-    const latestOrders = {
-        header: [
-            "주문 번호",
-            "상품명",
-            "가격",
-            "주문 일자",
-            "상태"
-        ],
-        headerMobile: [
-            "상품명",
-            "상태"
-        ],
-        body: [
-            {
-                id: "#OD1711",
-                user: "john doe",
-                date: "17 Jun 2021",
-                price: "$900",
-                status: "완료"
-            },
-            {
-                id: "#OD1712",
-                user: "frank iva",
-                date: "1 Jun 2021",
-                price: "$400",
-                status: "배송중"
-            },
-            {
-                id: "#OD1713",
-                user: "anthony baker",
-                date: "27 Jun 2021",
-                price: "$200",
-                status: "취소중"
-            },
-            {
-                id: "#OD1712",
-                user: "frank iva",
-                date: "1 Jun 2021",
-                price: "$400",
-                status: "배송중"
-            },
-            {
-                id: "#OD1713",
-                user: "anthony baker",
-                date: "27 Jun 2021",
-                price: "$200",
-                status: "반품"
-            }
-        ]
-    }
-
-    type T = {
-        [index:string]: string
-    }
-
-    const orderStatus: T = {
+    const orderStatus: StringObj = {
         "완료": "primary",
         "취소중": "warning",
         "배송중": "success",
@@ -74,11 +19,11 @@ const BuyerDashboard: FC = () => {
         <th key={index}>{item}</th>
     )
 
-    interface OrderItem {
+    interface StringObj {
         [index:string]: string
     }
 
-    const renderBody = (item:OrderItem, index:number) => (
+    const renderBody = (item:StringObj, index:number) => (
         <tr key={index}>
             <td>{item.id}</td>
             <td>{item.user}</td>
@@ -90,7 +35,7 @@ const BuyerDashboard: FC = () => {
         </tr>
     )
 
-    const renderBodyMobile = (item:OrderItem, index:number) => (
+    const renderBodyMobile = (item:StringObj, index:number) => (
         <tr key={index}>
             <td>{item.user}</td>
             <td>
@@ -109,7 +54,7 @@ const BuyerDashboard: FC = () => {
                     <div className="col-md-12">
                         <div className="row">
                             {
-                                statusCards.map((item, index) =>
+                                dashboardCard.map((item, index) =>
                                     <div className="col-lg-3 col-md-6" key={index}>
                                         <StatusCard
                                             link={item.link}
@@ -148,7 +93,7 @@ const BuyerDashboard: FC = () => {
                                 />
                             </div>
                             <div className="card__footer">
-                                <Link to='/'>view all</Link>
+                                <Link to='/orderList'>더보기</Link>
                             </div>
                         </div>
                     </div>
