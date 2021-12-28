@@ -6,7 +6,7 @@ import Button from "../../../UI/Button";
 const CancelListPage: FC = () => {
     const [items, setItems] = useState(item_list)
 
-    function orderBtnText(status:string) :string {
+    function orderBtnText(status: string): string {
         switch (status) {
             case '배송완료':
                 return '구매 확정'

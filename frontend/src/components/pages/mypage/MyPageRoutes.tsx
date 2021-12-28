@@ -10,10 +10,10 @@ import CancelListPage from "./buyer/CancelListPage";
 const MyPageRoutes = () => {
     return (
         <Switch>
-            <Route path='/buyermypage' exact component={BuyerDashboard}/>
-            <Route path='/orderList' exact component={OrderListPage}/>
-            <Route path='/cancelList' exact component={CancelListPage}/>
-            <Route path='/cart' exact component={CartPage}/>
+            <Route path='/buyer/mypage' exact component={BuyerDashboard}/>
+            <Route path='/buyer/orderList' exact component={OrderListPage}/>
+            <Route path='/buyer/cancelList' exact component={CancelListPage}/>
+            <Route path='/buyer/cart' exact component={CartPage}/>
         </Switch>
     )
 }

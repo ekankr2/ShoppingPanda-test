@@ -1,27 +1,27 @@
 export const buyerSidebarItems = [
     {
         "display_name": "Dashboard",
-        "route": "/buyermypage",
+        "route": "/buyer/mypage",
         "icon": "bx bx-category-alt"
     },
     {
         "display_name": "주문 / 배송",
-        "route": "/orderList",
+        "route": "/buyer/orderList",
         "icon": "bx bx-package"
     },
     {
         "display_name": "취소 / 반품",
-        "route": "/cancelList",
+        "route": "/buyer/cancelList",
         "icon": "bx bx bx-x-circle"
     },
     {
         "display_name": "찜 목록",
-        "route": "/orders",
+        "route": "/buyer/orders",
         "icon": "bx bx-heart"
     },
     {
         "display_name": "장바구니",
-        "route": "/cart",
+        "route": "/buyer/cart",
         "icon": "bx bx-cart"
     },
     {

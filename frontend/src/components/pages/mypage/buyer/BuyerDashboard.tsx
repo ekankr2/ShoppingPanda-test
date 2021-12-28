@@ -1,5 +1,5 @@
 import {FC} from "react";
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {dashboardCard} from "./buyerTypes";
 import StatusCard from "../../../UI/cards/StatusCard";
 import MyPageTable from "../../../UI/table/MyPageTable";
@@ -15,15 +15,15 @@ const BuyerDashboard: FC = () => {
         "반품": "danger"
     }
 
-    const renderHead = (item:any, index:number) => (
+    const renderHead = (item: any, index: number) => (
         <th key={index}>{item}</th>
     )
 
     interface StringObj {
-        [index:string]: string
+        [index: string]: string
     }
 
-    const renderBody = (item:StringObj, index:number) => (
+    const renderBody = (item: StringObj, index: number) => (
         <tr key={index}>
             <td>{item.id}</td>
             <td>{item.user}</td>
@@ -35,7 +35,7 @@ const BuyerDashboard: FC = () => {
         </tr>
     )
 
-    const renderBodyMobile = (item:StringObj, index:number) => (
+    const renderBodyMobile = (item: StringObj, index: number) => (
         <tr key={index}>
             <td>{item.user}</td>
             <td>
@@ -78,18 +78,18 @@ const BuyerDashboard: FC = () => {
                             <div className="card__body is-hidden-mobile">
                                 <MyPageTable
                                     headData={latestOrders.header}
-                                    renderHead={(item:any, index:number) => renderHead(item, index)}
+                                    renderHead={(item: any, index: number) => renderHead(item, index)}
                                     bodyData={latestOrders.body}
-                                    renderBody={(item:any, index:number) => renderBody(item, index)}
+                                    renderBody={(item: any, index: number) => renderBody(item, index)}
                                 />
                             </div>
                             {/*mobile table*/}
                             <div className="card__body is-hidden-tablet">
                                 <MyPageTable
                                     headData={latestOrders.headerMobile}
-                                    renderHead={(item:any, index:number) => renderHead(item, index)}
+                                    renderHead={(item: any, index: number) => renderHead(item, index)}
                                     bodyData={latestOrders.body}
-                                    renderBody={(item:any, index:number) => renderBodyMobile(item, index)}
+                                    renderBody={(item: any, index: number) => renderBodyMobile(item, index)}
                                 />
                             </div>
                             <div className="card__footer">
