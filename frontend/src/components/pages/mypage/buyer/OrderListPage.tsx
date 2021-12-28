@@ -23,6 +23,7 @@ const OrderListPage: FC = () => {
 
     return (
         <>
+            <h3 className="page-header">주문 현황</h3>
             {items && items.map((product, index) =>
                 <ProductCard key={index}
                              title={product.title}

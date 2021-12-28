@@ -8,7 +8,7 @@ import OrderListPage from "./pages/mypage/buyer/OrderListPage";
 const Routes = () => {
     return (
         <Switch>
-            <Route path='/mypage' exact component={BuyerDashboard}/>
+            <Route path='/buyermypage' exact component={BuyerDashboard}/>
             <Route path='/orderList' exact component={OrderListPage}/>
             <Route path='/cart' exact component={CartPage}/>
         </Switch>

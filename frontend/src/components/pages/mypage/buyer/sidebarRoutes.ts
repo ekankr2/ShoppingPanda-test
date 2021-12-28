@@ -1,4 +1,4 @@
-[
+export default [
     {
         "display_name": "Dashboard",
         "route": "/buyermypage",

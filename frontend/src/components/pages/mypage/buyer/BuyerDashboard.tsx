@@ -103,7 +103,7 @@ const BuyerDashboard: FC = () => {
         <>
 
             <div className="container">
-                <h2 className="page-header">마이페이지</h2>
+                <h3 className="page-header">마이페이지</h3>
                 {/*card*/}
                 <div className="row">
                     <div className="col-md-12">

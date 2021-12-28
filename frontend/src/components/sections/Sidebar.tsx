@@ -1,12 +1,44 @@
 import React, {FC} from 'react'
-
 import { Link } from 'react-router-dom'
-
 import './sidebar.css'
-
 import logo from '../../assets/images/logo.png'
 
-import sidebar_items from '../../assets/JsonData/sidebar_routes.json'
+interface SidebarProps {
+    location: {
+        pathname: string
+    }
+    sidebarItems: any
+}
+
+interface StringObj{
+    [key:string]:string
+}
+
+const Sidebar : FC<SidebarProps> = ({location, sidebarItems}) => {
+
+    const activeItem = sidebarItems.findIndex((item: StringObj) => item.route === location.pathname)
+
+    return (
+        <>
+            <div className='sidebar'>
+                <div className="sidebar__logo">
+                    <img src={logo} alt="company logo" />
+                </div>
+                {
+                    sidebarItems.map((item:StringObj, index:number) => (
+                        <Link to={item.route} key={index}>
+                            <SidebarItem
+                                title={item.display_name}
+                                icon={item.icon}
+                                active={index === activeItem}
+                            />
+                        </Link>
+                    ))
+                }
+            </div>
+        </>
+    )
+}
 
 interface ItemProps {
     title?: string
@@ -27,37 +59,6 @@ const SidebarItem : FC<ItemProps> = (props) => {
                 </span>
             </div>
         </div>
-    )
-}
-
-interface SidebarProps {
-    location: {
-        pathname: string
-    }
-}
-const Sidebar : FC<SidebarProps> = props => {
-
-    const activeItem = sidebar_items.findIndex(item => item.route === props.location.pathname)
-
-    return (
-        <>
-            <div className='sidebar'>
-                <div className="sidebar__logo">
-                    <img src={logo} alt="company logo" />
-                </div>
-                {
-                    sidebar_items.map((item, index) => (
-                        <Link to={item.route} key={index}>
-                            <SidebarItem
-                                title={item.display_name}
-                                icon={item.icon}
-                                active={index === activeItem}
-                            />
-                        </Link>
-                    ))
-                }
-            </div>
-        </>
     )
 }
 

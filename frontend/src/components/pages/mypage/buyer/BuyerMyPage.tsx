@@ -5,6 +5,7 @@ import './buyerMyPage.css'
 import { BrowserRouter, Route } from 'react-router-dom'
 import Sidebar from "../../../sections/Sidebar";
 import Routes from "../../../Routes";
+import sidebarRoutes from "./sidebarRoutes";
 
 const BuyerMyPage:FC = () => {
 
@@ -12,7 +13,7 @@ const BuyerMyPage:FC = () => {
         <BrowserRouter>
             <Route render={(props) => (
                 <div className={`layout theme-mode-light theme-color-blue`}>
-                    <Sidebar {...props}/>
+                    <Sidebar sidebarItems={sidebarRoutes} {...props}/>
                     <div className="layout__content">
                         <div className="layout__content-main">
                             <Routes/>
