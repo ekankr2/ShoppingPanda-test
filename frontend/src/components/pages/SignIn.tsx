@@ -1,6 +1,6 @@
 import React, { FC, useState, FormEvent, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import {Link, RouteComponentProps} from 'react-router-dom';
 
 import Input from '../UI/Input';
 import Button from '../UI/Button';
@@ -9,12 +9,26 @@ import { signin } from '../../store/actions/authActions';
 import { RootState } from '../../store';
 import {setError} from "../../store/actions/pageActions";
 
-const SignIn: FC = () => {
+interface Props{
+  history: RouteComponentProps["history"];
+  location: {
+    state: {
+      next: string
+    }
+}
+  match: RouteComponentProps['match'];
+}
+
+const SignIn: FC<Props> = (props) => {
   const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const { error } = useSelector((state: RootState) => state.page);
+  const { authenticated } = useSelector((state: RootState) => state.auth);
+
+  console.log(props)
+  console.log(props.location.state.next)
 
   useEffect(() => {
     return () => {
@@ -23,6 +37,15 @@ const SignIn: FC = () => {
       }
     }
   }, [error, dispatch]);
+
+  useEffect(()=> {
+    const {history, location: {state}} = props
+    if(authenticated){
+      if (state && state.next){
+        history.push(state.next)
+      }
+    }
+  },[authenticated, props])
 
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();

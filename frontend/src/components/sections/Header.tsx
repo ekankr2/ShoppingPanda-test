@@ -20,6 +20,7 @@ const Header: FC = () => {
       <div className="container">
         <div className="navbar-brand">
           <Link className="navbar-item" to={!authenticated ? "/" : "/dashboard"}>name</Link>
+          <Link className="navbar-item" to={"/buyer/mypage"}>mypage</Link>
         </div>
 
         <div className="navbar-end">

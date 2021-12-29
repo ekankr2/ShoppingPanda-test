@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter, Switch } from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import './App.css';
 
 import Header from './components/sections/Header';
@@ -47,10 +47,10 @@ const App: FC = () => {
       <BrowserRouter>
         <Header />
         <Switch>
-          <PublicRoute path="/" component={Homepage} exact />
-          <PublicRoute path="/signup" component={SignUp} exact />
-          <PublicRoute path="/signin" component={SignIn} exact />
-          <PublicRoute path="/buyer/mypage" component={BuyerMyPage} exact />
+          <Route path="/" component={Homepage} exact />
+          <Route path="/signup" component={SignUp} exact />
+          <Route path="/signin" component={SignIn} exact />
+          <PrivateRoute path="/buyer/mypage" component={BuyerMyPage} exact />
         </Switch>
       </BrowserRouter>
   );
