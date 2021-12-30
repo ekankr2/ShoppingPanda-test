@@ -1,5 +1,4 @@
 import {FC} from "react";
-import {Link} from 'react-router-dom'
 import {dashboardCard} from "./buyerTypes";
 import StatusCard from "../../../UI/cards/StatusCard";
 import MyPageTable from "../../../UI/table/MyPageTable";
@@ -77,6 +76,7 @@ const BuyerDashboard: FC = () => {
                             {/*table pc*/}
                             <div className="card__body is-hidden-mobile">
                                 <MyPageTable
+                                    limit="5"
                                     headData={latestOrders.header}
                                     renderHead={(item: any, index: number) => renderHead(item, index)}
                                     bodyData={latestOrders.body}
@@ -86,14 +86,12 @@ const BuyerDashboard: FC = () => {
                             {/*mobile table*/}
                             <div className="card__body is-hidden-tablet">
                                 <MyPageTable
+                                    limit="5"
                                     headData={latestOrders.headerMobile}
                                     renderHead={(item: any, index: number) => renderHead(item, index)}
                                     bodyData={latestOrders.body}
                                     renderBody={(item: any, index: number) => renderBodyMobile(item, index)}
                                 />
-                            </div>
-                            <div className="card__footer">
-                                <Link to='/orderList'>더보기</Link>
                             </div>
                         </div>
                     </div>

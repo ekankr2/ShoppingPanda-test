@@ -16,7 +16,7 @@ const MyPageTable: FC<Props> = ({limit, bodyData, headData, renderHead, renderBo
     const [dataShow, setDataShow] = useState(initDataShow)
 
     let pages = 1
-    let range: number[] = []
+    let range: any = []
 
     if(limit !== undefined) {
         let page = Math.floor(bodyData.length / Number(limit))
@@ -31,6 +31,7 @@ const MyPageTable: FC<Props> = ({limit, bodyData, headData, renderHead, renderBo
         const end = start + Number(limit)
 
         setDataShow(bodyData.slice(start, end))
+        setCurrPage(page)
     }
 
     return (
@@ -63,9 +64,8 @@ const MyPageTable: FC<Props> = ({limit, bodyData, headData, renderHead, renderBo
                 pages > 1 ? (
                     <div className="table__pagination">
                         {
-                            range.map((item, index:number) => (
-                                <div key={index} className={`table__pagination-item ${currPage === index ?
-                                    'active' : ''}`} onClick={() => selectPage(index)}>
+                            range.map((item:any, index:number) => (
+                                <div key={index} className={`table__pagination-item ${currPage === index ? 'active' : ''}`} onClick={() => selectPage(index)}>
                                     {item + 1}
                                 </div>
                             ))
