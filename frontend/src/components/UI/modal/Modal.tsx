@@ -16,7 +16,7 @@ const Modal: FC<ModalProps> = ({ onClose, title, children }) => {
             <div className="modal-card">
                 <header className="modal-card-head">
                     <p className="modal-card-title">{title}</p>
-                    <button className="delete" aria-label="close" onClick={onClose}></button>
+                    <button className="delete" aria-label="close" onClick={onClose}>닫기</button>
                 </header>
                 <section className="modal-card-body">
                     {children}

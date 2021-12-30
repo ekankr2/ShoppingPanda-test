@@ -1,11 +1,17 @@
-import {FC} from "react";
+import {FC, useState} from "react";
 import {dashboardCard} from "./buyerTypes";
 import StatusCard from "../../../UI/cards/StatusCard";
 import MyPageTable from "../../../UI/table/MyPageTable";
 import Badge from "../../../UI/badge/Badge";
 import {latestOrders} from "./buyerTypes";
+import Modal from "../../../UI/modal/Modal";
+
+interface StringObj {
+    [index: string]: string
+}
 
 const BuyerDashboard: FC = () => {
+    const [showModal, setShowModal] = useState(false)
 
     const orderStatus: StringObj = {
         "완료": "primary",
@@ -18,12 +24,10 @@ const BuyerDashboard: FC = () => {
         <th key={index}>{item}</th>
     )
 
-    interface StringObj {
-        [index: string]: string
-    }
-
     const renderBody = (item: StringObj, index: number) => (
-        <tr key={index}>
+        <tr key={index} onClick={() => {
+            setShowModal(true)
+        }}>
             <td>{item.id}</td>
             <td>{item.user}</td>
             <td>{item.price}</td>
@@ -98,6 +102,12 @@ const BuyerDashboard: FC = () => {
                 </div>
             </div>
 
+            {
+                showModal &&
+                <Modal onClose={() => {setShowModal(false)}} title={"배송 상세보기"}>
+                    <div>this is a modal</div>
+                </Modal>
+            }
 
         </>
     )
