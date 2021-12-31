@@ -1,19 +1,18 @@
 import React, {FC} from 'react'
 
-import './buyerMyPage.css'
+import './buyerIndex.css'
 
 import { BrowserRouter, Route } from 'react-router-dom'
-import Sidebar from "../../../sections/Sidebar";
 import {buyerSidebarItems} from "./buyerTypes";
 import MyPageRoutes from "../MyPageRoutes";
+import BuyerSidebar from "../../../sections/sidebar/BuyerSidebar";
 
-const BuyerMyPage:FC = () => {
+const BuyerIndex:FC = () => {
 
     return (
-        <BrowserRouter>
             <Route render={(props) => (
                 <div className={`layout theme-mode-light theme-color-blue`}>
-                    <Sidebar sidebarItems={buyerSidebarItems} {...props}/>
+                    <BuyerSidebar sidebarItems={buyerSidebarItems} {...props}/>
                     <div className="layout__content">
                         <div className="layout__content-main">
                             <MyPageRoutes/>
@@ -21,8 +20,7 @@ const BuyerMyPage:FC = () => {
                     </div>
                 </div>
             )}/>
-        </BrowserRouter>
     )
 }
 
-export default BuyerMyPage
+export default BuyerIndex

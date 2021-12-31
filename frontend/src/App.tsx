@@ -10,7 +10,8 @@ import Homepage from './components/pages/Homepage';
 import Loader from './components/UI/Loader';
 import { RootState } from './store';
 import {setLoading} from "./store/actions/pageActions";
-import BuyerMyPage from "./components/pages/mypage/buyer/BuyerMyPage";
+import BuyerIndex from "./components/pages/mypage/buyer/BuyerIndex";
+import PandaIndex from "./components/pages/mypage/panda/PandaIndex";
 
 const App: FC = () => {
   const dispatch = useDispatch();
@@ -40,15 +41,16 @@ const App: FC = () => {
   }
 
   return (
-      <BrowserRouter>
+      <>
         <Header />
         <Switch>
           <Route path="/" component={Homepage} exact />
           <Route path="/signup" component={SignUp} exact />
           <Route path="/signin" component={SignIn} exact />
-          <Route path="/buyer" component={BuyerMyPage} />
+          <Route path="/buyer" component={BuyerIndex} />
+          <Route path="/panda" component={PandaIndex} />
         </Switch>
-      </BrowserRouter>
+      </>
   );
 }
 

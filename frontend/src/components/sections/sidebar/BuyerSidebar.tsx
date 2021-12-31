@@ -1,20 +1,20 @@
 import React, {FC} from 'react'
 import { Link } from 'react-router-dom'
-import './sidebar.css'
-import logo from '../../assets/images/logo.png'
+import './buyerSidebar.css'
+import logo from '../../../assets/images/logo.png'
 
-interface SidebarProps {
+export interface SidebarProps {
     location: {
         pathname: string
     }
     sidebarItems: any
 }
 
-interface StringObj{
+export interface StringObj{
     [key:string]:string
 }
 
-const Sidebar : FC<SidebarProps> = ({location, sidebarItems}) => {
+const BuyerSidebar : FC<SidebarProps> = ({location, sidebarItems}) => {
 
     const activeItem = sidebarItems.findIndex((item: StringObj) => item.route === location.pathname)
 
@@ -62,4 +62,4 @@ const SidebarItem : FC<ItemProps> = (props) => {
     )
 }
 
-export default Sidebar
+export default BuyerSidebar
