@@ -73,7 +73,7 @@ const BuyerDashboard: FC = () => {
 
                 <div className="row">
                     <div className="col-12">
-                        <div className="card">
+                        <div className="custom-card">
                             <div className="card__header">
                                 <h3>최근 주문 현황</h3>
                             </div>

@@ -23,13 +23,13 @@ const CartPage: FC = () => {
                 <h3 className="page-header">장바구니</h3>
                 <div className="row">
                     <div className="col-12">
-                        <div className="card">
+                        <div className="custom-card">
 
                         </div>
                     </div>
 
                     <div className="col-12">
-                        <div className="card order-card">
+                        <div className="custom-card order-card">
                                 <hr/>
                                 <div className="row order_calculator">
                                     <dl className="col-2">

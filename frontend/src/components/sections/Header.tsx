@@ -21,6 +21,7 @@ const Header: FC = () => {
         <div className="navbar-brand">
           <Link className="navbar-item" to={!authenticated ? "/" : "/dashboard"}>name</Link>
           <Link className="navbar-item" to={"/buyer/mypage"}>mypage</Link>
+          <Link className="navbar-item" to={"/panda/mypage"}>pandapage</Link>
         </div>
 
         <div className="navbar-end">

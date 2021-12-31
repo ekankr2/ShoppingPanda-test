@@ -7,14 +7,10 @@ import Header from './components/sections/Header';
 import SignUp from './components/pages/SignUp';
 import SignIn from './components/pages/SignIn';
 import Homepage from './components/pages/Homepage';
-import Dashboard from './components/pages/Dashboard';
-import PrivateRoute from './components/auth/PrivateRoute';
-import PublicRoute from './components/auth/PublicRoute';
 import Loader from './components/UI/Loader';
 import { RootState } from './store';
 import {setLoading} from "./store/actions/pageActions";
 import BuyerMyPage from "./components/pages/mypage/buyer/BuyerMyPage";
-import BuyerDashboard from "./components/pages/mypage/buyer/BuyerDashboard";
 
 const App: FC = () => {
   const dispatch = useDispatch();
