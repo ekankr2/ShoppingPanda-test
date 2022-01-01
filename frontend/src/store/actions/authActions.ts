@@ -22,7 +22,7 @@ export const signin = (data: SignInData, onError: () => void): ThunkAction<void,
     return async dispatch => {
         try {
             dispatch(setLoading(true))
-            const res = await axios.post('http://localhost:8080/api/authenticate',{
+            const res = await axios.post('/api/authenticate',{
                 username: data.account,
                 password: data.password
             })
@@ -60,7 +60,7 @@ export const signout = (): ThunkAction<void, RootState, null, AuthAction> => {
 export const getUser = (account: string): ThunkAction<void, RootState, null, AuthAction> => {
     return async dispatch => {
         try {
-            const res = await axios.get('http://localhost:8080/api/auth/check')
+            const res = await axios.get('/api/auth/check')
             if(res.data){
                 console.log(res.data)
             }
