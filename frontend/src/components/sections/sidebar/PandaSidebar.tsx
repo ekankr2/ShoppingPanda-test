@@ -41,7 +41,7 @@ const SidebarItem: FC<ItemProps> = (props) => {
 
     return (
         <div className="sidebar__item">
-            <div className={`sidebar__item-inner panda-theme ${active} `}>
+            <div className={`sidebar__item-inner ${active} `}>
                 <i className={props.icon}></i>
                 <span>
                     {props.title}

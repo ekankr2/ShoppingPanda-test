@@ -12,28 +12,15 @@ import { RootState } from './store';
 import {setLoading} from "./store/actions/pageActions";
 import BuyerIndex from "./components/pages/mypage/buyer/BuyerIndex";
 import PandaIndex from "./components/pages/mypage/panda/PandaIndex";
+import {getUser} from "./store/actions/authActions";
 
 const App: FC = () => {
   const dispatch = useDispatch();
   const { loading } = useSelector((state: RootState) => state.page);
 
-  // Check if user exists
   // useEffect(() => {
-  //   dispatch(setLoading(true));
-  //   const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
-  //     if(user) {
-  //       dispatch(setLoading(true));
-  //       await dispatch(getUserById(user.uid));
-  //       if(!user.emailVerified) {
-  //         dispatch(setNeedVerification());
-  //       }
-  //     }
-  //     dispatch(setLoading(false));
-  //   });
+  //   // dispatch(setLoading(true));
   //
-  //   return () => {
-  //     unsubscribe();
-  //   };
   // }, [dispatch]);
 
   if(loading) {

@@ -8,7 +8,7 @@ import {pandaSidebarItems} from "./pandaTypes";
 const PandaIndex: FC = () => {
     return (
         <Route render={(props) => (
-            <div className={`layout theme-mode-light theme-color-orange`}>
+            <div className={`layout theme-mode-light theme-color-red`}>
                 <PandaSidebar sidebarItems={pandaSidebarItems} {...props}/>
                 <div className="layout__content">
                     <div className="layout__content-main">

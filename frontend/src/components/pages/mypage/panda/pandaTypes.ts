@@ -7,11 +7,11 @@ export const pandaSidebarItems = [
     {
         "display_name": "영상 관리",
         "route": "/panda/orderList",
-        "icon": "bx bx-package"
+        "icon": "bx bxs-videos"
     },
     {
         "display_name": "정산 관리",
         "route": "/panda/cancelList",
-        "icon": "bx bx bx-x-circle"
+        "icon": "bx bx bx-won"
     }
 ]

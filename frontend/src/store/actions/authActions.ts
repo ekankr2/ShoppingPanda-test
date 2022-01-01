@@ -21,6 +21,7 @@ export const signup = (data: SignUpData, onError: () => void): ThunkAction<void,
 export const signin = (data: SignInData, onError: () => void): ThunkAction<void, RootState, null, AuthAction> => {
     return async dispatch => {
         try {
+            dispatch(setLoading(true))
             const res = await axios.post('http://localhost:8080/api/authenticate',{
                 username: data.account,
                 password: data.password
@@ -32,6 +33,8 @@ export const signin = (data: SignInData, onError: () => void): ThunkAction<void,
                     type: SET_USER,
                     payload: userData
                 })
+                dispatch(getUser(data.account))
+                dispatch(setLoading(false))
             }
         }catch (err: any) {
             console.log(err)
@@ -54,7 +57,7 @@ export const signout = (): ThunkAction<void, RootState, null, AuthAction> => {
 }
 
 // getuser
-export const getUser = (): ThunkAction<void, RootState, null, AuthAction> => {
+export const getUser = (account: string): ThunkAction<void, RootState, null, AuthAction> => {
     return async dispatch => {
         try {
             const res = await axios.get('http://localhost:8080/api/auth/check')

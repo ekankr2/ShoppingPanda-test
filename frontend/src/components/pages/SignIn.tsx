@@ -28,7 +28,6 @@ const SignIn: FC<Props> = (props) => {
   const { authenticated } = useSelector((state: RootState) => state.auth);
 
   console.log(props)
-  console.log(props.location.state.next)
 
   useEffect(() => {
     return () => {
@@ -43,6 +42,8 @@ const SignIn: FC<Props> = (props) => {
     if(authenticated){
       if (state && state.next){
         history.push(state.next)
+      }else{
+        history.goBack()
       }
     }
   },[authenticated, props])
