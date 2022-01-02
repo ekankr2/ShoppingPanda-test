@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Button from '../UI/Button';
 import { RootState } from '../../store';
-import {getUser, signout} from '../../store/actions/authActions';
+import {signout} from '../../store/actions/authActions';
 
 const Header: FC = () => {
   const history = useHistory();

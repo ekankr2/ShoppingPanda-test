@@ -33,13 +33,14 @@ export const signin = (data: SignInData, onError: () => void): ThunkAction<void,
                     type: SET_USER,
                     payload: userData
                 })
-                dispatch(getUser(data.account))
                 dispatch(setLoading(false))
             }
         }catch (err: any) {
             console.log(err)
             onError()
-            dispatch(setError(err))
+            dispatch(setError("아이디나 비밀번호를 확인해 주십시오"))
+            dispatch(setLoading(false))
+
         }
     }
 }
@@ -57,17 +58,18 @@ export const signout = (): ThunkAction<void, RootState, null, AuthAction> => {
 }
 
 // getuser
-export const getUser = (account: string): ThunkAction<void, RootState, null, AuthAction> => {
-    return async dispatch => {
-        try {
-            const res = await axios.get('/api/auth/check')
-            if(res.data){
-                console.log(res.data)
-            }
-        }catch (err) {
-            console.log(err)
-            dispatch(setLoading(false))
-        }
-    }
-}
+// export const getUser = (): ThunkAction<void, RootState, null, AuthAction> => {
+//     return async dispatch => {
+//         try {
+//             const res = await axios.get('/api/auth/check')
+//             if(res.data){
+//                 console.log(res.data)
+//             }
+//         }catch (err) {
+//             console.log(err)
+//             dispatch(setLoading(false))
+//         }
+//     }
+// }
+
 
