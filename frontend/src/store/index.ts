@@ -4,10 +4,12 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import pageReducer from "./reducers/pageReducer";
 import authReducer from "./reducers/authReducer";
+import buyerReducer from "./reducers/mypageReducers/buyerReducer";
 
 const rootReducer = combineReducers({
     page: pageReducer,
-    auth: authReducer
+    auth: authReducer,
+    buyer: buyerReducer
 });
 
 const store = createStore(

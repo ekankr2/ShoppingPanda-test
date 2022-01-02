@@ -40,25 +40,25 @@ export const dashboardCard = [
     {
         "link": "/orderList",
         "icon": "bx bxs-truck",
-        "count": "0",
+        "count": 0,
         "title": "배송중"
     },
     {
         "link": "/orderList",
         "icon": "bx bx-package",
-        "count": "0",
+        "count": 0,
         "title": "배송 완료"
     },
     {
         "link": "/",
         "icon": "bx bx-x-circle",
-        "count": "0",
+        "count": 0,
         "title": "취소 / 반품"
     },
     {
         "link": "/cart",
         "icon": "bx bx-cart",
-        "count": "0",
+        "count": 0,
         "title": "장바구니"
     }
 ]

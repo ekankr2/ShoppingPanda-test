@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 interface Props{
     link: string
     icon: string
-    count: string
+    count: number
     title: string
 }
 

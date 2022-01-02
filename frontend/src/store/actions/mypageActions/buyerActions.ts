@@ -2,9 +2,9 @@ import {ThunkAction} from "redux-thunk";
 import {RootState} from "../../index";
 import {BuyerMyPageAction, Dashboard, FETCH_DASHBOARD} from "../../types";
 import axios from "axios";
-import {setLoading} from "../pageActions";
+import {setError, setLoading} from "../pageActions";
 
-export const fetchDashBoard = (onError: () => void): ThunkAction<void, RootState, null, BuyerMyPageAction> => {
+export const fetchDashBoard = (): ThunkAction<void, RootState, null, BuyerMyPageAction> => {
     return async dispatch => {
         try {
             const res = await axios.get('/api/dashboard')
@@ -19,7 +19,7 @@ export const fetchDashBoard = (onError: () => void): ThunkAction<void, RootState
             }
         }catch (error: any){
             console.log(error)
-            onError()
+            dispatch(setError("마이페이지 통신 이상"))
             dispatch(setLoading(false))
         }
     }

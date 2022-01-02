@@ -1,10 +1,13 @@
-import {FC, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {dashboardCard} from "./buyerTypes";
 import StatusCard from "../../../UI/cards/StatusCard";
 import MyPageTable from "../../../UI/table/MyPageTable";
 import Badge from "../../../UI/badge/Badge";
 import {latestOrders} from "./buyerTypes";
 import Modal from "../../../UI/modal/Modal";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchDashBoard} from "../../../../store/actions/mypageActions/buyerActions";
+import {RootState} from "../../../../store";
 
 interface StringObj {
     [index: string]: string
@@ -12,6 +15,25 @@ interface StringObj {
 
 const BuyerDashboard: FC = () => {
     const [showModal, setShowModal] = useState(false)
+    const [cardItems, setCardItems] = useState(dashboardCard)
+    const { dashboard } = useSelector((state: RootState) => state.buyer);
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        dispatch(fetchDashBoard())
+        console.log(...cardItems)
+    },[dispatch])
+
+    useEffect(()=>{
+        let copy = [...cardItems]
+        if(dashboard){
+            copy[0].count = dashboard.readyProduct
+            copy[1].count = dashboard.finishProduct
+            copy[2].count = dashboard.cancelProduct
+            copy[3].count = dashboard.cartProduct
+            setCardItems(copy)
+        }
+    },[dashboard])
 
     const orderStatus: StringObj = {
         "완료": "primary",
@@ -57,7 +79,7 @@ const BuyerDashboard: FC = () => {
                     <div className="col-md-12">
                         <div className="row">
                             {
-                                dashboardCard.map((item, index) =>
+                                cardItems.map((item, index) =>
                                     <div className="col-lg-3 col-md-6" key={index}>
                                         <StatusCard
                                             link={item.link}
