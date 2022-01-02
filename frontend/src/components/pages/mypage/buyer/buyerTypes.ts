@@ -38,13 +38,13 @@ export const buyerSidebarItems = [
 
 export const dashboardCard = [
     {
-        "link": "/orderList",
+        "link": "/buyer/orderList",
         "icon": "bx bxs-truck",
         "count": 0,
         "title": "배송중"
     },
     {
-        "link": "/orderList",
+        "link": "/buyer/orderList",
         "icon": "bx bx-package",
         "count": 0,
         "title": "배송 완료"

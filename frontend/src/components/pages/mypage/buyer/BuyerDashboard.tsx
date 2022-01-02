@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import {dashboardCard} from "./buyerTypes";
 import StatusCard from "../../../UI/cards/StatusCard";
 import MyPageTable from "../../../UI/table/MyPageTable";
@@ -8,6 +8,8 @@ import Modal from "../../../UI/modal/Modal";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchDashBoard} from "../../../../store/actions/mypageActions/buyerActions";
 import {RootState} from "../../../../store";
+import Message from "../../../UI/Message";
+import {setError} from "../../../../store/actions/pageActions";
 
 interface StringObj {
     [index: string]: string
@@ -17,15 +19,23 @@ const BuyerDashboard: FC = () => {
     const [showModal, setShowModal] = useState(false)
     const [cardItems, setCardItems] = useState(dashboardCard)
     const { dashboard } = useSelector((state: RootState) => state.buyer);
+    const { error } = useSelector((state: RootState) => state.page);
     const dispatch = useDispatch()
 
     useEffect(()=>{
+        // 대쉬보드 값 패치
         dispatch(fetchDashBoard())
-        console.log(...cardItems)
+
+        return () => {
+            if(error) {
+                dispatch(setError(''))
+            }
+        }
     },[dispatch])
 
     useEffect(()=>{
         let copy = [...cardItems]
+        console.log(copy)
         if(dashboard){
             copy[0].count = dashboard.readyProduct
             copy[1].count = dashboard.finishProduct
@@ -74,6 +84,7 @@ const BuyerDashboard: FC = () => {
 
             <div className="container">
                 <h3 className="page-header">마이페이지</h3>
+                {error && <Message type="danger" msg={error} />}
                 {/*card*/}
                 <div className="row">
                     <div className="col-md-12">
