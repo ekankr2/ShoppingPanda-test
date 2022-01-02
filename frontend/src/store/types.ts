@@ -7,6 +7,8 @@ export const SET_SUCCESS = 'SET_SUCCESS'
 export const SET_SUBMITTED = 'SET_SUBMITTED'
 
 export const FETCH_DASHBOARD = 'FETCH_DASHBOARD'
+export const FETCH_SITUATION_LIST = 'FETCH_SITUATION_LIST'
+export const FETCH_SITUATION = 'FETCH_SITUATION'
 
 // Page State
 export interface PageState {
@@ -138,3 +140,21 @@ export interface BuyerMyPageState {
     situationList: SituationList
     situationDetail: Situation
 }
+
+interface FetchDashboardAction {
+    type: typeof FETCH_DASHBOARD
+    payload: Dashboard
+}
+
+interface FetchSituationListAction {
+    type: typeof FETCH_SITUATION_LIST
+    payload: SituationList
+}
+
+interface FetchSituationAction {
+    type: typeof FETCH_SITUATION
+    payload: Situation
+}
+
+export type BuyerAction =
+    FetchDashboardAction | FetchSituationListAction | FetchSituationAction
