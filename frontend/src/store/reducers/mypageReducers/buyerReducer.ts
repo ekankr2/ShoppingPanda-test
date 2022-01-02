@@ -23,5 +23,7 @@ export default (state = initialState, action: BuyerMyPageAction) => {
                 ...state,
                 situationDetail: action.payload
             }
+        default:
+            return state
     }
 }
