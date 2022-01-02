@@ -19,7 +19,6 @@ export default (state = initialState, action: AuthAction) => {
                 ...state,
                 user: null,
                 authenticated: false,
-                loading: false
             }
         case NEED_VERIFICATION:
             return {

@@ -1,10 +1,10 @@
 import {ThunkAction} from "redux-thunk";
 import {RootState} from "../../index";
-import {BuyerAction, Dashboard, FETCH_DASHBOARD} from "../../types";
+import {BuyerMyPageAction, Dashboard, FETCH_DASHBOARD} from "../../types";
 import axios from "axios";
 import {setLoading} from "../pageActions";
 
-export const fetchDashBoard = (onError: () => void): ThunkAction<void, RootState, null, BuyerAction> => {
+export const fetchDashBoard = (onError: () => void): ThunkAction<void, RootState, null, BuyerMyPageAction> => {
     return async dispatch => {
         try {
             const res = await axios.get('/api/dashboard')

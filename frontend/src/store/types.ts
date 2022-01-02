@@ -136,9 +136,9 @@ export interface OptionName {
 }
 
 export interface BuyerMyPageState {
-    dashboard: Dashboard
-    situationList: SituationList
-    situationDetail: Situation
+    dashboard: Dashboard | null
+    situationList: SituationList | null
+    situationDetail: Situation | null
 }
 
 interface FetchDashboardAction {
@@ -156,5 +156,5 @@ interface FetchSituationAction {
     payload: Situation
 }
 
-export type BuyerAction =
+export type BuyerMyPageAction =
     FetchDashboardAction | FetchSituationListAction | FetchSituationAction
