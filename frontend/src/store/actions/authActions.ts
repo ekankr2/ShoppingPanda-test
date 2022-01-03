@@ -1,5 +1,5 @@
 import {ThunkAction} from "redux-thunk";
-import {AuthAction, LOGIN_CHECK, SET_USER, SignInData, SignUpData, User} from "../types";
+import {AuthAction, LOGIN_CHECK, SET_USER, SIGN_OUT, SignInData, SignUpData, User} from "../types";
 import {RootState} from "../index";
 import axios from "axios";
 import {setError, setLoading} from "./pageActions";
@@ -54,12 +54,14 @@ export const signout = (): ThunkAction<void, RootState, null, AuthAction> => {
             dispatch(setLoading(true))
             await axios.get('http://localhost:8080/api/user/logout')
             removeCookie('loggedIn')
+            dispatch({
+                type: SIGN_OUT
+            })
         } catch (err) {
             console.log(err)
             dispatch(setLoading(false))
         }
         dispatch(setLoading(false))
-        dispatch(loginCheck())
     }
 }
 
