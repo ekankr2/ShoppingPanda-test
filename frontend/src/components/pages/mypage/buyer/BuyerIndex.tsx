@@ -2,7 +2,7 @@ import React, {FC} from 'react'
 
 import './buyerIndex.css'
 
-import { BrowserRouter, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import {buyerSidebarItems} from "./buyerTypes";
 import MyPageRoutes from "../MyPageRoutes";
 import BuyerSidebar from "../../../sections/sidebar/BuyerSidebar";

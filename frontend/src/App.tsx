@@ -20,7 +20,6 @@ import PublicRoute from "./components/auth/PublicRoute";
 const App: FC = () => {
     const dispatch = useDispatch();
     const {loading} = useSelector((state: RootState) => state.page);
-    const {loggedIn} = useSelector((state: RootState) => state.auth)
 
     useEffect(() => {
         dispatch(loginCheck())
@@ -35,8 +34,8 @@ const App: FC = () => {
             <Header/>
             <Switch>
                 <Route path="/" component={Homepage} exact/>
-                <PublicRoute path="/signup" component={SignUp} exact/>
-                <PublicRoute path="/signin" component={SignIn} exact/>
+                <Route path="/signup" component={SignUp} exact/>
+                <Route path="/signin" component={SignIn} exact/>
                 <PrivateRoute path="/buyer" component={BuyerIndex}/>
                 <PrivateRoute path="/panda" component={PandaIndex}/>
             </Switch>
