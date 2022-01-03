@@ -3,7 +3,7 @@ import {AuthAction, LOGIN_CHECK, SET_USER, SignInData, SignUpData, User} from ".
 import {RootState} from "../index";
 import axios from "axios";
 import {setError, setLoading} from "./pageActions";
-import {getCookie, setCookie} from "./Cookie";
+import {getCookie, removeCookie, setCookie} from "./Cookie";
 
 // Create user
 export const signup = (data: SignUpData, onError: () => void): ThunkAction<void, RootState, null, AuthAction> => {
@@ -51,11 +51,15 @@ export const signin = (data: SignInData, onError: () => void): ThunkAction<void,
 export const signout = (): ThunkAction<void, RootState, null, AuthAction> => {
     return async dispatch => {
         try {
+            dispatch(setLoading(true))
             await axios.get('http://localhost:8080/api/user/logout')
+            removeCookie('loggedIn')
         } catch (err) {
             console.log(err)
             dispatch(setLoading(false))
         }
+        dispatch(setLoading(false))
+        dispatch(loginCheck())
     }
 }
 

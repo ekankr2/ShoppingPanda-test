@@ -15,6 +15,7 @@ import {setLoading} from "./store/actions/pageActions";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import {getCookie} from "./store/actions/Cookie";
 import {loginCheck} from "./store/actions/authActions";
+import PublicRoute from "./components/auth/PublicRoute";
 
 const App: FC = () => {
     const dispatch = useDispatch();
@@ -23,8 +24,7 @@ const App: FC = () => {
 
     useEffect(() => {
         dispatch(loginCheck())
-        console.log(loggedIn)
-    }, [dispatch, loggedIn]);
+    }, [dispatch]);
 
     if (loading) {
         return <Loader/>;
@@ -35,8 +35,8 @@ const App: FC = () => {
             <Header/>
             <Switch>
                 <Route path="/" component={Homepage} exact/>
-                <Route path="/signup" component={SignUp} exact/>
-                <Route path="/signin" component={SignIn} exact/>
+                <PublicRoute path="/signup" component={SignUp} exact/>
+                <PublicRoute path="/signin" component={SignIn} exact/>
                 <PrivateRoute path="/buyer" component={BuyerIndex}/>
                 <PrivateRoute path="/panda" component={PandaIndex}/>
             </Switch>

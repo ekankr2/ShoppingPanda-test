@@ -19,7 +19,7 @@ const Header: FC = () => {
     <nav className="navbar is-spaced has-shadow">
       <div className="container">
         <div className="navbar-brand">
-          <Link className="navbar-item" to={!loggedIn ? "/" : "/dashboard"}>name</Link>
+          <Link className="navbar-item" to={"/"}>name</Link>
           <Link className="navbar-item" to={"/buyer/mypage"}>mypage</Link>
           <Link className="navbar-item" to={"/panda/mypage"}>pandapage</Link>
         </div>
