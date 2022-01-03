@@ -1,9 +1,9 @@
-import {AuthAction, AuthState, NEED_VERIFICATION, SET_USER, SIGN_OUT} from "../types";
+import {AuthAction, AuthState, LOGIN_CHECK, NEED_VERIFICATION, SET_USER, SIGN_OUT} from "../types";
 
 const initialState: AuthState = {
     user: null,
-    authenticated: false,
     needVerification: false,
+    loggedIn: false
 }
 
 export default (state = initialState, action: AuthAction) => {
@@ -12,18 +12,23 @@ export default (state = initialState, action: AuthAction) => {
             return {
                 ...state,
                 user: action.payload,
-                authenticated: true
+                loggedIn: true
             }
         case SIGN_OUT:
             return {
                 ...state,
                 user: null,
-                authenticated: false,
+                loggedIn: false,
             }
         case NEED_VERIFICATION:
             return {
                 ...state,
                 needVerification: true
+            }
+        case LOGIN_CHECK:
+            return {
+                ...state,
+                loggedIn: action.payload
             }
         default:
             return state

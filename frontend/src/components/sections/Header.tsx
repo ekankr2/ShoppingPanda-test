@@ -9,7 +9,7 @@ import {signout} from '../../store/actions/authActions';
 const Header: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { authenticated } = useSelector((state: RootState) => state.auth);
+  const { loggedIn } = useSelector((state: RootState) => state.auth);
 
   const logoutClickHandler = () => {
     dispatch(signout());
@@ -19,14 +19,14 @@ const Header: FC = () => {
     <nav className="navbar is-spaced has-shadow">
       <div className="container">
         <div className="navbar-brand">
-          <Link className="navbar-item" to={!authenticated ? "/" : "/dashboard"}>name</Link>
+          <Link className="navbar-item" to={!loggedIn ? "/" : "/dashboard"}>name</Link>
           <Link className="navbar-item" to={"/buyer/mypage"}>mypage</Link>
           <Link className="navbar-item" to={"/panda/mypage"}>pandapage</Link>
         </div>
 
         <div className="navbar-end">
           <div className="navbar-items">
-            {!authenticated ? <div className="buttons">
+            {!loggedIn ? <div className="buttons">
                 <Button text="Sign up" onClick={() => history.push('/signup')} className="is-primary" />
                 <Button text="Sign in" onClick={() => history.push('/signin')} />
               </div>

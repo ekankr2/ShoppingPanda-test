@@ -25,7 +25,7 @@ const SignIn: FC<Props> = (props) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const { error } = useSelector((state: RootState) => state.page);
-  const { authenticated } = useSelector((state: RootState) => state.auth);
+  const { loggedIn } = useSelector((state: RootState) => state.auth);
 
   console.log(props)
 
@@ -39,14 +39,14 @@ const SignIn: FC<Props> = (props) => {
 
   useEffect(()=> {
     const {history, location: {state}} = props
-    if(authenticated){
+    if(loggedIn){
       if (state && state.next){
         history.push(state.next)
       }else{
         history.goBack()
       }
     }
-  },[authenticated, props])
+  },[loggedIn, props])
 
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();

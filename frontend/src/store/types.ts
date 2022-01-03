@@ -1,5 +1,6 @@
 export const SET_USER = 'SET_USER'
 export const SIGN_OUT = 'SIGN_OUt'
+export const LOGIN_CHECK = 'LOGIN_CHECK'
 export const SET_LOADING = 'SET_LOADING'
 export const SET_ERROR = 'SET_ERROR'
 export const NEED_VERIFICATION = 'NEED_VERIFICATION'
@@ -51,8 +52,8 @@ export interface User {
 
 export interface AuthState {
     user: User | null
-    authenticated: boolean
     needVerification: boolean
+    loggedIn : boolean
 }
 
 export interface SignUpData {
@@ -81,13 +82,16 @@ interface NeedVerificationAction {
     type: typeof NEED_VERIFICATION
 }
 
+interface LoginCheckAction {
+    type: typeof LOGIN_CHECK
+    payload: boolean
+}
+
 export type AuthAction =
     SetUserAction
-    | SetLoadingAction
     | SignOutAction
-    | SetErrorAction
     | NeedVerificationAction
-    | SetSuccessAction;
+    | LoginCheckAction
 
 //dashboard types
 export interface Dashboard {

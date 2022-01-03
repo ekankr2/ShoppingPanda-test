@@ -9,10 +9,10 @@ interface Props extends RouteProps {
 }
 
 const PrivateRoute: FC<Props> = ({ component: Component, ...rest }) => {
-  const { authenticated } = useSelector((state: RootState) => state.auth);
+  const { loggedIn } = useSelector((state: RootState) => state.auth);
 
   return(
-    <Route {...rest} render={props => authenticated ? <Component {...props} /> :
+    <Route {...rest} render={props => loggedIn ? <Component {...props} /> :
         <Redirect to={{pathname:"/signin", state: { next: props.location.pathname } }} />} />
   );
 }

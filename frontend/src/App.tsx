@@ -1,5 +1,5 @@
-import React, { FC, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, {FC, useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import './App.css';
 
@@ -8,34 +8,37 @@ import SignUp from './components/pages/SignUp';
 import SignIn from './components/pages/SignIn';
 import Homepage from './components/pages/Homepage';
 import Loader from './components/UI/Loader';
-import { RootState } from './store';
+import {RootState} from './store';
 import BuyerIndex from "./components/pages/mypage/buyer/BuyerIndex";
 import PandaIndex from "./components/pages/mypage/panda/PandaIndex";
 import {setLoading} from "./store/actions/pageActions";
 import PrivateRoute from "./components/auth/PrivateRoute";
+import {getCookie} from "./store/actions/Cookie";
+import {loginCheck} from "./store/actions/authActions";
 
 const App: FC = () => {
     const dispatch = useDispatch();
-    const { loading } = useSelector((state: RootState) => state.page);
+    const {loading} = useSelector((state: RootState) => state.page);
+    const {loggedIn} = useSelector((state: RootState) => state.auth)
 
-    // useEffect(() => {
-    //   dispatch(setLoading(true));
-    //
-    // }, [dispatch]);
+    useEffect(() => {
+        dispatch(loginCheck())
+        console.log(loggedIn)
+    }, [dispatch, loggedIn]);
 
-    if(loading) {
-        return <Loader />;
+    if (loading) {
+        return <Loader/>;
     }
 
     return (
         <>
-            <Header />
+            <Header/>
             <Switch>
-                <Route path="/" component={Homepage} exact />
-                <Route path="/signup" component={SignUp} exact />
-                <Route path="/signin" component={SignIn} exact />
-                <PrivateRoute path="/buyer" component={BuyerIndex} />
-                <PrivateRoute path="/panda" component={PandaIndex} />
+                <Route path="/" component={Homepage} exact/>
+                <Route path="/signup" component={SignUp} exact/>
+                <Route path="/signin" component={SignIn} exact/>
+                <PrivateRoute path="/buyer" component={BuyerIndex}/>
+                <PrivateRoute path="/panda" component={PandaIndex}/>
             </Switch>
         </>
     );

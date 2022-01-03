@@ -1,8 +1,9 @@
-import { ThunkAction } from "redux-thunk";
-import {AuthAction, SET_USER, SignInData, SignUpData, User} from "../types";
+import {ThunkAction} from "redux-thunk";
+import {AuthAction, LOGIN_CHECK, SET_USER, SignInData, SignUpData, User} from "../types";
 import {RootState} from "../index";
 import axios from "axios";
 import {setError, setLoading} from "./pageActions";
+import {getCookie, setCookie} from "./Cookie";
 
 // Create user
 export const signup = (data: SignUpData, onError: () => void): ThunkAction<void, RootState, null, AuthAction> => {
@@ -22,7 +23,7 @@ export const signin = (data: SignInData, onError: () => void): ThunkAction<void,
     return async dispatch => {
         try {
             dispatch(setLoading(true))
-            const res = await axios.post('/api/authenticate',{
+            const res = await axios.post('/api/authenticate', {
                 username: data.account,
                 password: data.password
             })
@@ -33,9 +34,10 @@ export const signin = (data: SignInData, onError: () => void): ThunkAction<void,
                     type: SET_USER,
                     payload: userData
                 })
+                setCookie('loggedIn', 'yes', {path: '/'})
                 dispatch(setLoading(false))
             }
-        }catch (err: any) {
+        } catch (err: any) {
             console.log(err)
             onError()
             dispatch(setError("아이디나 비밀번호를 확인해 주십시오"))
@@ -50,26 +52,26 @@ export const signout = (): ThunkAction<void, RootState, null, AuthAction> => {
     return async dispatch => {
         try {
             await axios.get('http://localhost:8080/api/user/logout')
-        }catch (err) {
+        } catch (err) {
             console.log(err)
             dispatch(setLoading(false))
         }
     }
 }
 
-// getuser
-// export const getUser = (): ThunkAction<void, RootState, null, AuthAction> => {
-//     return async dispatch => {
-//         try {
-//             const res = await axios.get('/api/auth/check')
-//             if(res.data){
-//                 console.log(res.data)
-//             }
-//         }catch (err) {
-//             console.log(err)
-//             dispatch(setLoading(false))
-//         }
-//     }
-// }
+// checkUserwithCookies
+export const loginCheck = (): AuthAction => {
+    const loggedIn = getCookie('loggedIn')
+    if(loggedIn === 'yes'){
+        return {
+            type: LOGIN_CHECK,
+            payload: true
+        }
+    }
+    return {
+        type: LOGIN_CHECK,
+        payload: false
+    }
+}
 
 
