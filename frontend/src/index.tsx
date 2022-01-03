@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/theme.css'
 import './assets/css/index.css'
 
+
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
