@@ -37,9 +37,11 @@ const ProductCard: FC<Props> = ({id, title, content, image, price, seller, selle
                 <li className='thumbnail col-3' style={thumbnail}></li>
                 <li className="product-content col-5">
                     <h5 className="title">{title}</h5>
-                    <p className="order-date">{date}</p>
-                    <p className="price">{price}원</p>
-                    <p className="status">{status}</p>
+                    <p>{date}</p>
+                    <p>{price}원</p>
+                    <p>{status}</p>
+                    <p>{seller}</p>
+                    <p>{sellerNum}</p>
                 </li>
                 <li className="product-right col-3">
                     {children}

@@ -18,7 +18,7 @@ const MyPageTable: FC<Props> = ({limit, bodyData, headData, renderHead, renderBo
     let pages = 1
     let range: any = []
 
-    if(limit !== undefined) {
+    if(limit !== undefined && bodyData) {
         let page = Math.floor(bodyData.length / Number(limit))
         pages = bodyData.length % Number(limit) === 0 ? page : page + 1
         range = [...Array(pages).keys()]
@@ -50,7 +50,7 @@ const MyPageTable: FC<Props> = ({limit, bodyData, headData, renderHead, renderBo
                         ) :null
                     }
                     {
-                        bodyData && renderBody ? (
+                        bodyData && renderBody && dataShow ? (
                             <tbody>
                             {
                                 dataShow.map((item: typeof initDataShow, index:number) => renderBody(item, index))

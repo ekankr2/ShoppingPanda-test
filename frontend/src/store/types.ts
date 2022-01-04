@@ -105,7 +105,7 @@ export interface Dashboard {
 export interface SituationList {
     pageList: {
         num: number
-        productName: string[]
+        productName: string
         price: number
         orderAt: any
         status: string

@@ -75,7 +75,7 @@ export const fetchSituationWithPage = (size: number, page: number): ThunkAction<
 export const fetchSituationDetail = (detailId: number): ThunkAction<void, RootState, null, BuyerMyPageAction> => {
     return async dispatch => {
         try {
-            const res = await axios.post('/api/recentsituation', {
+            const res = await axios.post('/api/situationdetail', {
                 detailId: detailId
             })
 
