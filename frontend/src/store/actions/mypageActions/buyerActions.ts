@@ -10,7 +10,7 @@ import {
     SituationList
 } from "../../types";
 import axios from "axios";
-import {setError, setLoading} from "../pageActions";
+import {setError} from "../pageActions";
 
 export const fetchDashBoard = (): ThunkAction<void, RootState, null, BuyerMyPageAction> => {
     return async dispatch => {
@@ -19,7 +19,7 @@ export const fetchDashBoard = (): ThunkAction<void, RootState, null, BuyerMyPage
 
             if (res.data) {
                 const dashBoardData = res.data as Dashboard
-                console.log(dashBoardData)
+                console.log('대쉬보드 박스: ', dashBoardData)
                 dispatch({
                     type: FETCH_DASHBOARD,
                     payload: dashBoardData
@@ -39,7 +39,7 @@ export const fetchSituationList = (): ThunkAction<void, RootState, null, BuyerMy
 
             if (res.data) {
                 const list = res.data as SituationList
-                console.log(list)
+                console.log('최근주문: ',list)
                 dispatch({
                     type: FETCH_SITUATION_LIST,
                     payload: list
@@ -81,7 +81,7 @@ export const fetchSituationDetail = (detailId: number): ThunkAction<void, RootSt
 
             if (res.data) {
                 const detail = res.data as Situation
-                console.log(detail)
+                console.log('주문디테일: ',detail)
                 dispatch({
                     type: FETCH_SITUATION,
                     payload: detail

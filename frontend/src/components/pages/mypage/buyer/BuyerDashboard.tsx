@@ -6,7 +6,7 @@ import Badge from "../../../UI/badge/Badge";
 import {latestOrders} from "./buyerTypes";
 import Modal from "../../../UI/modal/Modal";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchDashBoard} from "../../../../store/actions/mypageActions/buyerActions";
+import {fetchDashBoard, fetchSituationList} from "../../../../store/actions/mypageActions/buyerActions";
 import {RootState} from "../../../../store";
 import Message from "../../../UI/Message";
 import {setError} from "../../../../store/actions/pageActions";
@@ -18,34 +18,41 @@ interface StringObj {
 const BuyerDashboard: FC = () => {
     const [showModal, setShowModal] = useState(false)
     const [cardItems, setCardItems] = useState(dashboardCard)
-    const { dashboard } = useSelector((state: RootState) => state.buyer);
-    const { error } = useSelector((state: RootState) => state.page);
+    const {dashboard} = useSelector((state: RootState) => state.buyer);
+    const {situationList} = useSelector((state: RootState) => state.buyer);
+    const {error} = useSelector((state: RootState) => state.page);
     const dispatch = useDispatch()
 
-    useEffect(()=>{
+    useEffect(() => {
         // 대쉬보드 값 패치
-        dispatch(fetchDashBoard())
-
-        return () => {
-            if(error) {
-                dispatch(setError(''))
-            }
+        if (error) {
+            dispatch(setError(''))
         }
-    },[dispatch])
+        dispatch(fetchDashBoard())
+        dispatch(fetchSituationList())
+    }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
         let copy = [...cardItems]
-        console.log(copy)
-        if(dashboard){
+        if (dashboard) {
             copy[0].count = dashboard.readyProduct
             copy[1].count = dashboard.finishProduct
             copy[2].count = dashboard.cancelProduct
             copy[3].count = dashboard.cartProduct
             setCardItems(copy)
         }
-    },[dashboard])
+    }, [dashboard])
+
+    useEffect(() => {
+        return () => {
+            if (error) {
+                dispatch(setError(''));
+            }
+        }
+    }, []);
 
     const orderStatus: StringObj = {
+        "결제완료": "primary",
         "완료": "primary",
         "취소중": "warning",
         "배송중": "success",
@@ -60,10 +67,10 @@ const BuyerDashboard: FC = () => {
         <tr key={index} onClick={() => {
             setShowModal(true)
         }}>
-            <td>{item.id}</td>
-            <td>{item.user}</td>
-            <td>{item.price}</td>
-            <td>{item.date}</td>
+            <td>{item.num}</td>
+            <td>{item.productName}</td>
+            <td>{item.price} ₩</td>
+            <td>{(item.orderAt).slice(0, 10)}</td>
             <td>
                 <Badge type={orderStatus[item.status]} content={item.status}/>
             </td>
@@ -72,7 +79,7 @@ const BuyerDashboard: FC = () => {
 
     const renderBodyMobile = (item: StringObj, index: number) => (
         <tr key={index}>
-            <td>{item.user}</td>
+            <td>{item.productName}</td>
             <td>
                 <Badge type={orderStatus[item.status]} content={item.status}/>
             </td>
@@ -84,7 +91,7 @@ const BuyerDashboard: FC = () => {
 
             <div className="container">
                 <h3 className="page-header">마이페이지</h3>
-                {error && <Message type="danger" msg={error} />}
+                {error && <Message type="danger" msg={error}/>}
                 {/*card*/}
                 <div className="row">
                     <div className="col-md-12">
@@ -116,7 +123,7 @@ const BuyerDashboard: FC = () => {
                                     limit="5"
                                     headData={latestOrders.header}
                                     renderHead={(item: any, index: number) => renderHead(item, index)}
-                                    bodyData={latestOrders.body}
+                                    bodyData={situationList?.pageList}
                                     renderBody={(item: any, index: number) => renderBody(item, index)}
                                 />
                             </div>
@@ -126,7 +133,7 @@ const BuyerDashboard: FC = () => {
                                     limit="5"
                                     headData={latestOrders.headerMobile}
                                     renderHead={(item: any, index: number) => renderHead(item, index)}
-                                    bodyData={latestOrders.body}
+                                    bodyData={situationList?.pageList}
                                     renderBody={(item: any, index: number) => renderBodyMobile(item, index)}
                                 />
                             </div>
@@ -137,7 +144,9 @@ const BuyerDashboard: FC = () => {
 
             {
                 showModal &&
-                <Modal onClose={() => {setShowModal(false)}} title={"배송 상세보기"}>
+                <Modal onClose={() => {
+                    setShowModal(false)
+                }} title={"배송 상세보기"}>
                     <div>this is a modal</div>
                 </Modal>
             }
