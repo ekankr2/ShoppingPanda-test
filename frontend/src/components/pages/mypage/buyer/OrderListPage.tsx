@@ -44,16 +44,10 @@ const OrderListPage: FC = () => {
                              title={item.productName}
                              image="https://semantic-ui.com/images/wireframe/image.png"
                              price={item.price}
-                             seller="판매자는짬통"
-                             sellerNum="짬통연락처"
                              status={item.status}
-                             date={item.orderAt}
-                >
-                    <p className="seller-name is-hidden-mobile">판매자는짬통</p>
-                    <p className="seller-num is-hidden-mobile">짬통연락처</p>
-                    <Button text={orderBtnText(item.status)}
-                    />
-                </ProductCard>)}
+                             btnText={orderBtnText(item.status)}
+                />
+            )}
         </>
     );
 };

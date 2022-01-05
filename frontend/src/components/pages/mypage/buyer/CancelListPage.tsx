@@ -29,16 +29,9 @@ const CancelListPage: FC = () => {
                              title={product.title}
                              image={product.image}
                              price={product.price}
-                             seller={product.seller}
-                             sellerNum={product.sellerNum}
                              status={product.status}
-                             date={product.date}
-                >
-                    <p className="seller-name is-hidden-mobile">{product.seller}</p>
-                    <p className="seller-num is-hidden-mobile">{product.sellerNum}</p>
-                    <Button text={orderBtnText(product.status)}
-                    />
-                </ProductCard>)}
+                             btnText={orderBtnText(product.status)}
+                />)}
         </>
     );
 };

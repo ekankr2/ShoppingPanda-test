@@ -1,50 +1,47 @@
 import React, {FC} from 'react';
 import {useHistory} from "react-router-dom";
 import './productCard.css'
+import Button from "../Button";
 
 interface Props {
     id?: string
     title: string
-    content?: string
     image: string
     price: number | string
-    seller?: string
-    sellerNum?: string
     status?: string
-    date?: string
+    btnText: string
 }
 
-const ProductCard: FC<Props> = ({id, title, content, image, price, seller, sellerNum, status, date, children}) => {
+const ProductCard: FC<Props> = ({id, title, image, price, status, btnText}) => {
     let history = useHistory()
     const thumbnail = {
         width: "100%",
-        maxWidth: "180px",
-        height: "180px",
+        maxWidth: "130px",
+        height: "130px",
         borderRadius: "10px",
         backgroundImage: `url(${image})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         display: "inline-block",
-        verticalAlign: "top",
-        margin: "auto"
+        margin: "auto 0"
     }
 
     return (
-        <div className="product-container">
-            <ul className="product row" onClick={() => {
+        <div className="container">
+            <ul className="product-card-container row" onClick={() => {
                 history.push('/detail/' + id)
             }}>
-                <li className='thumbnail col-3' style={thumbnail}></li>
-                <li className="product-content col-5">
-                    <h5 className="title">{title}</h5>
-                    <p>{date}</p>
+                <li className='col-3' style={thumbnail}></li>
+                <li className="product-card-content col-6">
+                    <h5 className="product-card-title">{title}</h5>
+                    <p>옵션명 여기 필요함</p>
                     <p>{price}원</p>
-                    <p>{status}</p>
-                    <p>{seller}</p>
-                    <p>{sellerNum}</p>
                 </li>
                 <li className="product-right col-3">
-                    {children}
+                    <h5>{status}</h5>
+                    <p className="product-right-seller">판매자 이름 필요</p>
+                    <p className="product-right-sellerNum">판매자 전번</p>
+                    <Button className="is-info is-outlined" text={btnText}/>
                 </li>
             </ul>
         </div>
