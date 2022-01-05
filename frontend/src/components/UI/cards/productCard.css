@@ -42,15 +42,26 @@
 
 @media screen and (max-width: 768px){
 
+    .product-card-container{
+        margin: 0;
+        padding: 20px 20px 0;
+    }
+
     .product-card-content{
-        min-width: 100%;
-        text-align: center;
+        padding-top: 20px;
+    }
+
+    .product-card-container h5{
+        font-size: 0.9em;
     }
 
     .product-right{
-        min-width: 130px;
-        padding: 10px 0 0;
+        border: none;
         border-top: 1px solid #c0c2c7;
+        text-align: center;
+        width: 100%;
+        padding: 10px 0 20px;
+        margin-top: 10px;
     }
 }
 

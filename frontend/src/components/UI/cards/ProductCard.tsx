@@ -31,7 +31,7 @@ const ProductCard: FC<Props> = ({id, title, image, price, status, btnText}) => {
             <ul className="product-card-container row" onClick={() => {
                 history.push('/detail/' + id)
             }}>
-                <li className='col-3' style={thumbnail}></li>
+                <li className='col-3 product-card-thumbnail' style={thumbnail}></li>
                 <li className="product-card-content col-6">
                     <h5 className="product-card-title">{title}</h5>
                     <p>옵션명 여기 필요함</p>
