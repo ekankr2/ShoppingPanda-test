@@ -3,6 +3,10 @@
     margin: 0 auto;
 }
 
+.wrapper{
+    margin-bottom: 100px;
+}
+
 .loader-wrapper {
     display: flex;
     align-items: center;

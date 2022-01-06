@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {CountriesData} from "../components/Countries";
 
 interface PaginationHook {
@@ -7,15 +7,27 @@ interface PaginationHook {
     prevPage: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
     nextPage: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
     changePage: (page: number, e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+    setFilteredData: React.Dispatch<React.SetStateAction<Country[]>>
+    setSearching:  React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const usePagination = (initialState: CountriesData): PaginationHook => {
     const { itemsPerPage, data, startFrom } = initialState;
+    const [searching, setSearching] = useState(false)
+    const [filteredData, setFilteredData] = useState(data)
     const perPage = itemsPerPage ? itemsPerPage : 10;
-    const pages = Math.ceil(data.length / perPage);
+    const pages = Math.ceil(filteredData.length / perPage);
     const pagination: PaginationLink[] = [];
     const [currentPage, setCurrentPage] = useState(startFrom && startFrom <= pages ? startFrom : 1);
     const [slicedData, setSlicedData] = useState([...data].slice((currentPage - 1) * perPage, currentPage * perPage));
+
+    useEffect(()=> {
+        setSlicedData([...filteredData].slice((currentPage - 1) * perPage, currentPage * perPage))
+        if(searching) {
+            setCurrentPage(1);
+            setSearching(false)
+        }
+    },[filteredData, currentPage])
 
     let ellipsisLeft = false;
     let ellipsisRight = false;
@@ -72,7 +84,9 @@ const usePagination = (initialState: CountriesData): PaginationHook => {
         pagination,
         prevPage: goToPrevPage,
         nextPage: goToNextPage,
-        changePage
+        changePage,
+        setFilteredData,
+        setSearching
     };
 }
 
