@@ -59,7 +59,7 @@ export const fetchSituationWithPage = (size: number, page: number): ThunkAction<
 
             if (res.data) {
                 const list = res.data as SituationList
-                console.log(list)
+                console.log('최근주문 페이지 쿼리: ',list)
                 dispatch({
                     type: FETCH_SITUATION_LIST,
                     payload: list

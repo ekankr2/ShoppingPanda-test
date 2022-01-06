@@ -9,11 +9,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {
     fetchDashBoard,
     fetchSituationDetail,
-    fetchSituationList
+    fetchSituationList, fetchSituationWithPage
 } from "../../../../store/actions/mypageActions/buyerActions";
 import {RootState} from "../../../../store";
 import Message from "../../../UI/Message";
 import {setError} from "../../../../store/actions/pageActions";
+import {FETCH_SITUATION_LIST} from "../../../../store/types";
 
 interface StringObj {
     [index: string]: string
@@ -32,8 +33,7 @@ const BuyerDashboard: FC = () => {
             dispatch(setError(''))
         }
         dispatch(fetchDashBoard())
-        dispatch(fetchSituationList())
-
+        dispatch(fetchSituationWithPage(5, 0))
     }, [dispatch])
 
     useEffect(() => {
