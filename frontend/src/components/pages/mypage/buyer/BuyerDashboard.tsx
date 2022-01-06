@@ -62,10 +62,11 @@ const BuyerDashboard: FC = () => {
 
     const orderStatus: StringObj = {
         "결제완료": "primary",
+        "준비중": "success",
         "완료": "primary",
-        "취소중": "warning",
+        "주문취소": "danger",
         "배송중": "success",
-        "반품": "danger"
+        "반품": "warning"
     }
 
     const renderHead = (item: any, index: number) => (

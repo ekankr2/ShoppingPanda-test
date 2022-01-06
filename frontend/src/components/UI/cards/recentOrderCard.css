@@ -1,3 +1,8 @@
+.order-container{
+    max-width: 900px !important;
+    margin: 0 auto;
+}
+
 .recent-order-card-container.row {
     height: 140px;
     min-width: 100%;
@@ -61,31 +66,34 @@
     margin-bottom: 5px;
 }
 
-@media screen and (max-width: 768px) {
-
-    .recent-order-card-container {
+@media screen and (max-width: 975px) {
+    .recent-order-card-container.row {
+        height: 260px;
+        min-width: 100%;
+        max-width: 800px;
         text-align: center;
-        margin: 0;
-        padding: 20px 20px 0;
+        padding: 0;
     }
 
-    .recent-order-card-content {
-        width: 100%;
-        padding-top: 20px;
+    .recent-order-card-content{
+        height: 140px;
     }
 
-    .recent-order-card-container h5 {
-        font-size: 0.9em;
+    .recent-order-right ul{
+        padding: 0;
     }
 
-    .recent-order-right {
+    .recent-order-card-content p{
+        padding-top: 5px;
+        margin: 5px 0 0;
+    }
+
+    .recent-order-right{
         border: none;
-        border-top: 1px solid #c0c2c7;
-        text-align: center;
-        width: 100%;
-        padding: 10px 0 20px;
-        margin-top: 10px;
+        position: static;
     }
+
+
 }
 
 
