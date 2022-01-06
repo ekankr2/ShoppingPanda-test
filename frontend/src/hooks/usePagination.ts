@@ -1,67 +1,69 @@
-import React, {useState} from "react";
+import React, { useState } from 'react';
+import {CountriesData} from "../components/Countries";
 
-interface State{
-    itemsPerPage: number
-    data: any
-    startFrom: number
+interface PaginationHook {
+    slicedData: Country[];
+    pagination: PaginationLink[];
+    prevPage: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+    nextPage: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+    changePage: (page: number, e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 
-const usePagination = (initialState:State) => {
-    const {itemsPerPage, data, startFrom} = initialState;
+const usePagination = (initialState: CountriesData): PaginationHook => {
+    const { itemsPerPage, data, startFrom } = initialState;
     const perPage = itemsPerPage ? itemsPerPage : 10;
     const pages = Math.ceil(data.length / perPage);
-    const pagination = [];
-    const [currentPage, setCurrentPage] = useState(startFrom <= pages ? startFrom : 1);
-    const [slicedData, setSlicedData] =
-        useState([...data].slice((currentPage - 1) * perPage, currentPage * perPage))
+    const pagination: PaginationLink[] = [];
+    const [currentPage, setCurrentPage] = useState(startFrom && startFrom <= pages ? startFrom : 1);
+    const [slicedData, setSlicedData] = useState([...data].slice((currentPage - 1) * perPage, currentPage * perPage));
 
     let ellipsisLeft = false;
     let ellipsisRight = false;
-    for (let i = 0; i <= pages; i++) {
-        if (i === currentPage) {
+    for(let i = 1; i <= pages; i++) {
+        if(i === currentPage) {
             pagination.push(
-                {id: i, current: true, ellipsis: false}
-            )
-        } else {
-            if (i < 2 || i > pages - 1 || i === currentPage - 1 || i === currentPage + 1) {
+                { id: i, current: true, ellipsis: false }
+            );
+        }else {
+            if(i < 2 || i > pages - 1 || i === currentPage - 1 || i === currentPage + 1 ) {
                 pagination.push(
-                    {id: i, current: false, ellipsis: false}
+                    { id: i, current: false, ellipsis: false }
                 );
-            } else if (i > 1 && i < currentPage && !ellipsisLeft) {
+            }else if( i > 1 && i < currentPage && !ellipsisLeft ) {
                 pagination.push(
-                    {id: i, current: false, ellipsis: true}
+                    { id: i, current: false, ellipsis: true }
                 );
                 ellipsisLeft = true;
-            } else if (i < pages && i > currentPage && !ellipsisRight) {
+            }else if( i < pages && i > currentPage && !ellipsisRight) {
                 pagination.push(
-                    {id: i, current: false, ellipsis: true}
+                    { id: i, current: false, ellipsis: true }
                 );
                 ellipsisRight = true;
             }
         }
     }
 
-    const changePage = (page:number, e: React.SyntheticEvent<EventTarget>) => {
-        e.preventDefault()
-        if(page !== currentPage) {
-            setCurrentPage(page)
-            setSlicedData([...data].slice((page - 1) * perPage, page * perPage))
-        }
-    }
-
-    const goToPrevPage = (e: React.SyntheticEvent<EventTarget>) => {
-        e.preventDefault()
-        setCurrentPage((prevVal: number) => prevVal - 1 === 0 ? prevVal : prevVal - 1)
-        if(currentPage !== 1) {
-            setSlicedData([...data].slice((currentPage - 2) * perPage, (currentPage - 1) * perPage))
-        }
-    }
-
-    const goToNextPage = (e: React.SyntheticEvent<EventTarget>) => {
+    const changePage = (page: number, e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         e.preventDefault();
-        setCurrentPage((prevVal: number) => prevVal === pages ? prevVal : prevVal + 1)
+        if(page !== currentPage) {
+            setCurrentPage(page);
+            setSlicedData([...data].slice((page - 1) * perPage, page * perPage));
+        }
+    }
+
+    const goToPrevPage = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        e.preventDefault();
+        setCurrentPage(prevVal => prevVal - 1 === 0 ? prevVal : prevVal - 1);
+        if(currentPage !== 1) {
+            setSlicedData([...data].slice((currentPage - 2) * perPage, (currentPage - 1) * perPage));
+        }
+    }
+
+    const goToNextPage = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        e.preventDefault();
+        setCurrentPage(prevVal => prevVal === pages ? prevVal : prevVal + 1);
         if(currentPage !== pages) {
-            setSlicedData([...data].slice(currentPage * perPage, (currentPage + 1) * perPage))
+            setSlicedData([...data].slice(currentPage * perPage, (currentPage + 1) * perPage));
         }
     }
 
@@ -71,5 +73,7 @@ const usePagination = (initialState:State) => {
         prevPage: goToPrevPage,
         nextPage: goToNextPage,
         changePage
-    }
+    };
 }
+
+export default usePagination;
