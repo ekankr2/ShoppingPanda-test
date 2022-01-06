@@ -2,14 +2,12 @@ import React, {FC, useEffect, useState} from 'react';
 import RecentOrderCard from "../../../UI/cards/RecentOrderCard";
 import {setError} from "../../../../store/actions/pageActions";
 import {
-    fetchDashBoard,
     fetchSituationList,
     fetchSituationWithPage
 } from "../../../../store/actions/mypageActions/buyerActions";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../store";
 import Button from "../../../UI/Button";
-import {SituationList} from "../../../../store/types";
 import axios from "axios";
 
 interface pageList {
@@ -35,6 +33,7 @@ const OrderListPage: FC = () => {
         if (error) {
             dispatch(setError(''))
         }
+        dispatch(fetchSituationList())
         dispatch(fetchSituationWithPage(5, 0))
     }, [])
 
@@ -75,6 +74,7 @@ const OrderListPage: FC = () => {
             })
 
         console.log('결과: ', pagedData)
+        console.log('길이: ',pagedData?.length)
 
         setCurrPage(currPage + 1)
         console.log(currPage)
@@ -91,13 +91,18 @@ const OrderListPage: FC = () => {
                                  btnText={orderBtnText(item.status)}
                 />
             )}
-            <div className="mt-5" style={{textAlign: "center"}}>
-                <Button onClick={handleClick}
-                        text="더보기"
-                        className={loading ? 'is-primary is-rounded is-loading is-medium'
-                            : "is-primary is-rounded is-medium"}
-                        disabled={loading}/>
-            </div>
+            {
+                pagedData?.length === situationList?.totalElement ? null
+                    :
+                    <div className="mt-5" style={{textAlign: "center"}}>
+                        <Button onClick={handleClick}
+                                text="더보기"
+                                className={loading ? 'is-primary is-rounded is-loading is-medium'
+                                    : "is-primary is-rounded is-medium"}
+                                disabled={loading}/>
+                    </div>
+            }
+
         </>
     );
 };
