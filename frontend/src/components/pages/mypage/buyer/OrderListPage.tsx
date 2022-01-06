@@ -1,7 +1,5 @@
-import React, {FC, useEffect, useState} from 'react';
-import item_list from '../../../../assets/JsonData/item_list.json'
+import React, {FC, useEffect} from 'react';
 import ProductCard from "../../../UI/cards/ProductCard";
-import Button from "../../../UI/Button";
 import {setError} from "../../../../store/actions/pageActions";
 import {fetchDashBoard, fetchSituationList} from "../../../../store/actions/mypageActions/buyerActions";
 import {useDispatch, useSelector} from "react-redux";

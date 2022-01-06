@@ -14,7 +14,6 @@ import {
 import {RootState} from "../../../../store";
 import Message from "../../../UI/Message";
 import {setError} from "../../../../store/actions/pageActions";
-import ProductCard from "../../../UI/cards/ProductCard";
 
 interface StringObj {
     [index: string]: string
@@ -168,13 +167,7 @@ const BuyerDashboard: FC = () => {
                     {
                         situationDetail ?
                             <>
-                                {/*<ProductCard*/}
-                                {/*    title="상품제목 짬통"*/}
-                                {/*    image="https://semantic-ui.com/images/wireframe/image.png"*/}
-                                {/*    price={situationDetail.price}*/}
-                                {/*    seller="판매자 이름"*/}
-                                {/*    status="배송중짬통"*/}
-                                {/*/>*/}
+                                {/*<ProductCard title={} image={} price={} btnText={}/>*/}
                             </>
 
                             : <div>데이터 없음</div>
