@@ -167,7 +167,7 @@ const BuyerDashboard: FC = () => {
                     {
                         situationDetail ?
                             <>
-                                {/*<ProductCard title={} image={} price={} btnText={}/>*/}
+                                {/*<RecentOrderCard title={} image={} price={} btnText={}/>*/}
                             </>
 
                             : <div>데이터 없음</div>

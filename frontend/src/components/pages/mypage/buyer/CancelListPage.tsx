@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
 import item_list from '../../../../assets/JsonData/item_list.json'
-import ProductCard from "../../../UI/cards/ProductCard";
+import RecentOrderCard from "../../../UI/cards/RecentOrderCard";
 import Button from "../../../UI/Button";
 
 const CancelListPage: FC = () => {
@@ -23,15 +23,7 @@ const CancelListPage: FC = () => {
 
     return (
         <>
-            <h3 className="page-header">주문 취소 현황</h3>
-            {items && items.map((product, index) =>
-                <ProductCard key={index}
-                             title={product.title}
-                             image={product.image}
-                             price={product.price}
-                             status={product.status}
-                             btnText={orderBtnText(product.status)}
-                />)}
+
         </>
     );
 };

@@ -1,0 +1,91 @@
+.recent-order-card-container.row {
+    height: 140px;
+    min-width: 100%;
+    max-width: 800px;
+    position: relative;
+}
+
+.recent-order-card-content {
+    font-size: 20px;
+    height: 80%;
+    padding-top: 25px;
+}
+
+.recent-order-card-content h5 {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.recent-order-card-content p {
+    border-top: 1px solid rgba(192, 194, 199, 0.25);
+    font-size: 0.7em;
+    color: rgba(128, 128, 128, 0.87);
+    margin-top: 20px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.recent-order-price {
+    font-size: 0.75em;
+    margin-right: 10px;
+}
+
+.recent-order-date {
+    border-left: 1px solid #c0c2c7;
+    font-size: 0.7em;
+    color: rgba(128, 128, 128, 0.82);
+    padding: 0 10px;
+}
+
+
+.recent-order-right {
+    border-left: 1px solid rgba(192, 194, 199, 0.37);
+    height: 120px;
+    text-align: center;
+    font-size: 0.8em;
+    right: 0;
+    top: 20px;
+    position: absolute;
+}
+
+.recent-order-right-status{
+    margin-top: 2px;
+}
+
+.recent-order-right-seller{
+    margin-top: 8px;
+}
+
+.recent-order-right-sellerNum {
+    color: rgba(128, 128, 128, 0.74);
+    margin-bottom: 5px;
+}
+
+@media screen and (max-width: 768px) {
+
+    .recent-order-card-container {
+        text-align: center;
+        margin: 0;
+        padding: 20px 20px 0;
+    }
+
+    .recent-order-card-content {
+        width: 100%;
+        padding-top: 20px;
+    }
+
+    .recent-order-card-container h5 {
+        font-size: 0.9em;
+    }
+
+    .recent-order-right {
+        border: none;
+        border-top: 1px solid #c0c2c7;
+        text-align: center;
+        width: 100%;
+        padding: 10px 0 20px;
+        margin-top: 10px;
+    }
+}
+
+

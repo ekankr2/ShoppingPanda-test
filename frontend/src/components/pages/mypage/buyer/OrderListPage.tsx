@@ -1,5 +1,5 @@
 import React, {FC, useEffect} from 'react';
-import ProductCard from "../../../UI/cards/ProductCard";
+import RecentOrderCard from "../../../UI/cards/RecentOrderCard";
 import {setError} from "../../../../store/actions/pageActions";
 import {fetchDashBoard, fetchSituationList} from "../../../../store/actions/mypageActions/buyerActions";
 import {useDispatch, useSelector} from "react-redux";
@@ -24,13 +24,13 @@ const OrderListPage: FC = () => {
             case '배송완료':
                 return '구매 확정'
             case '배송중':
-                return '배송 정보'
+                return '상세 보기'
             case '상품준비중':
-                return '취소요청'
+                return '상세 보기'
             case '구매확정':
                 return '재구매'
             default:
-                return '배송 정보'
+                return '상세 보기'
         }
     }
 
@@ -38,12 +38,11 @@ const OrderListPage: FC = () => {
         <>
             <h3 className="page-header">주문 현황</h3>
             {situationList && situationList.pageList.map((item, index) =>
-                <ProductCard key={index}
-                             title={item.productName}
-                             image="https://semantic-ui.com/images/wireframe/image.png"
-                             price={item.price}
-                             status={item.status}
-                             btnText={orderBtnText(item.status)}
+                <RecentOrderCard key={index}
+                                 title={item.productName}
+                                 price={item.price}
+                                 status={item.status}
+                                 btnText={orderBtnText(item.status)}
                 />
             )}
         </>
