@@ -25,6 +25,7 @@ const OrderListPage: FC = () => {
     const {situationList} = useSelector((state: RootState) => state.buyer);
     const [pagedData, setPagedData] = useState<pageList[] | null | undefined>(null)
     const [currPage, setCurrPage] = useState(1)
+    const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
 
     console.log('페이지데이타: ', pagedData)
@@ -38,7 +39,7 @@ const OrderListPage: FC = () => {
     }, [])
 
     useEffect(() => {
-        if(currPage === 1){
+        if (currPage === 1) {
             setPagedData(situationList?.pageList)
         }
 
@@ -63,13 +64,13 @@ const OrderListPage: FC = () => {
         e.preventDefault()
 
         axios.get(`/api/recentsituation?size=${5}&page=${currPage}`)
-            .then((result)=>{
+            .then((result) => {
                 console.log(result.data)
                 if (pagedData && result) {
                     setPagedData([...pagedData, ...result.data.pageList])
                 }
             })
-            .catch(()=>{
+            .catch(() => {
                 console.log('더보기 실패')
             })
 
@@ -91,8 +92,11 @@ const OrderListPage: FC = () => {
                 />
             )}
             <div className="mt-5" style={{textAlign: "center"}}>
-                <Button onClick={handleClick} text="더보기" className="is-primary is-rounded is-medium"/>
-                <Button text="더보기" className="is-primary is-loading is-rounded is-medium"/>
+                <Button onClick={handleClick}
+                        text="더보기"
+                        className={loading ? 'is-primary is-rounded is-loading is-medium'
+                            : "is-primary is-rounded is-medium"}
+                        disabled={loading}/>
             </div>
         </>
     );
