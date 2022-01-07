@@ -33,7 +33,6 @@ const OrderListPage: FC = () => {
         if (error) {
             dispatch(setError(''))
         }
-        dispatch(fetchSituationList())
         dispatch(fetchSituationWithPage(5, 0))
     }, [])
 

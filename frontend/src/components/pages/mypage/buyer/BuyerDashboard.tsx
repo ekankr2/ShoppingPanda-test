@@ -6,6 +6,7 @@ import Badge from "../../../UI/badge/Badge";
 import {latestOrders} from "./buyerTypes";
 import Modal from "../../../UI/modal/Modal";
 import {useDispatch, useSelector} from "react-redux";
+import {Link} from "react-router-dom";
 import {
     fetchDashBoard,
     fetchSituationDetail,
@@ -100,7 +101,10 @@ const BuyerDashboard: FC = () => {
         <>
 
             <div className="container">
-                <h3 className="page-header">마이페이지</h3>
+                <Link to="/">
+                    <h3 className="page-header">마이페이지</h3>
+                </Link>
+
                 {error && <Message type="danger" msg={error}/>}
                 {/*card*/}
                 <div className="row">
