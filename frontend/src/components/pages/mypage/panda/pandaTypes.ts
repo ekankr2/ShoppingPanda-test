@@ -18,13 +18,13 @@ export const pandaSidebarItems = [
 
 export const pandaDashboardCard = [
     {
-        "link": "/buyer/orderList",
+        "link": "/panda/video",
         "icon": "bx bxs-gift",
         "count": 0,
         "title": "판매"
     },
     {
-        "link": "/buyer/orderList",
+        "link": "/panda/settlement",
         "icon": "bx bx-won",
         "count": 0,
         "title": "충전금"

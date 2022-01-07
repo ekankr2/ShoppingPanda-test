@@ -6,6 +6,7 @@ export const SET_ERROR = 'SET_ERROR'
 export const NEED_VERIFICATION = 'NEED_VERIFICATION'
 export const SET_SUCCESS = 'SET_SUCCESS'
 export const SET_SUBMITTED = 'SET_SUBMITTED'
+export const SET_MODE = 'SET_MODE'
 
 export const FETCH_DASHBOARD = 'FETCH_DASHBOARD'
 export const FETCH_SITUATION_LIST = 'FETCH_SITUATION_LIST'
@@ -17,6 +18,7 @@ export interface PageState {
     error: string
     success: string
     submitted: boolean
+    mode: string
 }
 
 // Page Actions
@@ -40,7 +42,12 @@ interface setSubmittedAction {
     payload: boolean
 }
 
-export type PageAction = SetLoadingAction | SetErrorAction | SetSuccessAction | setSubmittedAction
+interface setModeAction {
+    type: typeof SET_MODE
+    payload: string
+}
+
+export type PageAction = SetLoadingAction | SetErrorAction | SetSuccessAction | setSubmittedAction | setModeAction
 
 // Auth Types
 export interface User {

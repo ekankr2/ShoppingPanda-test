@@ -1,10 +1,11 @@
-import {PageAction, PageState, SET_ERROR, SET_LOADING, SET_SUBMITTED, SET_SUCCESS} from "../types";
+import {PageAction, PageState, SET_ERROR, SET_LOADING, SET_MODE, SET_SUBMITTED, SET_SUCCESS} from "../types";
 
 const initialState: PageState = {
     loading: false,
     error: '',
     success: '',
-    submitted: false
+    submitted: false,
+    mode: ''
 }
 
 export default (state = initialState, action: PageAction) => {
@@ -28,6 +29,11 @@ export default (state = initialState, action: PageAction) => {
             return {
                 ...state,
                 submitted: action.payload
+            }
+        case SET_MODE:
+            return {
+                ...state,
+                mode: action.payload
             }
         default:
             return state

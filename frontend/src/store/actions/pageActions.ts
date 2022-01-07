@@ -1,6 +1,6 @@
 import {ThunkAction} from "redux-thunk";
 import {RootState} from "../index";
-import {PageAction, SET_ERROR, SET_LOADING, SET_SUBMITTED, SET_SUCCESS} from "../types";
+import {PageAction, SET_ERROR, SET_LOADING, SET_MODE, SET_SUBMITTED, SET_SUCCESS} from "../types";
 
 // Set loading
 export const setLoading = (value: boolean): ThunkAction<void, RootState, null, PageAction> => {
@@ -57,5 +57,14 @@ export const submitLoading = (): ThunkAction<void, RootState, null, PageAction> 
             type: SET_SUBMITTED,
             payload: false
         });
+    }
+}
+
+export const setMode = (mode:string): ThunkAction<void, RootState, null, PageAction> => {
+    return dispatch => {
+        dispatch({
+            type: SET_MODE,
+            payload: mode
+        })
     }
 }
