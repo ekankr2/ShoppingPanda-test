@@ -10,9 +10,11 @@ const PandaSidebar: FC<SidebarProps> = ({location, sidebarItems}) => {
     return (
         <>
             <div className='sidebar'>
-                <div className="sidebar__logo">
-                    <img src={logo} alt="company logo"/>
-                </div>
+                <Link to="/">
+                    <div className="sidebar__logo">
+                        <img src={logo} alt="company logo"/>
+                    </div>
+                </Link>
                 {
                     sidebarItems.map((item: StringObj, index: number) => (
                         <Link to={item.route} key={index}>

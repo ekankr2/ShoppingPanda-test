@@ -1,21 +1,17 @@
 import React, {FC, useEffect, useState} from "react";
 import StatusCard from "../../../UI/cards/StatusCard";
-import MyPageTable from "../../../UI/table/MyPageTable";
-import Badge from "../../../UI/badge/Badge";
+
+import Chart from 'react-apexcharts'
 import Modal from "../../../UI/modal/Modal";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {RootState} from "../../../../store";
 import Message from "../../../UI/Message";
-import {setError} from "../../../../store/actions/pageActions";
-import {pandaDashboardCard} from "./pandaTypes";
+import {chartOptions, pandaDashboardCard} from "./pandaTypes";
 
-interface StringObj {
-    [index: string]: string
-}
 
 const PandaDashboard: FC = () => {
-    const {error} = useSelector((state: RootState) => state.page);
+    const {error, mode} = useSelector((state: RootState) => state.page);
     const [cardItems] = useState(pandaDashboardCard)
     const [showModal, setShowModal] = useState(false)
     const dispatch = useDispatch()
@@ -36,7 +32,7 @@ const PandaDashboard: FC = () => {
                         <div className="row">
                             {
                                 cardItems.map((item, index) =>
-                                    <div className="col-6" key={index}>
+                                    <div className="col-lg-6 col-sm-12" key={index}>
                                         <StatusCard
                                             link={item.link}
                                             icon={item.icon}
@@ -51,11 +47,19 @@ const PandaDashboard: FC = () => {
 
                 <div className="row">
                     <div className="col-12">
-                        <div className="custom-card">
-                            <div className="card__header">
-                                <h3>최근 주문 현황</h3>
-
-                            </div>
+                        <div style={{minHeight: "500px"}} className="custom-card">
+                            <Chart
+                                options={mode === 'theme-mode-dark' ? {
+                                    ...chartOptions.options,
+                                    theme: { mode: 'dark'}
+                                } : {
+                                    ...chartOptions.options,
+                                    theme: { mode: 'light'}
+                                }}
+                                series={chartOptions.series}
+                                type='line'
+                                height='100%'
+                            />
                         </div>
                     </div>
                 </div>

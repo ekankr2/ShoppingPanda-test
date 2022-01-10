@@ -30,3 +30,56 @@ export const pandaDashboardCard = [
         "title": "충전금"
     }
 ]
+
+export const chartOptions = {
+    series: [{
+        name: 'Online Customers',
+        data: [40,70,20,90,36,80,30,91,60]
+    }, {
+        name: 'Store Customers',
+        data: [40, 30, 70, 80, 40, 16, 40, 20, 51, 10]
+    }],
+    options: {
+        color: ['#6ab04c', '#2980b9'],
+        chart: {
+            background: 'transparent',
+            height: '800px'
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        xaxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
+        },
+        legend: {
+            position: 'top'
+        },
+        grid: {
+            show: false
+        }
+    }
+}
+
+export const videoData = [
+    {
+        title: "dummy title 1",
+        image: "https://bulma.io/images/placeholders/1280x960.png"
+    },
+    {
+        title: "dummy title 2",
+        image: "https://bulma.io/images/placeholders/1280x960.png"
+    },
+    {
+        title: "dummy title 3",
+        image: "https://bulma.io/images/placeholders/1280x960.png"
+    },
+    {
+        title: "dummy title 4",
+        image: "https://bulma.io/images/placeholders/1280x960.png"
+    },
+]
+
+export const loadingVideoData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]

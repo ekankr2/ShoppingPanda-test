@@ -6,6 +6,7 @@ import OrderListPage from "./buyer/OrderListPage";
 import CartPage from "./buyer/CartPage";
 import CancelListPage from "./buyer/CancelListPage";
 import PandaDashboard from "./panda/PandaDashboard";
+import PandaVideoPage from "./panda/PandaVideoPage";
 
 
 const MyPageRoutes = () => {
@@ -17,6 +18,7 @@ const MyPageRoutes = () => {
             <Route path='/buyer/cart' exact component={CartPage}/>
 
             <Route path='/panda/dashboard' exact component={PandaDashboard}/>
+            <Route path='/panda/video' exact component={PandaVideoPage}/>
         </Switch>
     )
 }
