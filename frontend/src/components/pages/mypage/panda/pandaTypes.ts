@@ -63,21 +63,29 @@ export const chartOptions = {
     }
 }
 
-export const videoData = [
+export const dummyVideoData = [
     {
-        title: "dummy title 1",
+        title: "더미 짬통 비디오 제목 1 더미 짬통 비디오 제목 1",
         image: "https://bulma.io/images/placeholders/1280x960.png"
     },
     {
-        title: "dummy title 2",
+        title: "더미 짬통 비디오 제목 2 더미 짬통",
         image: "https://bulma.io/images/placeholders/1280x960.png"
     },
     {
-        title: "dummy title 3",
+        title: "더미 짬통 비디오 제목 3 더미 짬통 더미 짬통",
         image: "https://bulma.io/images/placeholders/1280x960.png"
     },
     {
-        title: "dummy title 4",
+        title: "더미 짬통 비디오 제목 4",
+        image: "https://bulma.io/images/placeholders/1280x960.png"
+    },
+    {
+        title: "더미 짬통 비디오 제목 5",
+        image: "https://bulma.io/images/placeholders/1280x960.png"
+    },
+    {
+        title: "더미 짬통 비디오 제목 6",
         image: "https://bulma.io/images/placeholders/1280x960.png"
     },
 ]

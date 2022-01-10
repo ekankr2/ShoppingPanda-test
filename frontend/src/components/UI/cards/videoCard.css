@@ -1,0 +1,41 @@
+.video-card{
+    font-size: 12px;
+}
+
+.video-card .video-card-image{
+    padding: 10px;
+}
+
+.video-card .card-content{
+    border-top: 1px solid #e2e3e5;
+    margin: 0 20px;
+    padding: 20px 0;
+}
+
+.video-card .video-title{
+    font-size: 1.4em;
+    font-weight: 500;
+    min-height: 50px;
+}
+
+.video-card .video-content{
+
+    font-size: 1.2em;
+    color: rgba(128, 128, 128, 0.91);
+}
+
+.video-card .video-sold::after{
+    content: "•";
+    margin: 0 7px;
+}
+
+@media screen and (max-width: 768px){
+    .video-card .video-title{
+        font-size: 1.5em;
+        min-height: 0;
+    }
+    .video-card .video-content{
+        font-size: 1.4em;
+        color: rgba(128, 128, 128, 0.91);
+    }
+}
