@@ -1,0 +1,7 @@
+.panel-container{
+}
+
+.panel-container .panel{
+    max-width: 900px;
+    margin: 0 auto;
+}
