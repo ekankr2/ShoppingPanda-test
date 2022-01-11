@@ -16,3 +16,7 @@ interface PaginationLink {
     current: boolean;
     ellipsis: boolean;
 }
+
+interface StringObj {
+    [key:string]: string
+}

@@ -1,9 +1,20 @@
-import React, {FC} from 'react';
-import logo from "../../../assets/images/logo.png";
-import {Link} from "react-router-dom";
-import {SidebarProps, StringObj} from "./BuyerSidebar";
+import React, {FC} from 'react'
+import { Link } from 'react-router-dom'
+import './sidebar.css'
+import logo from '../../../assets/images/logo.png'
 
-const PandaSidebar: FC<SidebarProps> = ({location, sidebarItems}) => {
+export interface SidebarProps {
+    location: {
+        pathname: string
+    }
+    sidebarItems: any
+}
+
+export interface StringObj{
+    [key:string]:string
+}
+
+const Sidebar : FC<SidebarProps> = ({location, sidebarItems}) => {
 
     const activeItem = sidebarItems.findIndex((item: StringObj) => item.route === location.pathname)
 
@@ -12,11 +23,11 @@ const PandaSidebar: FC<SidebarProps> = ({location, sidebarItems}) => {
             <div className='sidebar'>
                 <Link to="/">
                     <div className="sidebar__logo">
-                        <img src={logo} alt="company logo"/>
+                        <img src={logo} alt="company logo" />
                     </div>
                 </Link>
                 {
-                    sidebarItems.map((item: StringObj, index: number) => (
+                    sidebarItems.map((item:StringObj, index:number) => (
                         <Link to={item.route} key={index}>
                             <SidebarItem
                                 title={item.display_name}
@@ -37,13 +48,13 @@ interface ItemProps {
     active: boolean
 }
 
-const SidebarItem: FC<ItemProps> = (props) => {
+const SidebarItem : FC<ItemProps> = (props) => {
 
     const active = props.active ? 'active' : ''
 
     return (
         <div className="sidebar__item">
-            <div className={`sidebar__item-inner ${active} `}>
+            <div className={`sidebar__item-inner ${active}`}>
                 <i className={props.icon}></i>
                 <span>
                     {props.title}
@@ -53,4 +64,4 @@ const SidebarItem: FC<ItemProps> = (props) => {
     )
 }
 
-export default PandaSidebar;
+export default Sidebar
