@@ -20,7 +20,7 @@ interface pageList {
 
 const OrderListPage: FC = () => {
     const {error} = useSelector((state: RootState) => state.page);
-    const {situationList} = useSelector((state: RootState) => state.buyer);
+    const {buyerSituationList} = useSelector((state: RootState) => state.buyer);
     const [pagedData, setPagedData] = useState<pageList[] | null | undefined>(null)
     const [currPage, setCurrPage] = useState(1)
     const [loading, setLoading] = useState(false)
@@ -38,10 +38,10 @@ const OrderListPage: FC = () => {
 
     useEffect(() => {
         if (currPage === 1) {
-            setPagedData(situationList?.pageList)
+            setPagedData(buyerSituationList?.pageList)
         }
 
-    }, [situationList])
+    }, [buyerSituationList])
 
     function orderBtnText(status: string): string {
         switch (status) {
@@ -91,7 +91,7 @@ const OrderListPage: FC = () => {
                 />
             )}
             {
-                pagedData?.length === situationList?.totalElement ? null
+                pagedData?.length === buyerSituationList?.totalElement ? null
                     :
                     <div className="mt-5" style={{textAlign: "center"}}>
                         <Button onClick={handleClick}

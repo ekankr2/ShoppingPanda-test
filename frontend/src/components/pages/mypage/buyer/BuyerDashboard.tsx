@@ -8,14 +8,13 @@ import Modal from "../../../UI/modal/Modal";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {
-    fetchDashBoard,
+    fetchBuyerDashBoard,
     fetchSituationDetail,
     fetchSituationList, fetchSituationWithPage
 } from "../../../../store/actions/mypageActions/buyerActions";
 import {RootState} from "../../../../store";
 import Message from "../../../UI/Message";
 import {setError} from "../../../../store/actions/pageActions";
-import {FETCH_SITUATION_LIST} from "../../../../store/types";
 
 interface StringObj {
     [index: string]: string
@@ -24,7 +23,7 @@ interface StringObj {
 const BuyerDashboard: FC = () => {
     const [showModal, setShowModal] = useState(false)
     const [cardItems, setCardItems] = useState(dashboardCard)
-    const {dashboard, situationList, situationDetail} = useSelector((state: RootState) => state.buyer);
+    const {buyerDashboard, buyerSituationList, buyerSituationDetail} = useSelector((state: RootState) => state.buyer);
     const {error} = useSelector((state: RootState) => state.page);
     const dispatch = useDispatch()
 
@@ -33,20 +32,20 @@ const BuyerDashboard: FC = () => {
         if (error) {
             dispatch(setError(''))
         }
-        dispatch(fetchDashBoard())
+        dispatch(fetchBuyerDashBoard())
         dispatch(fetchSituationWithPage(5, 0))
     }, [dispatch])
 
     useEffect(() => {
         let copy = [...cardItems]
-        if (dashboard) {
-            copy[0].count = dashboard.readyProduct
-            copy[1].count = dashboard.finishProduct
-            copy[2].count = dashboard.cancelProduct
-            copy[3].count = dashboard.cartProduct
+        if (buyerDashboard) {
+            copy[0].count = buyerDashboard.readyProduct
+            copy[1].count = buyerDashboard.finishProduct
+            copy[2].count = buyerDashboard.cancelProduct
+            copy[3].count = buyerDashboard.cartProduct
             setCardItems(copy)
         }
-    }, [dashboard])
+    }, [buyerDashboard])
 
     useEffect(() => {
         return () => {
@@ -134,12 +133,12 @@ const BuyerDashboard: FC = () => {
                             {/*table pc*/}
                             <div className="card__body is-hidden-mobile">
                                 {
-                                    situationList ?
+                                    buyerSituationList ?
                                         <MyPageTable
                                             limit="5"
                                             headData={latestOrders.header}
                                             renderHead={(item: any, index: number) => renderHead(item, index)}
-                                            bodyData={situationList.pageList}
+                                            bodyData={buyerSituationList.pageList}
                                             renderBody={(item: any, index: number) => renderBody(item, index)}
                                         /> : null
                                 }
@@ -148,12 +147,12 @@ const BuyerDashboard: FC = () => {
                             {/*mobile table*/}
                             <div className="card__body is-hidden-tablet">
                                 {
-                                    situationList ?
+                                    buyerSituationList ?
                                         <MyPageTable
                                             limit="5"
                                             headData={latestOrders.headerMobile}
                                             renderHead={(item: any, index: number) => renderHead(item, index)}
-                                            bodyData={situationList.pageList}
+                                            bodyData={buyerSituationList.pageList}
                                             renderBody={(item: any, index: number) => renderBodyMobile(item, index)}
                                         /> : null
                                 }
@@ -170,7 +169,7 @@ const BuyerDashboard: FC = () => {
                     setShowModal(false)
                 }} title={"주문 상세보기"}>
                     {
-                        situationDetail ?
+                        buyerSituationDetail ?
                             <>
                                 {/*<RecentOrderCard title={} image={} price={} btnText={}/>*/}
                             </>

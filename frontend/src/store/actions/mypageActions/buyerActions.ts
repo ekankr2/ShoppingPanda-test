@@ -2,26 +2,26 @@ import {ThunkAction} from "redux-thunk";
 import {RootState} from "../../index";
 import {
     BuyerMyPageAction,
-    Dashboard,
-    FETCH_DASHBOARD,
-    FETCH_SITUATION,
-    FETCH_SITUATION_LIST,
+    BuyerDashboard,
+    FETCH_BUYER_DASHBOARD,
+    FETCH_BUYER_SITUATION,
+    FETCH_BUYER_SITUATION_LIST,
     Situation,
     SituationList
 } from "../../types";
 import axios from "axios";
 import {setError} from "../pageActions";
 
-export const fetchDashBoard = (): ThunkAction<void, RootState, null, BuyerMyPageAction> => {
+export const fetchBuyerDashBoard = (): ThunkAction<void, RootState, null, BuyerMyPageAction> => {
     return async dispatch => {
         try {
             const res = await axios.get('/api/dashboard')
 
             if (res.data) {
-                const dashBoardData = res.data as Dashboard
+                const dashBoardData = res.data as BuyerDashboard
                 console.log('대쉬보드 박스: ', dashBoardData)
                 dispatch({
-                    type: FETCH_DASHBOARD,
+                    type: FETCH_BUYER_DASHBOARD,
                     payload: dashBoardData
                 })
             }
@@ -41,7 +41,7 @@ export const fetchSituationList = (): ThunkAction<void, RootState, null, BuyerMy
                 const list = res.data as SituationList
                 console.log('최근주문: ',list)
                 dispatch({
-                    type: FETCH_SITUATION_LIST,
+                    type: FETCH_BUYER_SITUATION_LIST,
                     payload: list
                 })
             }
@@ -61,7 +61,7 @@ export const fetchSituationWithPage = (size: number, page: number): ThunkAction<
                 const list = res.data as SituationList
                 console.log('최근주문 페이지 쿼리: ',list)
                 dispatch({
-                    type: FETCH_SITUATION_LIST,
+                    type: FETCH_BUYER_SITUATION_LIST,
                     payload: list
                 })
             }
@@ -83,7 +83,7 @@ export const fetchSituationDetail = (detailId: number): ThunkAction<void, RootSt
                 const detail = res.data as Situation
                 console.log('주문디테일: ',detail)
                 dispatch({
-                    type: FETCH_SITUATION,
+                    type: FETCH_BUYER_SITUATION,
                     payload: detail
                 })
             }

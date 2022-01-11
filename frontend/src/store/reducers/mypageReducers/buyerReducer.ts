@@ -1,24 +1,24 @@
-import {BuyerMyPageAction, BuyerMyPageState, FETCH_DASHBOARD, FETCH_SITUATION, FETCH_SITUATION_LIST} from "../../types";
+import {BuyerMyPageAction, BuyerMyPageState, FETCH_BUYER_DASHBOARD, FETCH_BUYER_SITUATION, FETCH_BUYER_SITUATION_LIST} from "../../types";
 
 const initialState: BuyerMyPageState = {
-    dashboard: null,
-    situationList: null,
-    situationDetail: null
+    buyerDashboard: null,
+    buyerSituationList: null,
+    buyerSituationDetail: null
 }
 
 export default (state = initialState, action: BuyerMyPageAction) => {
     switch (action.type) {
-        case FETCH_DASHBOARD:
+        case FETCH_BUYER_DASHBOARD:
             return {
                 ...state,
-                dashboard: action.payload
+                buyerDashboard: action.payload
             }
-        case FETCH_SITUATION_LIST:
+        case FETCH_BUYER_SITUATION_LIST:
             return {
                 ...state,
                 situationList: action.payload
             }
-        case FETCH_SITUATION:
+        case FETCH_BUYER_SITUATION:
             return {
                 ...state,
                 situationDetail: action.payload
