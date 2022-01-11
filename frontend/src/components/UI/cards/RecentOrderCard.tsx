@@ -2,7 +2,6 @@ import React, {FC} from 'react';
 import './recentOrderCard.css'
 import Button from "../Button";
 import Badge from "../badge/Badge";
-import {StringObj} from "../../sections/sidebar/BuyerSidebar";
 
 interface Props {
     id?: string

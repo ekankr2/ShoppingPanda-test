@@ -22,6 +22,7 @@ const Header: FC = () => {
           <Link className="navbar-item" to={"/"}>name</Link>
           <Link className="navbar-item" to={"/buyer/dashboard"}>mypage</Link>
           <Link className="navbar-item" to={"/panda/dashboard"}>pandapage</Link>
+          <Link className="navbar-item" to={"/seller/dashboard"}>sellerpage</Link>
           <Link className="navbar-item" to={"/pagination"}>pagination</Link>
         </div>
 

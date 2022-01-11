@@ -5,14 +5,14 @@ import './buyerIndex.css'
 import { Route } from 'react-router-dom'
 import {buyerSidebarItems} from "./buyerTypes";
 import MyPageRoutes from "../MyPageRoutes";
-import BuyerSidebar from "../../../sections/sidebar/BuyerSidebar";
+import Sidebar from "../../../sections/sidebar/Sidebar";
 
 const BuyerIndex:FC = () => {
 
     return (
             <Route render={(props) => (
-                <div className={`layout theme-mode-light theme-color-blue`}>
-                    <BuyerSidebar sidebarItems={buyerSidebarItems} {...props}/>
+                <div className={`layout theme-mode-light theme-color-cyan`}>
+                    <Sidebar sidebarItems={buyerSidebarItems} {...props}/>
                     <div className="layout__content">
                         <div className="layout__content-main">
                             <MyPageRoutes/>

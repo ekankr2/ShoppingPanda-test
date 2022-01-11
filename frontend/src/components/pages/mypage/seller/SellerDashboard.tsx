@@ -7,12 +7,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {RootState} from "../../../../store";
 import Message from "../../../UI/Message";
-import {chartOptions, pandaDashboardCard} from "./pandaTypes";
+import {chartOptions, sellerDashboardCard} from "./sellerTypes";
 
 
-const PandaDashboard: FC = () => {
+const SellerDashboard: FC = () => {
     const {error, mode} = useSelector((state: RootState) => state.page);
-    const [cardItems] = useState(pandaDashboardCard)
+    const [cardItems] = useState(sellerDashboardCard)
     const [showModal, setShowModal] = useState(false)
     const dispatch = useDispatch()
 
@@ -29,7 +29,7 @@ const PandaDashboard: FC = () => {
                         <div className="row">
                             {
                                 cardItems.map((item, index) =>
-                                    <div className="col-lg-6 col-sm-12" key={index}>
+                                    <div className="col-lg-3 col-sm-6" key={index}>
                                         <StatusCard
                                             link={item.link}
                                             icon={item.icon}
@@ -79,4 +79,4 @@ const PandaDashboard: FC = () => {
     )
 }
 
-export default PandaDashboard
+export default SellerDashboard

@@ -1,15 +1,18 @@
-import React, {FC} from 'react';
+import React, {FC} from 'react'
+
 import '../buyer/buyerIndex.css'
+
+import { Route } from 'react-router-dom'
+import {sellerSidebarItems} from "./sellerTypes";
 import MyPageRoutes from "../MyPageRoutes";
-import {Route} from "react-router-dom";
-import {pandaSidebarItems} from "./pandaTypes";
 import Sidebar from "../../../sections/sidebar/Sidebar";
 
-const PandaIndex: FC = () => {
+const SellerIndex:FC = () => {
+
     return (
         <Route render={(props) => (
-            <div className={`layout theme-mode-light theme-color-red`}>
-                <Sidebar sidebarItems={pandaSidebarItems} {...props}/>
+            <div className={`layout theme-mode-light theme-color-blue`}>
+                <Sidebar sidebarItems={sellerSidebarItems} {...props}/>
                 <div className="layout__content">
                     <div className="layout__content-main">
                         <MyPageRoutes/>
@@ -17,7 +20,7 @@ const PandaIndex: FC = () => {
                 </div>
             </div>
         )}/>
-    );
-};
+    )
+}
 
-export default PandaIndex;
+export default SellerIndex
