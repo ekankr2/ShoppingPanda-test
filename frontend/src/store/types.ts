@@ -7,10 +7,14 @@ export const NEED_VERIFICATION = 'NEED_VERIFICATION'
 export const SET_SUCCESS = 'SET_SUCCESS'
 export const SET_SUBMITTED = 'SET_SUBMITTED'
 export const SET_MODE = 'SET_MODE'
-
-export const FETCH_DASHBOARD = 'FETCH_DASHBOARD'
-export const FETCH_SITUATION_LIST = 'FETCH_SITUATION_LIST'
-export const FETCH_SITUATION = 'FETCH_SITUATION'
+// buyer
+export const FETCH_BUYER_DASHBOARD = 'FETCH_BUYER_DASHBOARD'
+export const FETCH_BUYER_SITUATION_LIST = 'FETCH_BUYER_SITUATION_LIST'
+export const FETCH_BUYER_SITUATION = 'FETCH_BUYER_SITUATION'
+// panda
+export const FETCH_PANDA_DASHBOARD = 'FETCH_PANDA_DASHBOARD'
+export const FETCH_PANDA_SETTLEMENT_LIST = 'FETCH_PANDA_SETTLEMENT_LIST'
+export const FETCH_PANDA_SETTLEMENT = 'FETCH_PANDA_SETTLEMENT'
 
 // Page State
 export interface PageState {
@@ -101,8 +105,7 @@ export type AuthAction =
     | LoginCheckAction
 
 //dashboard types
-export interface Dashboard {
-    success: string
+export interface BuyerDashboard {
     readyProduct: number
     finishProduct: number
     cancelProduct: number
@@ -147,25 +150,68 @@ export interface OptionName {
 }
 
 export interface BuyerMyPageState {
-    dashboard: Dashboard | null
-    situationList: SituationList | null
-    situationDetail: Situation | null
+    buyerDashboard: BuyerDashboard | null
+    buyerSituationList: SituationList | null
+    buyerSituationDetail: Situation | null
 }
 
-interface FetchDashboardAction {
-    type: typeof FETCH_DASHBOARD
-    payload: Dashboard
+interface FetchBuyerDashboardAction {
+    type: typeof FETCH_BUYER_DASHBOARD
+    payload: BuyerDashboard
 }
 
-interface FetchSituationListAction {
-    type: typeof FETCH_SITUATION_LIST
+interface FetchBuyerSituationListAction {
+    type: typeof FETCH_BUYER_SITUATION_LIST
     payload: SituationList
 }
 
-interface FetchSituationAction {
-    type: typeof FETCH_SITUATION
+interface FetchBuyerSituationAction {
+    type: typeof FETCH_BUYER_SITUATION
     payload: Situation
 }
 
 export type BuyerMyPageAction =
-    FetchDashboardAction | FetchSituationListAction | FetchSituationAction
+    FetchBuyerDashboardAction | FetchBuyerSituationListAction | FetchBuyerSituationAction
+
+//panda types
+export interface PandaDashboard {
+    readyProduct: number
+    finishProduct: number
+    cancelProduct: number
+    cartProduct: number
+}
+
+export interface PandaSettlementList {
+    orderNum: number
+    productName: string
+    buyerName: string
+    settlementDate: string
+}
+
+export interface PandaSettlement {
+
+}
+
+export interface PandaMyPageState {
+    pandaDashboard: PandaDashboard | null
+    pandaSettlementList: PandaSettlementList | null
+    pandaSettlement: PandaSettlement | null
+}
+
+export interface FetchPandaDashboardAction {
+    type: typeof FETCH_PANDA_DASHBOARD
+    payload: PandaDashboard
+}
+
+export interface FetchPandaSettlementListAction {
+    type: typeof FETCH_PANDA_SETTLEMENT_LIST
+    payload: PandaSettlementList
+}
+
+export interface FetchPandaSettlementAction {
+    type: typeof FETCH_PANDA_SETTLEMENT
+    payload: PandaSettlement
+}
+
+export type PandaMyPageAction = FetchPandaDashboardAction | FetchPandaSettlementListAction | FetchPandaSettlementAction
+
