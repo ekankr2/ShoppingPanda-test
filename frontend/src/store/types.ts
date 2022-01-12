@@ -1,3 +1,5 @@
+import exp from "constants";
+
 export const SET_USER = 'SET_USER'
 export const SIGN_OUT = 'SIGN_OUt'
 export const LOGIN_CHECK = 'LOGIN_CHECK'
@@ -214,4 +216,36 @@ export interface FetchPandaSettlementAction {
 }
 
 export type PandaMyPageAction = FetchPandaDashboardAction | FetchPandaSettlementListAction | FetchPandaSettlementAction
+
+// seller types
+export interface SellerDashboard {
+    newOrderNum: number
+    checkedOrderNum: number
+    shipCompleteNum: number
+    canceledOrderNum: number
+    paymentAmount: number[]
+    paymentCount: number[]
+}
+
+export interface SellerProductList {
+    amount: number
+    fullprice: number
+    orders: any
+    orderuser: string
+    orderuserPhone: string
+    pureamount: number
+    receiverAddress: string
+    receiverName: string
+    receiverPhone: string
+    receiverZipCode: string
+    shipprice: number
+    userOrderId: number
+}
+
+export interface SellerMyPageState {
+    sellerDashboard: SellerDashboard | null
+    sellerProductList: SellerProductList | null
+}
+
+
 
