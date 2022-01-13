@@ -6,11 +6,16 @@ export const sellerSidebarItems = [
     },
     {
         "display_name": "상품 관리",
-        "route": "/seller/video",
+        "route": "/seller/product",
         "icon": "bx bxs-videos"
     },
     {
         "display_name": "판매 관리",
+        "route": "/seller/",
+        "icon": "bx bx bx-purchase-tag"
+    },
+    {
+        "display_name": "정산 관리",
         "route": "/seller/settlement",
         "icon": "bx bx bx-won"
     }

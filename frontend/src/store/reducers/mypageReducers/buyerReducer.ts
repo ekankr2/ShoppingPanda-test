@@ -16,12 +16,12 @@ export default (state = initialState, action: BuyerMyPageAction) => {
         case FETCH_BUYER_SITUATION_LIST:
             return {
                 ...state,
-                situationList: action.payload
+                buyerSituationList: action.payload
             }
         case FETCH_BUYER_SITUATION:
             return {
                 ...state,
-                situationDetail: action.payload
+                buyerSituationDetail: action.payload
             }
         default:
             return state

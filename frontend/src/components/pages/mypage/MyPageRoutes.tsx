@@ -9,6 +9,7 @@ import PandaDashboard from "./panda/PandaDashboard";
 import PandaVideoPage from "./panda/PandaVideoPage";
 import PandaSettlementPage from "./panda/PandaSettlementPage";
 import SellerDashboard from "./seller/SellerDashboard";
+import SellerSettlementPage from "./seller/SellerSettlementPage";
 
 
 const MyPageRoutes = () => {
@@ -24,6 +25,7 @@ const MyPageRoutes = () => {
             <Route path='/panda/settlement' exact component={PandaSettlementPage}/>
 
             <Route path='/seller/dashboard' exact component={SellerDashboard}/>
+            <Route path='/seller/settlement' exact component={SellerSettlementPage}/>
         </Switch>
     )
 }

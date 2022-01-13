@@ -10,7 +10,7 @@ import {Link} from "react-router-dom";
 import {
     fetchBuyerDashBoard,
     fetchSituationDetail,
-    fetchSituationList, fetchSituationWithPage
+    fetchSituationWithPage
 } from "../../../../store/actions/mypageActions/buyerActions";
 import {RootState} from "../../../../store";
 import Message from "../../../UI/Message";
