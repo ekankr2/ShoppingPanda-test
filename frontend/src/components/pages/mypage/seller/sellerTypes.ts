@@ -10,7 +10,7 @@ export const sellerSidebarItems = [
         "icon": "bx bxs-videos"
     },
     {
-        "display_name": "정산 관리",
+        "display_name": "판매 관리",
         "route": "/seller/settlement",
         "icon": "bx bx bx-won"
     }
@@ -70,9 +70,7 @@ export const chartOptions = {
         xaxis: {
             type: 'datetime'
         },
-        yaxis: [{
-
-        }, {
+        yaxis: [{}, {
             opposite: true,
         }],
         legend: {
@@ -110,5 +108,20 @@ export const dummyVideoData = [
         image: "https://bulma.io/images/placeholders/1280x960.png"
     },
 ]
+
+export const settlementSearchByDate = [
+    {label: '정산예정일', value: 'planned'},
+    {label: '정산기준일', value: 'settled'},
+    {label: '세금신고기준일', value: 'taxed'},
+]
+
+export const settlementSearchByStatus = [
+    {label: '전체', value: 'all'},
+    {label: '일반 정산', value: 'normal'},
+    {label: '정산 후 취소', value: 'canceledAfter'},
+    {label: '정산 전 취소', value: 'canceledBefore'},
+    {label: '빠른정산', value: 'fastSettlement'},
+]
+
 
 export const loadingVideoData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]

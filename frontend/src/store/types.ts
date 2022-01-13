@@ -1,4 +1,3 @@
-import exp from "constants";
 
 export const SET_USER = 'SET_USER'
 export const SIGN_OUT = 'SIGN_OUt'

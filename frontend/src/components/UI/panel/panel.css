@@ -1,6 +1,5 @@
-.panel-container{
-}
 
-.panel-container .panel{
+.panel-container .panel {
+    max-width: 800px;
     margin: 0 auto;
 }
