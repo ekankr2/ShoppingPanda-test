@@ -5,6 +5,7 @@ import Button from "../Button";
 import {setError, setLoading} from "../../../store/actions/pageActions";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../store";
+import DatePicker from "react-datepicker";
 
 
 const SellerSettlementPanel: FC = () => {
@@ -12,7 +13,8 @@ const SellerSettlementPanel: FC = () => {
     const {error} = useSelector((state: RootState) => state.page);
 
     const [searchMode, setSearchMode] = useState('date')
-    const [searchDate, setSearchDate] = useState('')
+    const [startDate, setStartDate] = useState<any>(new Date())
+    const [endDate, setEndDate] = useState<any>(new Date())
     const [searchDateMode, setSearchDateMode] = useState('planned')
     const [searchStatus, setSearchStatus] = useState('all')
     const [searchOrderNum, setSearchOrderNum] = useState('')
@@ -67,6 +69,21 @@ const SellerSettlementPanel: FC = () => {
                                             }
                                         </select>
                                     </div>
+                                    <span className="mx-4">
+                                       <DatePicker
+                                           selected={startDate}
+                                           onChange={(date) => setStartDate(date)}
+                                           className="red-border"
+                                       />
+                                    </span>
+                                    ~
+                                    <span className="mx-4">
+                                        <DatePicker
+                                            selected={endDate}
+                                            onChange={(date) => setEndDate(date)}
+                                            placeholderText="I have been cleared!"
+                                        />
+                                    </span>
                                 </div>
                                 <div className="panel-block">
                                     <p className="my-auto ml-2 mr-6 has-text-grey">정산상태</p>

@@ -60,7 +60,6 @@ const PandaSettlementPanel: FC = () => {
                                         }
                                     </select>
                                 </div>
-
                                     <span className="mx-4">
                                        <DatePicker
                                            selected={startDate}
@@ -76,8 +75,6 @@ const PandaSettlementPanel: FC = () => {
                                             placeholderText="I have been cleared!"
                                         />
                                     </span>
-
-
                             </div>
                             <div className="panel-block">
                                 <p className="my-auto ml-2 mr-6 has-text-grey">정산상태</p>
