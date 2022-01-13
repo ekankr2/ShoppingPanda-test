@@ -15,6 +15,7 @@ import PrivateRoute from "./components/auth/PrivateRoute";
 import {loginCheck} from "./store/actions/authActions";
 import PaginationTest from "./components/pages/PaginationTest";
 import SellerIndex from "./components/pages/mypage/seller/SellerIndex";
+import Navbar from "./components/sections/navbar/Navbar";
 
 const App: FC = () => {
     const dispatch = useDispatch();
@@ -30,7 +31,8 @@ const App: FC = () => {
 
     return (
         <>
-            <Header/>
+            {/*<Header/>*/}
+            <Navbar/>
             <Switch>
                 <Route path="/" component={Homepage} exact/>
                 <Route path="/signup" component={SignUp} exact/>

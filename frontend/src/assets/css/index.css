@@ -38,6 +38,14 @@
     --border-radius: 15px;
     --topnav-height: 110px;
     --transition-cubic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    --bg:  #242526;
+    --bg-accent: #484a4d;
+    --text-color: #dadce1;
+    --nav-size: 60px;
+    --border: 1px solid #474a4d;
+    --nav-border-radius: 8px;
+    --speed: 500ms;
 }
 
 * {
