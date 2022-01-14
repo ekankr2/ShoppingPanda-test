@@ -183,9 +183,9 @@ export interface PandaDashboard {
 }
 
 export interface PandaSettlementList {
-    localeDateTime: any
-    money: number
-    status: string
+    expectedMoney: number
+    finMoney: number
+    pandaDashboardDtoList: any
 }
 
 export interface PandaSettlement {

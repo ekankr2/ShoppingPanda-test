@@ -20,14 +20,14 @@ const PandaSettlementPanel: FC = () => {
     const [searchStatus, setSearchStatus] = useState('all')
     const [loading, setLoading] = useState(false);
 
-    console.log('시작날짜 : ,',startDate, '끝나는 날짜 : ', endDate)
+    console.log('시작날짜 : ,', startDate, '끝나는 날짜 : ', endDate)
     console.log(` 상태모드: ${searchStatus}`)
 
-    useEffect(()=>{
-        if(pandaSettlementList){
+    useEffect(() => {
+        if (pandaSettlementList) {
             setLoading(false)
         }
-    },[pandaSettlementList])
+    }, [pandaSettlementList])
 
     const submitHandler = (e: FormEvent) => {
         e.preventDefault();
@@ -54,24 +54,42 @@ const PandaSettlementPanel: FC = () => {
                     </p>
                     {
                         <>
-                            <div className="panel-block">
+                            <div className="panel-block is-hidden-touch">
                                 <p className="my-auto ml-2 mr-6 has-text-grey">조회기간</p>
-                                    <span className="mr-3">
+                                <span className="mr-3">
                                        <DatePicker
                                            selected={startDate}
                                            onChange={(date) => setStartDate(date)}
-                                           className="red-border"
                                        />
                                     </span>
                                 ~
-                                    <span className="ml-3">
+                                <span className="ml-3">
                                         <DatePicker
                                             selected={endDate}
                                             onChange={(date) => setEndDate(date)}
-                                            placeholderText="I have been cleared!"
                                         />
                                     </span>
                             </div>
+
+                            <div className="panel-block is-hidden-desktop">
+                                <p className="my-auto mr-5 has-text-grey">시작날짜</p>
+                                <div>
+                                    <DatePicker
+                                        selected={startDate}
+                                        onChange={(date) => setStartDate(date)}
+                                    />
+                                </div>
+                            </div>
+                            <div className="panel-block is-hidden-desktop">
+                                <p className="my-auto mr-5 has-text-grey">시작날짜</p>
+                                <div>
+                                    <DatePicker
+                                        selected={endDate}
+                                        onChange={(date) => setStartDate(date)}
+                                    />
+                                </div>
+                            </div>
+
                             <div className="panel-block">
                                 <p className="my-auto ml-2 mr-6 has-text-grey">정산상태</p>
                                 <div className="select mr-2">
@@ -87,7 +105,8 @@ const PandaSettlementPanel: FC = () => {
                     }
                     <div className="panel-block">
                         <div className="mx-auto">
-                            <Button type="submit" className="is-danger is-outlined mr-2" text="검색하기" disabled={loading}/>
+                            <Button type="submit" className="is-danger is-outlined mr-2" text="검색하기"
+                                    disabled={loading}/>
                             <Button onClick={clickHandler} className="ml-2" text="초기화"/>
                         </div>
                     </div>

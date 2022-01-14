@@ -19,7 +19,7 @@ export const fetchPandaDashBoard = (): ThunkAction<void, RootState, null, PandaM
 export const fetchPandaSettlementList = (data:PandaSettlementRequestData): ThunkAction<void, RootState, null, PandaMyPageAction> => {
     return async dispatch => {
         try {
-            const res = await axios.post(`/api/pandadashboard`, {
+            const res = await axios.post('/api/pandadashboard', {
                 startDay: data.startDate,
                 endDay: data.endDate,
                 status: data.searchStatus
