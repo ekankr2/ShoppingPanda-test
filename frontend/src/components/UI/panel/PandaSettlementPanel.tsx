@@ -1,28 +1,33 @@
-import React, {FC, FormEvent, forwardRef, ReactNode, SetStateAction, useState} from 'react';
+import React, {FC, FormEvent, useEffect, useState} from 'react';
 import Panel from "./Panel";
-import {settlementSearchByDate, settlementSearchByStatus} from "../../pages/mypage/seller/sellerTypes";
+import {settlementSearchByStatus} from "../../pages/mypage/seller/sellerTypes";
 import Button from "../Button";
-import {setError, setLoading} from "../../../store/actions/pageActions";
+import {setError} from "../../../store/actions/pageActions";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../store";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {fetchPandaSettlementList} from "../../../store/actions/mypageActions/pandaActions";
 
 
 const PandaSettlementPanel: FC = () => {
     const dispatch = useDispatch();
     const {error} = useSelector((state: RootState) => state.page);
+    const {pandaSettlementList} = useSelector((state: RootState) => state.panda)
 
     const [startDate, setStartDate] = useState<any>(new Date())
     const [endDate, setEndDate] = useState<any>(new Date())
-    const [searchDateMode, setSearchDateMode] = useState('planned')
     const [searchStatus, setSearchStatus] = useState('all')
-    const [searchOrderNum, setSearchOrderNum] = useState('')
-    console.log(`날짜모드: ${searchDateMode}, 상태모드: ${searchStatus}`)
-    console.log('주문번호 : ', searchOrderNum)
+    const [loading, setLoading] = useState(false);
 
     console.log('시작날짜 : ,',startDate, '끝나는 날짜 : ', endDate)
+    console.log(` 상태모드: ${searchStatus}`)
 
+    useEffect(()=>{
+        if(pandaSettlementList){
+            setLoading(false)
+        }
+    },[pandaSettlementList])
 
     const submitHandler = (e: FormEvent) => {
         e.preventDefault();
@@ -30,13 +35,13 @@ const PandaSettlementPanel: FC = () => {
             dispatch(setError(''));
         }
         setLoading(true);
-        console.log('hi')
+        dispatch(fetchPandaSettlementList({startDate, endDate, searchStatus}))
     }
 
     const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        setSearchDateMode('planned')
-        setSearchOrderNum('')
+        setStartDate(new Date())
+        setEndDate(new Date())
         setSearchStatus('all')
     }
 
@@ -51,16 +56,7 @@ const PandaSettlementPanel: FC = () => {
                         <>
                             <div className="panel-block">
                                 <p className="my-auto ml-2 mr-6 has-text-grey">조회기간</p>
-                                <div className="select">
-                                    <select value={searchDateMode}
-                                            onChange={(e) => setSearchDateMode(e.target.value)}>
-                                        {settlementSearchByDate.map((data: { value: string, label: string }, index: number) => (
-                                            <option key={index} value={data.value}>{data.label}</option>
-                                        ))
-                                        }
-                                    </select>
-                                </div>
-                                    <span className="mx-4">
+                                    <span className="mr-3">
                                        <DatePicker
                                            selected={startDate}
                                            onChange={(date) => setStartDate(date)}
@@ -68,7 +64,7 @@ const PandaSettlementPanel: FC = () => {
                                        />
                                     </span>
                                 ~
-                                    <span className="mx-4">
+                                    <span className="ml-3">
                                         <DatePicker
                                             selected={endDate}
                                             onChange={(date) => setEndDate(date)}
@@ -91,7 +87,7 @@ const PandaSettlementPanel: FC = () => {
                     }
                     <div className="panel-block">
                         <div className="mx-auto">
-                            <Button type="submit" className="is-danger is-outlined mr-2" text="검색하기"/>
+                            <Button type="submit" className="is-danger is-outlined mr-2" text="검색하기" disabled={loading}/>
                             <Button onClick={clickHandler} className="ml-2" text="초기화"/>
                         </div>
                     </div>

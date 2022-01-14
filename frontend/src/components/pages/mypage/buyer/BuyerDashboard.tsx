@@ -16,10 +16,6 @@ import {RootState} from "../../../../store";
 import Message from "../../../UI/Message";
 import {setError} from "../../../../store/actions/pageActions";
 
-interface StringObj {
-    [index: string]: string
-}
-
 const BuyerDashboard: FC = () => {
     const [showModal, setShowModal] = useState(false)
     const [cardItems, setCardItems] = useState(dashboardCard)

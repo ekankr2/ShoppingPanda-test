@@ -122,10 +122,8 @@ export const settlementSearchByDate = [
 
 export const settlementSearchByStatus = [
     {label: '전체', value: 'all'},
-    {label: '일반 정산', value: 'normal'},
-    {label: '정산 후 취소', value: 'canceledAfter'},
-    {label: '정산 전 취소', value: 'canceledBefore'},
-    {label: '빠른정산', value: 'fastSettlement'},
+    {label: '정산 완료', value: 'normal'},
+    {label: '정산 대기', value: 'canceledAfter'},
 ]
 
 

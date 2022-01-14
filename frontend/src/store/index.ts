@@ -5,11 +5,13 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import pageReducer from "./reducers/pageReducer";
 import authReducer from "./reducers/authReducer";
 import buyerReducer from "./reducers/mypageReducers/buyerReducer";
+import pandaReducer from "./reducers/mypageReducers/pandaReducer";
 
 const rootReducer = combineReducers({
     page: pageReducer,
     auth: authReducer,
-    buyer: buyerReducer
+    buyer: buyerReducer,
+    panda: pandaReducer
 });
 
 const store = createStore(

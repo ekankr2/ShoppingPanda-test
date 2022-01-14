@@ -183,14 +183,19 @@ export interface PandaDashboard {
 }
 
 export interface PandaSettlementList {
-    orderNum: number
-    productName: string
-    buyerName: string
-    settlementDate: string
+    localeDateTime: any
+    money: number
+    status: string
 }
 
 export interface PandaSettlement {
 
+}
+
+export interface PandaSettlementRequestData {
+    startDate: any
+    endDate: any
+    searchStatus: string
 }
 
 export interface PandaMyPageState {
@@ -198,7 +203,7 @@ export interface PandaMyPageState {
     pandaSettlementList: PandaSettlementList | null
     pandaSettlement: PandaSettlement | null
 }
-
+// panda action
 export interface FetchPandaDashboardAction {
     type: typeof FETCH_PANDA_DASHBOARD
     payload: PandaDashboard

@@ -1,6 +1,14 @@
 import {ThunkAction} from "redux-thunk";
 import {RootState} from "../../index";
-import {PandaMyPageAction} from "../../types";
+import {
+    FETCH_PANDA_SETTLEMENT_LIST,
+    PandaMyPageAction,
+    PandaSettlementList,
+    PandaSettlementRequestData,
+    SituationList
+} from "../../types";
+import axios from "axios";
+import {setError} from "../pageActions";
 
 export const fetchPandaDashBoard = (): ThunkAction<void, RootState, null, PandaMyPageAction> => {
     return async dispatch => {
@@ -8,9 +16,26 @@ export const fetchPandaDashBoard = (): ThunkAction<void, RootState, null, PandaM
     }
 }
 
-export const fetchPandaSettlementList = (): ThunkAction<void, RootState, null, PandaMyPageAction> => {
+export const fetchPandaSettlementList = (data:PandaSettlementRequestData): ThunkAction<void, RootState, null, PandaMyPageAction> => {
     return async dispatch => {
-
+        try {
+            const res = await axios.post(`/api/pandadashboard`, {
+                startDay: data.startDate,
+                endDay: data.endDate,
+                status: data.searchStatus
+            })
+            if (res.data) {
+                const list = res.data as PandaSettlementList
+                console.log('판다 정산 목록: ',list)
+                dispatch({
+                    type: FETCH_PANDA_SETTLEMENT_LIST,
+                    payload: list
+                })
+            }
+        } catch (error: any) {
+            console.log(error)
+            dispatch(setError("판다 정산 목록 이상"))
+        }
     }
 }
 

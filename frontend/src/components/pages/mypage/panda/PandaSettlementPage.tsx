@@ -4,6 +4,7 @@ import MyPageTable from "../../../UI/table/MyPageTable";
 import {latestOrders} from "../buyer/buyerTypes";
 
 const PandaSettlementPage = () => {
+
     return (
         <>
             <div className="container">
