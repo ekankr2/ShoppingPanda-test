@@ -5,7 +5,6 @@ import {
     PandaMyPageAction,
     PandaSettlementList,
     PandaSettlementRequestData,
-    SituationList
 } from "../../types";
 import axios from "axios";
 import {setError} from "../pageActions";
@@ -16,7 +15,7 @@ export const fetchPandaDashBoard = (): ThunkAction<void, RootState, null, PandaM
     }
 }
 
-export const fetchPandaSettlementList = (data:PandaSettlementRequestData): ThunkAction<void, RootState, null, PandaMyPageAction> => {
+export const fetchPandaSettlementList = (data:PandaSettlementRequestData, onError: () => void): ThunkAction<void, RootState, null, PandaMyPageAction> => {
     return async dispatch => {
         try {
             const res = await axios.post('/api/pandadashboard', {
@@ -34,6 +33,7 @@ export const fetchPandaSettlementList = (data:PandaSettlementRequestData): Thunk
             }
         } catch (error: any) {
             console.log(error)
+            onError()
             dispatch(setError("판다 정산 목록 이상"))
         }
     }

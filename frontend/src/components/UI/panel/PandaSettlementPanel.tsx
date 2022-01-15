@@ -35,7 +35,7 @@ const PandaSettlementPanel: FC = () => {
             dispatch(setError(''));
         }
         setLoading(true);
-        dispatch(fetchPandaSettlementList({startDate, endDate, searchStatus}))
+        dispatch(fetchPandaSettlementList({startDate, endDate, searchStatus}, () => setLoading(false)))
     }
 
     const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {

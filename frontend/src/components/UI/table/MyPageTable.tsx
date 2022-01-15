@@ -1,4 +1,4 @@
-import React, {FC, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import './myPageTable.css'
 
 interface Props{
@@ -33,6 +33,16 @@ const MyPageTable: FC<Props> = ({limit, bodyData, headData, renderHead, renderBo
         setDataShow(bodyData.slice(start, end))
         setCurrPage(page)
     }
+
+    useEffect(()=>{
+        if(bodyData){
+            const initDataShow =
+                limit && bodyData ? bodyData.slice(0, Number(limit)) : bodyData;
+
+            setDataShow(initDataShow)
+        }
+
+    },[bodyData])
 
     return (
         <>
