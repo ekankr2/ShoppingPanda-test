@@ -1,7 +1,8 @@
 import {ThunkAction} from "redux-thunk";
 import {RootState} from "../../index";
 import {
-    FETCH_PANDA_SETTLEMENT_LIST,
+    FETCH_PANDA_DASHBOARD,
+    FETCH_PANDA_SETTLEMENT_LIST, PandaDashboard,
     PandaMyPageAction,
     PandaSettlementList,
     PandaSettlementRequestData,
@@ -9,9 +10,25 @@ import {
 import axios from "axios";
 import {setError} from "../pageActions";
 
-export const fetchPandaDashBoard = (): ThunkAction<void, RootState, null, PandaMyPageAction> => {
+export const fetchPandaDashBoard = (year: number, onError: () => void): ThunkAction<void, RootState, null, PandaMyPageAction> => {
     return async dispatch => {
-
+        try {
+            let res = await axios.post('/api/pandadashboard', {
+                year: year
+            })
+            if(res.data) {
+                const data = res.data as PandaDashboard
+                console.log(data)
+                dispatch({
+                    type: FETCH_PANDA_DASHBOARD,
+                    payload: data
+                })
+            }
+        } catch (error: any) {
+            console.log(error)
+            onError()
+            dispatch(setError("판다 대시보드 이상"))
+        }
     }
 }
 

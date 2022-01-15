@@ -8,14 +8,17 @@ import {Link} from "react-router-dom";
 import {RootState} from "../../../../store";
 import Message from "../../../UI/Message";
 import {chartOptions, pandaDashboardCard} from "./pandaTypes";
+import Button from "../../../UI/Button";
 
 
 const PandaDashboard: FC = () => {
     const {error, mode} = useSelector((state: RootState) => state.page);
     const [cardItems] = useState(pandaDashboardCard)
     const [showModal, setShowModal] = useState(false)
+    const [currentYear] = useState(new Date().getFullYear())
     const dispatch = useDispatch()
 
+    console.log(currentYear)
 
     return (
         <>
@@ -23,7 +26,11 @@ const PandaDashboard: FC = () => {
             <div className="container">
 
                 {error && <Message type="danger" msg={error}/>}
-
+                <div className="page-header">
+                    <span className="mr-3"><Button text={currentYear} className="is-danger"/></span>
+                    <span className="mr-3"><Button text={currentYear - 1}/></span>
+                    <span className="mr-3"><Button text={currentYear - 2}/></span>
+                </div>
                 <div className="row">
                     <div className="col-md-12">
                         <div className="row">
