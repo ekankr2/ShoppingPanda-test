@@ -183,7 +183,7 @@ export interface PandaDashboard {
 }
 
 export interface PandaSettlementList {
-    expectedMoney: number
+    expectMoney: number
     finMoney: number
     pandaDashboardDtoList: any
 }

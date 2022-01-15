@@ -19,9 +19,13 @@ export const fetchPandaSettlementList = (data:PandaSettlementRequestData, onErro
     return async dispatch => {
         try {
             const res = await axios.post('/api/pandadashboard', {
-                startDay: data.startDate,
-                endDay: data.endDate,
-                status: data.searchStatus
+                startYear: new Date(data.startDate).getFullYear(),
+                startMonth: new Date(data.startDate).getMonth(),
+                startDay: new Date(data.startDate).getDate(),
+                endYear: new Date(data.endDate).getFullYear(),
+                endMonth: new Date(data.endDate).getMonth(),
+                endDay: new Date(data.endDate).getDate(),
+                status: data.searchStatus,
             })
             if (res.data) {
                 const list = res.data as PandaSettlementList

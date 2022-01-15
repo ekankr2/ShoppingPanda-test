@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 
 interface MessageProps {
-    msg: string
+    msg: string | number
     type: 'danger' | 'success' | 'info'
 }
 

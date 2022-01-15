@@ -34,10 +34,10 @@ export const pandaDashboardCard = [
 export const chartOptions = {
     series: [{
         name: 'Online Customers',
-        data: [40,70,20,90,36,80,30,91,60]
+        data: [40, 70, 20, 90, 36, 80, 30, 91, 60]
     }, {
         name: 'Store Customers',
-        data: [40, 30, 70, 80, 40, 16, 40, 20, 51, 10]
+        data: [40, 30, 70, 80, 40, 16, 40, 20, 51, 10, 21, 42]
     }],
     options: {
         color: ['#6ab04c', '#2980b9'],
@@ -52,7 +52,7 @@ export const chartOptions = {
             curve: 'smooth'
         },
         xaxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         },
         legend: {
             position: 'top'
@@ -94,10 +94,5 @@ export const loadingVideoData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1
 
 
 export const pandaSettlementTable = {
-    header: [
-        "정산 일자",
-        " ",
-        "금액",
-        "상태"
-    ]
+    header: ["정산 일자", "정산번호", "금액", "상태"],
 }
