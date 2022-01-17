@@ -1,7 +1,5 @@
 import React, {FC, useEffect, useState} from "react";
 import StatusCard from "../../../UI/cards/StatusCard";
-
-import Modal from "../../../UI/modal/Modal";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../store";
 import Message from "../../../UI/Message";
@@ -14,7 +12,6 @@ import PandaChart from "../../../UI/chart/PandaChart";
 const PandaDashboard: FC = () => {
     const {error} = useSelector((state: RootState) => state.page);
     const [cardItems, setCardItems] = useState(pandaDashboardCard)
-    const [showModal, setShowModal] = useState(false)
     const [currentYear] = useState(new Date().getFullYear())
     const [selectedYear, setSelectedYear] = useState(currentYear)
     const [chartSeries, setChartSeries] = useState<number[]>([])
@@ -106,20 +103,6 @@ const PandaDashboard: FC = () => {
                     </div>
                 </div>
             </div>
-
-            {
-                showModal &&
-                <Modal onClose={() => {
-                    setShowModal(false)
-                }} title={"주문 상세보기"}>
-                    {
-                        <>
-                        </>
-                    }
-
-                </Modal>
-            }
-
         </>
     )
 }

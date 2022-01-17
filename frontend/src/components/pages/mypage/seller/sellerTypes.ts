@@ -36,19 +36,19 @@ export const sellerDashboardCard = [
     },
     {
         "link": "/seller/settlement",
-        "icon": "bx bxs-package",
-        "count": 0,
-        "title": "배송완료"
-    },
-    {
-        "link": "/seller/settlement",
         "icon": "bx bx-error-alt",
         "count": 0,
         "title": "취소 / 반품"
+    },
+    {
+        "link": "/seller/settlement",
+        "icon": "bx bxs-package",
+        "count": 0,
+        "title": "완료주문"
     }
 ]
 
-export const chartOptions = {
+export const sellerChartOptions = {
     series: [{
         name: '결제금액',
         type: 'column',
@@ -68,7 +68,7 @@ export const chartOptions = {
             enabled: true,
             enabledOnSeries: [1]
         },
-        labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
+        labels: [1,2,3,4,5,6,7,8,9,10,11],
         stroke: {
             width: [0, 4]
         },
@@ -125,6 +125,10 @@ export const settlementSearchByStatus = [
     {label: '정산 완료', value: '지급완료'},
     {label: '정산 대기', value: '지급예정'},
 ]
+
+export const sellerSettlementTable = {
+    header: ["입금액", "정산금액", "수수료", "판매일", "구매확정일", "정산예상일", "정산상태"],
+}
 
 
 export const loadingVideoData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]

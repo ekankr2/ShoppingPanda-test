@@ -1,29 +1,88 @@
 import React, {FC, useEffect, useState} from "react";
 import StatusCard from "../../../UI/cards/StatusCard";
-
-import Chart from 'react-apexcharts'
-import Modal from "../../../UI/modal/Modal";
 import {useDispatch, useSelector} from "react-redux";
-import {Link} from "react-router-dom";
 import {RootState} from "../../../../store";
 import Message from "../../../UI/Message";
-import {chartOptions, sellerDashboardCard} from "./sellerTypes";
+import {sellerDashboardCard} from "./sellerTypes";
+import {setError, setLoading} from "../../../../store/actions/pageActions";
+import {fetchSellerDashboard} from "../../../../store/actions/mypageActions/sellerActions";
+import Button from "../../../UI/Button";
+import SellerChart from "../../../UI/chart/SellerChart";
 
 
 const SellerDashboard: FC = () => {
-    const {error, mode} = useSelector((state: RootState) => state.page);
-    const [cardItems] = useState(sellerDashboardCard)
-    const [showModal, setShowModal] = useState(false)
+    const [cardItems, setCardItems] = useState(sellerDashboardCard)
+    const [currentYear] = useState(new Date().getFullYear())
+    const [selectedYear, setSelectedYear] = useState(currentYear)
     const dispatch = useDispatch()
+    const [chartMoney, setChartMoney] = useState<any[]>([])
+    const [chartQuantity, setChartQuantity] = useState<any[]>([])
+    const {error} = useSelector((state: RootState) => state.page);
+    const { sellerDashboard } = useSelector((state: any) => state.seller)
 
+    useEffect(() => {
+        if (error) {
+            dispatch(setError(''))
+        }
+        dispatch(fetchSellerDashboard(currentYear, () => setLoading(false)))
+    }, [])
+
+    useEffect(() => {
+        dispatch(fetchSellerDashboard(selectedYear, () => setLoading(false)))
+    }, [selectedYear, dispatch])
+
+    useEffect(()=>{
+        let cardCopy = [...cardItems]
+        if(sellerDashboard){
+            cardCopy[0].count = sellerDashboard.newOrder
+            cardCopy[1].count = sellerDashboard.readyOrder
+            cardCopy[2].count = sellerDashboard.cancelReturn
+            cardCopy[3].count = sellerDashboard.completeBuy
+            setChartMoney(sellerDashboard.money)
+            setChartQuantity(sellerDashboard.quantity)
+        }
+        setCardItems(cardCopy)
+    },[sellerDashboard, dispatch])
+
+    useEffect(()=>{
+        return (()=>{
+            if(error) {
+                dispatch(setError(''))
+            }
+        })
+    },[error, dispatch])
 
     return (
         <>
 
             <div className="container">
-
                 {error && <Message type="danger" msg={error}/>}
-
+                <div className="page-header">
+                    <span className="mr-3">
+                        <Button
+                            text={currentYear}
+                            className={selectedYear === currentYear ? "is-info" : ""}
+                            onClick={() => {
+                                setSelectedYear(currentYear)
+                            }}/>
+                    </span>
+                    <span className="mr-3">
+                        <Button
+                            text={currentYear - 1}
+                            className={selectedYear === currentYear - 1 ? "is-info" : ""}
+                            onClick={() => {
+                                setSelectedYear(currentYear - 1)
+                            }}/>
+                    </span>
+                    <span className="mr-3">
+                        <Button
+                            text={currentYear - 2}
+                            className={selectedYear === currentYear - 2 ? "is-info" : ""}
+                            onClick={() => {
+                                setSelectedYear(currentYear - 2)
+                            }}/>
+                    </span>
+                </div>
                 <div className="row">
                     <div className="col-md-12">
                         <div className="row">
@@ -45,36 +104,11 @@ const SellerDashboard: FC = () => {
                 <div className="row">
                     <div className="col-12">
                         <div style={{minHeight: "500px"}} className="custom-card">
-                            <Chart
-                                options={mode === 'theme-mode-dark' ? {
-                                    ...chartOptions.options,
-                                    theme: { mode: 'dark'}
-                                } : {
-                                    ...chartOptions.options,
-                                    theme: { mode: 'light'}
-                                }}
-                                series={chartOptions.series}
-                                type='line'
-                                height='100%'
-                            />
+                            <SellerChart money={chartMoney} quantity={chartQuantity}/>
                         </div>
                     </div>
                 </div>
             </div>
-
-            {
-                showModal &&
-                <Modal onClose={() => {
-                    setShowModal(false)
-                }} title={"주문 상세보기"}>
-                    {
-                        <>
-                        </>
-                    }
-
-                </Modal>
-            }
-
         </>
     )
 }

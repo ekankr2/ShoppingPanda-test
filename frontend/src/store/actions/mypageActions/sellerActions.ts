@@ -10,11 +10,12 @@ import {
 import axios from "axios";
 import {setError} from "../pageActions";
 
-export const fetchSellerDashboard = (): ThunkAction<void, RootState, null, SellerMyPageAction> => {
+export const fetchSellerDashboard = (year: number, onError: () => void): ThunkAction<void, RootState, null, SellerMyPageAction> => {
     return async dispatch => {
         try {
-            const res = await axios.get('/api/shopdashboardmainv2')
-
+            const res = await axios.post('/api/shopdashboardmainv2', {
+                year: year
+            })
             if (res.data) {
                 const dashboardData = res.data as SellerDashboard
                 console.log('대쉬보드 :', dashboardData)
@@ -25,6 +26,7 @@ export const fetchSellerDashboard = (): ThunkAction<void, RootState, null, Selle
             }
         } catch (error: any) {
             console.error(error)
+            onError()
             dispatch(setError("셀러 대쉬보드 통신 이상"))
         }
     }

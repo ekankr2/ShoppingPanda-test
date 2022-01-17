@@ -288,10 +288,10 @@ export interface SellerMyPageState {
 }
 
 export interface SellerSettlementRequestData {
-    startDate: any
-    endDate: any
-    searchStatus: string | null
-    orderId: number | null
+    startDate?: any
+    endDate?: any
+    searchStatus?: string
+    orderId?: string | number
 }
 
 //seller actions

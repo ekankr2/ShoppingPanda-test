@@ -7,7 +7,7 @@ const initialState: SellerMyPageState = {
 }
 
 export default (state = initialState, action: SellerMyPageAction) => {
-    switch(action.type) {
+    switch (action.type) {
         case FETCH_SELLER_DASHBOARD:
             return {
                 ...state,
