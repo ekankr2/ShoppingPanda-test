@@ -21,32 +21,29 @@ export const pandaDashboardCard = [
         "link": "/panda/video",
         "icon": "bx bxs-gift",
         "count": 0,
-        "title": "판매"
+        "title": "정산예정"
     },
     {
         "link": "/panda/settlement",
         "icon": "bx bx-won",
         "count": 0,
-        "title": "충전금"
+        "title": "정산완료"
     }
 ]
 
-export const chartOptions = {
-    series: [{
-        name: 'Online Customers',
-        data: [40, 70, 20, 90, 36, 80, 30, 91, 60]
-    }, {
+export const pandaChartOptions = {
+    series: {
         name: 'Store Customers',
         data: [40, 30, 70, 80, 40, 16, 40, 20, 51, 10, 21, 42]
-    }],
+    },
     options: {
-        color: ['#6ab04c', '#2980b9'],
+        colors: ['#FF4560'],
         chart: {
             background: 'transparent',
             height: '800px'
         },
         dataLabels: {
-            enabled: false
+            enabled: true
         },
         stroke: {
             curve: 'smooth'
@@ -59,6 +56,13 @@ export const chartOptions = {
         },
         grid: {
             show: false
+        },
+        title: {
+            text: '월별 판매랑',
+            align: 'center',
+            style: {
+                fontSize: '20px',
+            }
         }
     }
 }
@@ -66,27 +70,27 @@ export const chartOptions = {
 export const dummyVideoData = [
     {
         title: "더미 짬통 비디오 제목 1 더미 짬통 비디오 제목 1",
-        image: "https://bulma.io/images/placeholders/1280x960.png"
+        image: "https://user-images.githubusercontent.com/83811729/149706400-34575ef7-bfd0-457d-ab64-379b326a78dc.png"
     },
     {
         title: "더미 짬통 비디오 제목 2 더미 짬통",
-        image: "https://bulma.io/images/placeholders/1280x960.png"
+        image: "https://user-images.githubusercontent.com/83811729/149706400-34575ef7-bfd0-457d-ab64-379b326a78dc.png"
     },
     {
         title: "더미 짬통 비디오 제목 3 더미 짬통 더미 짬통",
-        image: "https://bulma.io/images/placeholders/1280x960.png"
+        image: "https://user-images.githubusercontent.com/83811729/149706400-34575ef7-bfd0-457d-ab64-379b326a78dc.png"
     },
     {
         title: "더미 짬통 비디오 제목 4",
-        image: "https://bulma.io/images/placeholders/1280x960.png"
+        image: "https://user-images.githubusercontent.com/83811729/149706400-34575ef7-bfd0-457d-ab64-379b326a78dc.png"
     },
     {
         title: "더미 짬통 비디오 제목 5",
-        image: "https://bulma.io/images/placeholders/1280x960.png"
+        image: "https://user-images.githubusercontent.com/83811729/149706400-34575ef7-bfd0-457d-ab64-379b326a78dc.png"
     },
     {
         title: "더미 짬통 비디오 제목 6",
-        image: "https://bulma.io/images/placeholders/1280x960.png"
+        image: "https://user-images.githubusercontent.com/83811729/149706400-34575ef7-bfd0-457d-ab64-379b326a78dc.png"
     },
 ]
 

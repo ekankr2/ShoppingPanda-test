@@ -2,21 +2,21 @@ import {ThunkAction} from "redux-thunk";
 import {RootState} from "../../index";
 import {
     FETCH_PANDA_DASHBOARD,
-    FETCH_PANDA_SETTLEMENT_LIST, PandaDashboard,
+    FETCH_PANDA_SETTLEMENT_LIST, FETCH_PANDA_VIDEO_LIST, PandaDashboard,
     PandaMyPageAction,
     PandaSettlementList,
-    PandaSettlementRequestData,
+    PandaSettlementRequestData, PandaVideoList,
 } from "../../types";
 import axios from "axios";
-import {setError} from "../pageActions";
+import {setError, setLoading} from "../pageActions";
 
 export const fetchPandaDashBoard = (year: number, onError: () => void): ThunkAction<void, RootState, null, PandaMyPageAction> => {
     return async dispatch => {
         try {
-            let res = await axios.post('/api/pandadashboard', {
+            let res = await axios.post('/api/pandadashboardmain', {
                 year: year
             })
-            if(res.data) {
+            if (res.data) {
                 const data = res.data as PandaDashboard
                 console.log(data)
                 dispatch({
@@ -25,14 +25,14 @@ export const fetchPandaDashBoard = (year: number, onError: () => void): ThunkAct
                 })
             }
         } catch (error: any) {
-            console.log(error)
+            console.error(error)
             onError()
             dispatch(setError("판다 대시보드 이상"))
         }
     }
 }
 
-export const fetchPandaSettlementList = (data:PandaSettlementRequestData, onError: () => void): ThunkAction<void, RootState, null, PandaMyPageAction> => {
+export const fetchPandaSettlementList = (data: PandaSettlementRequestData, onError: () => void): ThunkAction<void, RootState, null, PandaMyPageAction> => {
     return async dispatch => {
         try {
             const res = await axios.post('/api/pandadashboard', {
@@ -46,7 +46,7 @@ export const fetchPandaSettlementList = (data:PandaSettlementRequestData, onErro
             })
             if (res.data) {
                 const list = res.data as PandaSettlementList
-                console.log('판다 정산 목록: ',list)
+                console.log('판다 정산 목록: ', list)
                 dispatch({
                     type: FETCH_PANDA_SETTLEMENT_LIST,
                     payload: list
@@ -63,5 +63,28 @@ export const fetchPandaSettlementList = (data:PandaSettlementRequestData, onErro
 export const fetchPandaSettlement = (): ThunkAction<void, RootState, null, PandaMyPageAction> => {
     return async dispatch => {
 
+    }
+}
+
+export const fetchPandaVideoList = (): ThunkAction<void, RootState, null, PandaMyPageAction> => {
+    return async dispatch => {
+        try {
+            dispatch(setLoading(true))
+            const res = await axios.get('/api/pandadashboardmovie')
+
+            if (res.data) {
+                const videoList = res.data as PandaVideoList
+                console.log('판다 비디오 목록: ',videoList)
+                dispatch({
+                    type: FETCH_PANDA_VIDEO_LIST,
+                    payload: videoList
+                })
+            }
+        } catch (error: any){
+            console.error(error)
+            dispatch(setError('동영상 리스트 통신이상'))
+            dispatch(setLoading(false))
+        }
+        dispatch(setLoading(false))
     }
 }

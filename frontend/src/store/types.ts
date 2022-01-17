@@ -1,4 +1,3 @@
-
 export const SET_USER = 'SET_USER'
 export const SIGN_OUT = 'SIGN_OUt'
 export const LOGIN_CHECK = 'LOGIN_CHECK'
@@ -16,6 +15,7 @@ export const FETCH_BUYER_SITUATION = 'FETCH_BUYER_SITUATION'
 export const FETCH_PANDA_DASHBOARD = 'FETCH_PANDA_DASHBOARD'
 export const FETCH_PANDA_SETTLEMENT_LIST = 'FETCH_PANDA_SETTLEMENT_LIST'
 export const FETCH_PANDA_SETTLEMENT = 'FETCH_PANDA_SETTLEMENT'
+export const FETCH_PANDA_VIDEO_LIST = 'FETCH_PANDA_VIDEO_LIST'
 
 // Page State
 export interface PageState {
@@ -65,7 +65,7 @@ export interface User {
 export interface AuthState {
     user: User | null
     needVerification: boolean
-    loggedIn : boolean
+    loggedIn: boolean
 }
 
 export interface SignUpData {
@@ -176,10 +176,9 @@ export type BuyerMyPageAction =
 
 //panda types
 export interface PandaDashboard {
-    readyProduct: number
-    finishProduct: number
-    cancelProduct: number
-    cartProduct: number
+    salse: number[]
+    expect: number
+    finish: number
 }
 
 export interface PandaSettlementList {
@@ -192,6 +191,16 @@ export interface PandaSettlement {
 
 }
 
+interface VideoDetails{
+    link: string
+    panda: string
+    pandaId: number
+}
+
+export interface PandaVideoList {
+    details: VideoDetails[]
+}
+
 export interface PandaSettlementRequestData {
     startDate: any
     endDate: any
@@ -202,7 +211,9 @@ export interface PandaMyPageState {
     pandaDashboard: PandaDashboard | null
     pandaSettlementList: PandaSettlementList | null
     pandaSettlement: PandaSettlement | null
+    pandaVideoList: PandaVideoList | null
 }
+
 // panda action
 export interface FetchPandaDashboardAction {
     type: typeof FETCH_PANDA_DASHBOARD
@@ -219,7 +230,16 @@ export interface FetchPandaSettlementAction {
     payload: PandaSettlement
 }
 
-export type PandaMyPageAction = FetchPandaDashboardAction | FetchPandaSettlementListAction | FetchPandaSettlementAction
+export interface FetchPandaVideoListAction {
+    type: typeof FETCH_PANDA_VIDEO_LIST
+    payload: PandaVideoList
+}
+
+export type PandaMyPageAction =
+    FetchPandaDashboardAction
+    | FetchPandaSettlementListAction
+    | FetchPandaSettlementAction
+    | FetchPandaVideoListAction
 
 // seller types
 export interface SellerDashboard {

@@ -1,7 +1,7 @@
 import {
     FETCH_PANDA_DASHBOARD,
     FETCH_PANDA_SETTLEMENT,
-    FETCH_PANDA_SETTLEMENT_LIST,
+    FETCH_PANDA_SETTLEMENT_LIST, FETCH_PANDA_VIDEO_LIST,
     PandaMyPageAction,
     PandaMyPageState
 } from "../../types";
@@ -9,7 +9,8 @@ import {
 const initialState: PandaMyPageState = {
     pandaDashboard: null,
     pandaSettlement: null,
-    pandaSettlementList: null
+    pandaSettlementList: null,
+    pandaVideoList: null
 }
 
 export default (state = initialState, action: PandaMyPageAction) => {
@@ -28,6 +29,11 @@ export default (state = initialState, action: PandaMyPageAction) => {
             return {
                 ...state,
                 pandaSettlement: action.payload
+            }
+        case FETCH_PANDA_VIDEO_LIST:
+            return {
+                ...state,
+                pandaVideoList: action.payload
             }
         default:
             return state
