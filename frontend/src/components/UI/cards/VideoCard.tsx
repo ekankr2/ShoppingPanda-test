@@ -1,10 +1,11 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import Button from "../Button";
 import "./videoCard.css"
+import axios from "axios";
 
 interface Props {
-    title?: string
     link: string
+    panda: string
 }
 
 function linkFormatter(link: string) {
@@ -12,13 +13,40 @@ function linkFormatter(link: string) {
 }
 
 function videoImageMaker(link: string) :string {
-    let videoLink = `https://img.youtube.com/vi/${link}/0.jpg`
-    return videoLink
+    return `https://img.youtube.com/vi/${link}/mqdefault.jpg`
 }
 
-const VideoCard: FC<Props> = ({title, link}) => {
+// function getVideoInfo(link: string, setVideoInfo: () => void) :any{
+//     const fullUrl = `https://noembed.com/embed?url=${link}`
+//     axios.get(fullUrl)
+//         .then((result)=>{
+//             console.log(result.data)
+//             setVideoInfo(result.data)
+//         }).catch((error)=>{console.log(error)})
+// }
+
+const VideoCard: FC<Props> = ({link, panda}) => {
+    const [videoInfo, setVideoInfo] = useState<any>(null)
+
+    useEffect(()=>{
+        const fullUrl = `https://noembed.com/embed?url=${link}`
+        axios.get(fullUrl)
+            .then((result)=>{
+                // console.log(result.data)
+                setVideoInfo(result.data)
+                return result.data
+            }).then((setVideoInfo)
+        )
+    },[])
+
+    useEffect(()=>{
+        console.log('비디오 정보: ',videoInfo)
+    },[videoInfo])
+
     return (
         <>
+            {
+                videoInfo &&
             <div className="card video-card">
                 <div className="card-image video-card-image">
                     <figure className="image is-4by3">
@@ -28,16 +56,16 @@ const VideoCard: FC<Props> = ({title, link}) => {
                 <div className="card-content">
                     <div className="media">
                         <div className="media-content">
-                            <a className="video-title" target="_blank" href={link}>{title}</a>
+                            <a className="video-title" target="_blank" href={link}>{videoInfo.title}</a>
                         </div>
                     </div>
 
-                    {/*<div className="video-content">*/}
-                    {/*    <div>*/}
-                    {/*        <span className="video-sold">판매수 11,000회</span>*/}
-                    {/*        <span><i className="bx bx bx-won"></i>15만원</span>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
+                    <div className="video-content">
+                        <div>
+                            <span className="video-sold">{videoInfo.author_name}</span>
+                            {/*<span><i className="bx bx bx-won"></i>15만원</span>*/}
+                        </div>
+                    </div>
                 </div>
 
                 <footer className="card-footer has-background-white">
@@ -51,6 +79,8 @@ const VideoCard: FC<Props> = ({title, link}) => {
                     </div>
                 </footer>
             </div>
+        }
+
         </>
     );
 };
