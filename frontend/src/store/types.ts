@@ -16,6 +16,10 @@ export const FETCH_PANDA_DASHBOARD = 'FETCH_PANDA_DASHBOARD'
 export const FETCH_PANDA_SETTLEMENT_LIST = 'FETCH_PANDA_SETTLEMENT_LIST'
 export const FETCH_PANDA_SETTLEMENT = 'FETCH_PANDA_SETTLEMENT'
 export const FETCH_PANDA_VIDEO_LIST = 'FETCH_PANDA_VIDEO_LIST'
+// seller
+export const FETCH_SELLER_DASHBOARD = 'FETCH_SELLER_DASHBOARD'
+export const FETCH_SELLER_SETTLEMENT_LIST = 'FETCH_SELLER_SETTLEMENT_LIST'
+export const FETCH_SELLER_PRODUCT_LIST = 'FETCH_SELLER_PRODUCT_LIST'
 
 // Page State
 export interface PageState {
@@ -215,22 +219,22 @@ export interface PandaMyPageState {
 }
 
 // panda action
-export interface FetchPandaDashboardAction {
+interface FetchPandaDashboardAction {
     type: typeof FETCH_PANDA_DASHBOARD
     payload: PandaDashboard
 }
 
-export interface FetchPandaSettlementListAction {
+interface FetchPandaSettlementListAction {
     type: typeof FETCH_PANDA_SETTLEMENT_LIST
     payload: PandaSettlementList
 }
 
-export interface FetchPandaSettlementAction {
+interface FetchPandaSettlementAction {
     type: typeof FETCH_PANDA_SETTLEMENT
     payload: PandaSettlement
 }
 
-export interface FetchPandaVideoListAction {
+interface FetchPandaVideoListAction {
     type: typeof FETCH_PANDA_VIDEO_LIST
     payload: PandaVideoList
 }
@@ -243,12 +247,12 @@ export type PandaMyPageAction =
 
 // seller types
 export interface SellerDashboard {
-    newOrderNum: number
-    checkedOrderNum: number
-    shipCompleteNum: number
-    canceledOrderNum: number
-    paymentAmount: number[]
-    paymentCount: number[]
+    newOrder: number
+    readyOrder: number
+    cancelReturn: number
+    completeBuy: number
+    money: number[]
+    quantity: number[]
 }
 
 export interface SellerProductList {
@@ -266,10 +270,42 @@ export interface SellerProductList {
     userOrderId: number
 }
 
+export interface SellerSettlementList {
+    beforeSalePrice: number
+    settlePrice: number
+    fees: number
+    salesDate: any
+    confirmDate: any
+    expectDate: any
+    depositCompleted: any
+    paymentStatus: string
+}
+
 export interface SellerMyPageState {
     sellerDashboard: SellerDashboard | null
     sellerProductList: SellerProductList | null
+    sellerSettlementList: SellerSettlementList[] | null
 }
+
+export interface SellerSettlementRequestData {
+    startDate: any
+    endDate: any
+    searchStatus: string | null
+    orderId: number | null
+}
+
+//seller actions
+interface fetchSellerDashboardAction {
+    type: typeof FETCH_SELLER_DASHBOARD
+    payload: SellerDashboard
+}
+
+interface fetchSellerSettlementListAction {
+    type: typeof FETCH_SELLER_SETTLEMENT_LIST
+    payload: SellerSettlementList
+}
+
+export type SellerMyPageAction = fetchSellerDashboardAction | fetchSellerSettlementListAction
 
 
 
