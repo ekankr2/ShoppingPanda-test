@@ -1,28 +1,35 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import VideoCard from "../../../UI/cards/VideoCard";
-import {dummyVideoData, loadingVideoData} from "./pandaTypes";
 import {useDispatch, useSelector} from "react-redux";
 import {setError, setLoading} from "../../../../store/actions/pageActions";
 import {RootState} from "../../../../store";
 import {fetchPandaVideoList} from "../../../../store/actions/mypageActions/pandaActions";
-import axios from "axios";
+import Message from "../../../UI/Message";
 
 
 const PandaVideoPage: FC = () => {
     const {error} = useSelector((state: RootState) => state.page);
     const {pandaVideoList} = useSelector((state: RootState) => state.panda);
-    const [videoInfo, setVideoInfo] = useState(null)
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        if (!pandaVideoList) {
-            dispatch(fetchPandaVideoList())
-        }
+    useEffect(()=>{
+        return(()=>{
+            if(error){
+                dispatch(setError(''))
+            }
+        })
+    },[error, dispatch])
 
-    }, [])
+    useEffect(() => {
+        if(error) {
+            dispatch(setError(''));
+        }
+        dispatch(fetchPandaVideoList(() => setLoading(false)))
+    }, [dispatch])
 
     return (
         <>
+            {error ? <Message msg={error} type="danger" /> : null}
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">

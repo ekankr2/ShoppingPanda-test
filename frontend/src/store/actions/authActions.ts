@@ -41,8 +41,6 @@ export const signin = (data: SignInData, onError: () => void): ThunkAction<void,
             console.log(err)
             onError()
             dispatch(setError("아이디나 비밀번호를 확인해 주십시오"))
-            dispatch(setLoading(false))
-
         }
     }
 }

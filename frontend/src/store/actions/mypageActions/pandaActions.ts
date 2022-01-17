@@ -66,10 +66,9 @@ export const fetchPandaSettlement = (): ThunkAction<void, RootState, null, Panda
     }
 }
 
-export const fetchPandaVideoList = (): ThunkAction<void, RootState, null, PandaMyPageAction> => {
+export const fetchPandaVideoList = (onError: () => void): ThunkAction<void, RootState, null, PandaMyPageAction> => {
     return async dispatch => {
         try {
-            dispatch(setLoading(true))
             const res = await axios.get('/api/pandadashboardmovie')
 
             if (res.data) {
@@ -79,12 +78,13 @@ export const fetchPandaVideoList = (): ThunkAction<void, RootState, null, PandaM
                     type: FETCH_PANDA_VIDEO_LIST,
                     payload: videoList
                 })
+                dispatch(setLoading(false))
             }
         } catch (error: any){
             console.error(error)
+            onError()
             dispatch(setError('동영상 리스트 통신이상'))
-            dispatch(setLoading(false))
         }
-        dispatch(setLoading(false))
+
     }
 }
