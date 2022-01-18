@@ -271,20 +271,24 @@ export interface SellerProductList {
 }
 
 export interface SellerSettlementList {
-    beforeSalePrice: number
-    settlePrice: number
-    fees: number
-    salesDate: any
-    confirmDate: any
-    expectDate: any
-    depositCompleted: any
-    paymentStatus: string
+    finMoney: number
+    expectMoney: number
+    shopDashboardDtoTypeList: {
+        id: number
+        beforeSalePrice: number
+        settlePrice: number
+        salesDate: any
+        confirmDate: any
+        expectDate: any
+        depositCompleted: any
+        paymentStatus: any
+    }
 }
 
 export interface SellerMyPageState {
     sellerDashboard: SellerDashboard | null
     sellerProductList: SellerProductList | null
-    sellerSettlementList: SellerSettlementList[] | null
+    sellerSettlementList: SellerSettlementList | null
 }
 
 export interface SellerSettlementRequestData {

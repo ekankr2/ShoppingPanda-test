@@ -23,12 +23,14 @@ const SellerSettlementPage = () => {
 
     const renderBody = (item: StringObj, index: number) => (
         <tr key={index}>
-            <td>{item.localDateTime.slice(0, 10)}</td>
-
             <td>USOD01{item.id} </td>
-            <td>{item.money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ₩</td>
+            <td>{item.settlePrice}</td>
+            <td>{item.fees}</td>
+            <td>{item.salesDate.slice(0, 10)}</td>
+            <td>{item.expectDate.slice(0, 10)}</td>
+            <td>{item.depositCompleted.slice(0, 10)}</td>
             <td>
-                <Badge type={orderStatus[item.status]} content={item.status}/>
+                <Badge type={orderStatus[item.paymentStatus]} content={item.paymentStatus}/>
             </td>
         </tr>
     );
@@ -42,22 +44,22 @@ const SellerSettlementPage = () => {
                 <div className="row mt-4">
                     <div className="col-12">
                         <div className="custom-card">
-                            {/*<div className="card__header">*/}
-                            {/*    {sellerSettlementList && <Message*/}
-                            {/*        msg={`예상금액 : ${sellerSettlementList.expectMoney} 원 //*/}
-                            {/*        정산된 금액: ${sellerSettlementList.finMoney} 원`}*/}
-                            {/*        type="info"/>}*/}
-                            {/*</div>*/}
+                            <div className="card__header">
+                                {sellerSettlementList && <Message
+                                    msg={`예상금액 : ${sellerSettlementList.expectMoney} 원 //
+                                    정산된 금액: ${sellerSettlementList.finMoney} 원`}
+                                    type="info"/>}
+                            </div>
                             <div className="card__body">
                                 {
-                                    // sellerSettlementList ?
-                                    //     // <MyPageTable
-                                    //     //     limit="5"
-                                    //     //     headData={sellerSettlementTable.header}
-                                    //     //     renderHead={(item: any, index: number) => renderHead(item, index)}
-                                    //     //     bodyData={sellerSettlementList.pandaDashboardDtoList}
-                                    //     //     renderBody={(item: any, index: number) => renderBody(item, index)}
-                                    //     // /> : null
+                                    sellerSettlementList ?
+                                        <MyPageTable
+                                            limit="5"
+                                            headData={sellerSettlementTable.header}
+                                            renderHead={(item: any, index: number) => renderHead(item, index)}
+                                            bodyData={sellerSettlementList.shopDashboardDtoTypeList}
+                                            renderBody={(item: any, index: number) => renderBody(item, index)}
+                                        /> : null
                                 }
                             </div>
                         </div>
