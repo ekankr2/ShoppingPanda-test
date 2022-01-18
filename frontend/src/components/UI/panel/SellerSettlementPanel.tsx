@@ -23,6 +23,8 @@ const SellerSettlementPanel: FC = () => {
     const [searchStatus, setSearchStatus] = useState('all')
     const [orderId, setOrderId] = useState('')
 
+    console.log('검색기준: ', searchDateMode, '검색상태 :',searchStatus)
+
     useEffect(() => {
         if (sellerSettlementList) {
             setLoading(false)
@@ -36,7 +38,7 @@ const SellerSettlementPanel: FC = () => {
         }
         setLoading(true);
         if(searchMode === 'date') {
-            dispatch(fetchSellerSettlementList({startDate, endDate, searchStatus}, () => setLoading(false)))
+            dispatch(fetchSellerSettlementList({searchDateMode, startDate, endDate, searchStatus}, () => setLoading(false)))
         } else {
             dispatch(fetchSellerSettlementListWithOrderNum({orderId}, () => setLoading(false)))
         }

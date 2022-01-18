@@ -115,15 +115,14 @@ export const dummyVideoData = [
 ]
 
 export const settlementSearchByDate = [
-    {label: '정산예정일', value: 'planned'},
-    {label: '정산기준일', value: 'settled'},
-    {label: '세금신고기준일', value: 'taxed'},
+    {label: '정산일자', value: '정산일자'},
+    {label: '정산예정일', value: '정산예정일'},
+    {label: '판매일자', value: '판매일자'},
+    {label: '구매확정일자', value: '구매확정일자'},
 ]
 
 export const settlementSearchByStatus = [
-    {label: '전체', value: 'all'},
-    {label: '정산 완료', value: '지급완료'},
-    {label: '정산 대기', value: '지급예정'},
+    {label: '전체', value: 'all'}
 ]
 
 export const sellerSettlementTable = {

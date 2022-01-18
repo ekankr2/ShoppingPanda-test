@@ -36,6 +36,7 @@ export const fetchSellerSettlementList = (data: SellerSettlementRequestData, onE
     return async dispatch => {
         try {
             const res = await axios.post('/api/shopdashboard', {
+                searchDateMode: data.searchDateMode,
                 startYear: new Date(data.startDate).getFullYear(),
                 startMonth: new Date(data.startDate).getMonth(),
                 startDay: new Date(data.startDate).getDate(),

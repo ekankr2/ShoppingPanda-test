@@ -34,7 +34,9 @@ export const signin = (data: SignInData, onError: () => void): ThunkAction<void,
                     type: SET_USER,
                     payload: userData
                 })
+                let userId = data.account.split('@')
                 setCookie('loggedIn', 'yes', {path: '/'})
+                setCookie('userId', userId[0], {path: '/'})
                 dispatch(setLoading(false))
             }
         } catch (err: any) {
@@ -53,6 +55,7 @@ export const signout = (): ThunkAction<void, RootState, null, AuthAction> => {
             dispatch(setLoading(true))
             await axios.get('http://localhost:8080/api/user/logout')
             removeCookie('loggedIn')
+            removeCookie('userId')
             dispatch({
                 type: SIGN_OUT
             })
@@ -67,7 +70,7 @@ export const signout = (): ThunkAction<void, RootState, null, AuthAction> => {
 // checkUserwithCookies
 export const loginCheck = (): AuthAction => {
     const loggedIn = getCookie('loggedIn')
-    if(loggedIn === 'yes'){
+    if (loggedIn === 'yes') {
         return {
             type: LOGIN_CHECK,
             payload: true

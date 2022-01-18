@@ -292,6 +292,7 @@ export interface SellerMyPageState {
 }
 
 export interface SellerSettlementRequestData {
+    searchDateMode?: string
     startDate?: any
     endDate?: any
     searchStatus?: string

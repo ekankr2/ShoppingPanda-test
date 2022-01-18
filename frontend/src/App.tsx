@@ -31,8 +31,8 @@ const App: FC = () => {
 
     return (
         <>
-            <Header/>
-            {/*<Navbar/>*/}
+            {/*<Header/>*/}
+            <Navbar/>
             <Switch>
                 <Route path="/" component={Homepage} exact/>
                 <Route path="/signup" component={SignUp} exact/>
