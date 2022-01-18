@@ -5,9 +5,45 @@ export const user_menu =[
         "link": "/buyer/dashboard"
     },
     {
+        "icon": "bx bx-cart",
+        "content": "장바구니",
+        "link":"/buyer/cart"
+    },
+    {
+        "icon": "bx bx-log-out-circle bx-rotate-180",
+        "content": "로그아웃",
+        "link":"/logout"
+    }
+]
+
+export const panda_menu =[
+    {
+        "icon": "bx bx-user",
+        "content": "마이메뉴",
+        "link": "/buyer/dashboard"
+    },
+    {
         "icon": "bx bx-leaf",
         "content": "판다메뉴",
         "link": "/panda/dashboard"
+    },
+    {
+        "icon": "bx bx-cart",
+        "content": "장바구니",
+        "link":"/buyer/cart"
+    },
+    {
+        "icon": "bx bx-log-out-circle bx-rotate-180",
+        "content": "로그아웃",
+        "link":"/logout"
+    }
+]
+
+export const seller_menu =[
+    {
+        "icon": "bx bx-user",
+        "content": "마이메뉴",
+        "link": "/buyer/dashboard"
     },
     {
         "icon": "bx bx-store",

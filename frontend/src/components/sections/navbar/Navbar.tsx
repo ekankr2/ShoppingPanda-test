@@ -2,16 +2,12 @@ import React, {FC, useState} from 'react';
 import './navbar.css'
 import {Link, useHistory} from "react-router-dom";
 import Dropdown from "../../UI/dropdown/Dropdown";
-import {notification_dummy, user_menu} from "./navbarTypes";
+import {notification_dummy, user_menu, panda_menu, seller_menu} from "./navbarTypes";
 import {useDispatch, useSelector} from "react-redux";
 import {signout} from "../../../store/actions/authActions";
 import {RootState} from "../../../store";
 import Button from "../../UI/Button";
 import {getCookie} from "../../../store/actions/Cookie";
-
-const curr_user = {
-    display_name: 'Brian Im',
-}
 
 const renderNotificationItem = (item: StringObj, index: number) => (
     <div className="notification-item" key={index}>
@@ -25,8 +21,8 @@ const Navbar: FC = () => {
     const dispatch = useDispatch()
     const {loggedIn} = useSelector((state: RootState) => state.auth);
     const [userId] = useState(getCookie('userId'))
-
-    console.log(userId)
+    const [panda] = useState(getCookie('panda'))
+    const [seller] = useState(getCookie('seller'))
 
     const renderUserToggle = () => (
         <div className="topnav__right-user">
@@ -40,26 +36,39 @@ const Navbar: FC = () => {
     )
 
     const renderUserMenu = (item: StringObj, index: number) => (
-        <>
-            {
-                item.link === "/logout" ?
-                    <a onClick={() => {
-                        dispatch(signout())
-                    }} key={index}>
-                        <div className="notification-item">
-                            <i className={item.icon}></i>
-                            <span>{item.content}</span>
-                        </div>
-                    </a> :
-                    <Link to={item.link} key={index}>
-                        <div className="notification-item">
-                            <i className={item.icon}></i>
-                            <span>{item.content}</span>
-                        </div>
-                    </Link>
-            }
-        </>
+            <div key={index}>
+                {
+                    item.link === "/logout" ?
+                        <a onClick={() => {
+                            dispatch(signout())
+                        }} key={index}>
+                            <div className="notification-item">
+                                <i className={item.icon}></i>
+                                <span>{item.content}</span>
+                            </div>
+                        </a> :
+                        <Link to={item.link} key={index}>
+                            <div className="notification-item">
+                                <i className={item.icon}></i>
+                                <span>{item.content}</span>
+                            </div>
+                        </Link>
+                }
+            </div>
     )
+
+    const renderAuthMenu = (panda: any, seller: any) => {
+        if(panda && seller) {
+            return user_menu
+        }
+        if(panda){
+            return panda_menu
+        }
+        if(seller){
+            return seller_menu
+        }
+        return user_menu
+    }
 
     return (
         <nav className="navbar is-spaced has-shadow">
@@ -72,7 +81,7 @@ const Navbar: FC = () => {
                         <span className="mr-3">
                             <Dropdown
                                 customToggle={() => renderUserToggle()}
-                                contentData={user_menu}
+                                contentData={renderAuthMenu(panda, seller)}
                                 renderItems={(item: StringObj, index: number) => renderUserMenu(item, index)}
                             />
                         </span>

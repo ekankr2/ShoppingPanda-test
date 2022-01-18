@@ -27,9 +27,11 @@ export const signin = (data: SignInData, onError: () => void): ThunkAction<void,
                 username: data.account,
                 password: data.password
             })
+            const auth = await axios.post('/api/userauth')
             if (res.data) {
                 const userData = res.data as User
                 console.log(userData)
+                console.log('어스 :', auth.data)
                 dispatch({
                     type: SET_USER,
                     payload: userData
@@ -37,6 +39,8 @@ export const signin = (data: SignInData, onError: () => void): ThunkAction<void,
                 let userId = data.account.split('@')
                 setCookie('loggedIn', 'yes', {path: '/'})
                 setCookie('userId', userId[0], {path: '/'})
+                setCookie('panda', auth.data.panda, {path: '/'})
+                setCookie('seller', auth.data.shop, {path: '/'})
                 dispatch(setLoading(false))
             }
         } catch (err: any) {
@@ -56,6 +60,8 @@ export const signout = (): ThunkAction<void, RootState, null, AuthAction> => {
             await axios.get('http://localhost:8080/api/user/logout')
             removeCookie('loggedIn')
             removeCookie('userId')
+            removeCookie('panda')
+            removeCookie('seller')
             dispatch({
                 type: SIGN_OUT
             })
