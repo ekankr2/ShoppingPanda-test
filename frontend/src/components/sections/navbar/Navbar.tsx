@@ -58,13 +58,13 @@ const Navbar: FC = () => {
     )
 
     const renderAuthMenu = (panda: any, seller: any) => {
-        if(panda && seller) {
+        if(panda === "true" && seller === "true") {
             return user_menu
         }
-        if(panda){
+        if(panda === "true"){
             return panda_menu
         }
-        if(seller){
+        if(seller === "true"){
             return seller_menu
         }
         return user_menu

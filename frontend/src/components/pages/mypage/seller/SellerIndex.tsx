@@ -1,16 +1,19 @@
-import React, {FC} from 'react'
+import React, {FC, useState} from 'react'
 
 import '../buyer/buyerIndex.css'
 
-import { Route } from 'react-router-dom'
+import {Redirect, Route} from 'react-router-dom'
 import {sellerSidebarItems} from "./sellerTypes";
 import MyPageRoutes from "../MyPageRoutes";
 import Sidebar from "../../../sections/sidebar/Sidebar";
+import {getCookie} from "../../../../store/actions/Cookie";
 
 const SellerIndex:FC = () => {
+    const [seller] = useState(getCookie('seller'))
 
     return (
         <Route render={(props) => (
+            seller === 'true' ?
             <div className={`layout theme-mode-light theme-color-blue`}>
                 <Sidebar sidebarItems={sellerSidebarItems} {...props}/>
                 <div className="layout__content">
@@ -18,7 +21,8 @@ const SellerIndex:FC = () => {
                         <MyPageRoutes/>
                     </div>
                 </div>
-            </div>
+            </div> :
+                <Redirect to={"/shop"} />
         )}/>
     )
 }
