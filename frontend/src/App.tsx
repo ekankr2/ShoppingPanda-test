@@ -16,6 +16,7 @@ import {loginCheck} from "./store/actions/authActions";
 import PaginationTest from "./components/pages/PaginationTest";
 import SellerIndex from "./components/pages/mypage/seller/SellerIndex";
 import Navbar from "./components/sections/navbar/Navbar";
+import TableTestPage from "./components/pages/TableTestPage";
 
 const App: FC = () => {
     const dispatch = useDispatch();
@@ -41,6 +42,8 @@ const App: FC = () => {
                 <PrivateRoute path="/buyer" component={BuyerIndex}/>
                 <PrivateRoute path="/panda" component={PandaIndex}/>
                 <PrivateRoute path="/seller" component={SellerIndex}/>
+
+                <Route path="/tableTest" component={TableTestPage}/>
             </Switch>
         </>
     );
