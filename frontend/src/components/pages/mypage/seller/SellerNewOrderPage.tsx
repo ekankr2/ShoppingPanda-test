@@ -8,8 +8,8 @@ function checkOrder(event: React.MouseEvent, cellValues: any) {
 }
 
 const columns = [
-    {field: 'id', headerName: '주문번호', flex: 1},
-    {field: 'productName', headerName: '상품명', minWidth: 200, flex: 1},
+    {field: 'id', headerName: '주문번호', flex: 0.5},
+    {field: 'productName', headerName: '상품명', flex: 2},
     {field: 'price', headerName: '가격', flex: 1},
     {field: 'date', headerName: '주문일자', flex: 1},
     {
@@ -47,27 +47,40 @@ const SellerNewOrderPage = () => {
     const [selectedRows, setSelectedRows] = React.useState<any>([]);
     console.log(selectedRows)
 
+    const handleClick = (event: React.MouseEvent) => {
+        event.preventDefault()
+        console.log('선택된 주문 확인', selectedRows)
+    }
+
     return (
         <div className='container'>
-            <h3 className="page-header">신규 주문</h3>
-            <div style={{width: "100%", height: '600px'}}>
-                <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    pageSize={10}
-                    rowsPerPageOptions={[5]}
-                    checkboxSelection
-                    onSelectionModelChange={(ids) => {
-                        const selectedIDs = new Set(ids);
-                        const selectedRows = rows.filter((row) =>
-                            selectedIDs.has(row.id),
-                        );
+            <div className='custom-card'>
+                <div className="card__header">
+                    <Button
+                        className="is-primary"
+                        disabled={selectedRows.length === 0}
+                        text='선택 주문 확인'
+                        onClick={handleClick}
+                    />
+                </div>
+                <div style={{width: "100%", height: '600px'}}>
+                    <DataGrid
+                        rows={rows}
+                        columns={columns}
+                        pageSize={10}
+                        rowsPerPageOptions={[5]}
+                        checkboxSelection
+                        onSelectionModelChange={(ids) => {
+                            const selectedIDs = new Set(ids);
+                            const selectedRows = rows.filter((row) =>
+                                selectedIDs.has(row.id),
+                            );
 
-                        setSelectedRows(selectedRows);
-                    }}
-                />
+                            setSelectedRows(selectedRows);
+                        }}
+                    />
+                </div>
             </div>
-
         </div>
     );
 };
