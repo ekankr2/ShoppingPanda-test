@@ -1,22 +1,30 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, Suspense, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Route, Switch} from 'react-router-dom';
 import './App.css';
-
-import Header from './components/sections/Header';
-import SignUp from './components/pages/SignUp';
-import SignIn from './components/pages/SignIn';
-import Homepage from './components/pages/Homepage';
 import Loader from './components/UI/Loader';
 import {RootState} from './store';
-import BuyerIndex from "./components/pages/mypage/buyer/BuyerIndex";
-import PandaIndex from "./components/pages/mypage/panda/PandaIndex";
-import PrivateRoute from "./components/auth/PrivateRoute";
 import {loginCheck} from "./store/actions/authActions";
-import PaginationTest from "./components/pages/PaginationTest";
-import SellerIndex from "./components/pages/mypage/seller/SellerIndex";
 import Navbar from "./components/sections/navbar/Navbar";
-import TableTestPage from "./components/pages/TableTestPage";
+
+
+// import BuyerIndex from "./components/pages/mypage/buyer/BuyerIndex";
+// import PandaIndex from "./components/pages/mypage/panda/PandaIndex";
+// import PrivateRoute from "./components/auth/PrivateRoute";
+// import PaginationTest from "./components/pages/PaginationTest";
+// import SellerIndex from "./components/pages/mypage/seller/SellerIndex";
+// import TableTestPage from "./components/pages/TableTestPage";
+
+const Homepage = React.lazy(() => import('./components/pages/Homepage'));
+const SignUp = React.lazy(() => import('./components/pages/SignIn'));
+const SignIn = React.lazy(() => import('./components/pages/SignIn'));
+const BuyerIndex = React.lazy(() => import('./components/pages/mypage/buyer/BuyerIndex'));
+const PandaIndex = React.lazy(() => import('./components/pages/mypage/panda/PandaIndex'));
+const PrivateRoute = React.lazy(() => import('./components/auth/PrivateRoute'));
+const PaginationTest = React.lazy(() => import('./components/pages/SignIn'));
+const SellerIndex = React.lazy(() => import('./components/pages/mypage/seller/SellerIndex'));
+const TableTestPage = React.lazy(() => import('./components/pages/TableTestPage'));
+
 
 const App: FC = () => {
     const dispatch = useDispatch();
@@ -32,9 +40,9 @@ const App: FC = () => {
 
     return (
         <>
-            {/*<Header/>*/}
-            <Navbar/>
-            <Switch>
+        <Navbar/>
+        <Suspense fallback={<Loader/>}>
+        <Switch>
                 <Route path="/" component={Homepage} exact/>
                 <Route path="/signup" component={SignUp} exact/>
                 <Route path="/signin" component={SignIn} exact/>
@@ -42,9 +50,9 @@ const App: FC = () => {
                 <PrivateRoute path="/buyer" component={BuyerIndex}/>
                 <PrivateRoute path="/panda" component={PandaIndex}/>
                 <PrivateRoute path="/seller" component={SellerIndex}/>
-
                 <Route path="/tableTest" component={TableTestPage}/>
             </Switch>
+        </Suspense>
         </>
     );
 }
