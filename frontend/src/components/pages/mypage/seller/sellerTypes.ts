@@ -10,12 +10,22 @@ export const sellerSidebarItems = [
         icon: "bx bx-task",
     },
     {
-        display_name: "배송중인 주문",
-        route: "/seller/shippingOrder",
+        display_name: "준비중인 주문",
+        route: "/seller/newOrder",
         icon: "bx bx-package",
     },
     {
-        display_name: "취소/반품주문",
+        display_name: "배송중인 주문",
+        route: "/seller/shippingOrder",
+        icon: "bx bx-paper-plane",
+    },
+    {
+        display_name: "교환 / 반품주문 요청",
+        route: "/seller/cancelReturnOrder",
+        icon: "bx bx-task-x",
+    },
+    {
+        display_name: "교환 / 반품주문 확인",
         route: "/seller/cancelReturnOrder",
         icon: "bx bx-task-x",
     },
@@ -88,10 +98,10 @@ export const sellerChartOptions = {
             enabled: true,
             enabledOnSeries: [1]
         },
-        labels: [1,2,3,4,5,6,7,8,9,10,11],
         stroke: {
             width: [0, 4]
         },
+        labels: [],
         xaxis: {
             type: 'datetime'
         },

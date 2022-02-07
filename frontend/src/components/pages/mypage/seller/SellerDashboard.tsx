@@ -17,6 +17,7 @@ const SellerDashboard: FC = () => {
     const dispatch = useDispatch()
     const [chartMoney, setChartMoney] = useState<any[]>([])
     const [chartQuantity, setChartQuantity] = useState<any[]>([])
+    const [chartDate, setChartDate] = useState<any[]>([])
     const {error} = useSelector((state: RootState) => state.page);
     const { sellerDashboard } = useSelector((state: any) => state.seller)
 
@@ -40,6 +41,7 @@ const SellerDashboard: FC = () => {
             cardCopy[3].count = sellerDashboard.completeBuy
             setChartMoney(sellerDashboard.money)
             setChartQuantity(sellerDashboard.quantity)
+            setChartDate(sellerDashboard.day)
         }
         setCardItems(cardCopy)
     },[sellerDashboard, dispatch])
@@ -104,7 +106,7 @@ const SellerDashboard: FC = () => {
                 <div className="row">
                     <div className="col-12">
                         <div style={{minHeight: "500px"}} className="custom-card">
-                            <SellerChart money={chartMoney} quantity={chartQuantity}/>
+                            <SellerChart date={chartDate} money={chartMoney} quantity={chartQuantity}/>
                         </div>
                     </div>
                 </div>
