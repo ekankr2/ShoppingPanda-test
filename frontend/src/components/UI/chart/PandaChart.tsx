@@ -12,8 +12,10 @@ const PandaChart: FC<Props> = ({series}) => {
             name: "판매량",
             data: series
         }
+
     return (
         <Chart
+            // @ts-ignore
             options={{
                 ...pandaChartOptions.options,
                 theme: {mode: 'light'}

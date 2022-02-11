@@ -24,7 +24,8 @@ const SellerChart: FC<Props> = ({money, quantity, date}) => {
         <>
             {
                 <Chart
-                options={{
+                    // @ts-ignore
+                    options={{
                     ...sellerChartOptions.options,
                     theme: {mode: 'light'},
                     labels: date
