@@ -6,6 +6,7 @@ import Loader from './components/UI/Loader';
 import {RootState} from './store';
 import {loginCheck} from "./store/actions/authActions";
 import Navbar from "./components/sections/navbar/Navbar";
+import axios from "axios";
 
 
 // import BuyerIndex from "./components/pages/mypage/buyer/BuyerIndex";
@@ -25,6 +26,14 @@ const PaginationTest = React.lazy(() => import('./components/pages/SignIn'));
 const SellerIndex = React.lazy(() => import('./components/pages/mypage/seller/SellerIndex'));
 const TableTestPage = React.lazy(() => import('./components/pages/TableTestPage'));
 
+const check = async () => {
+    try {
+        const res = await axios.post('/api/userauth')
+        console.log(res.data)
+    }catch(err){
+        console.error(err)
+    }
+}
 
 const App: FC = () => {
     const dispatch = useDispatch();
@@ -32,6 +41,7 @@ const App: FC = () => {
 
     useEffect(() => {
         dispatch(loginCheck())
+        check()
     }, [dispatch]);
 
     if (loading) {
