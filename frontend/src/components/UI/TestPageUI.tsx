@@ -1,40 +1,38 @@
-import React, {FC, useCallback, useState} from 'react';
+import React, {FC} from 'react';
 import axios from "axios";
 
+function fetchBookLists() {
+    const res = axios(`https://randomuser.me/api#`);
 
+
+    if (res) {
+        // @ts-ignore
+        const data = res.data
+        console.log(data.results[0])
+        return data.results[0];
+    } else {
+        throw new Error("Loading failed, likely rate limit");
+    }
+}
 
 const TestPageUi: FC = () => {
-    const [loading, setLoading] = useState(false)
-    const [person, setPerson] = useState(null)
-
-    console.log(person)
-
-    const fetchPerson = useCallback(async ()=>{
-        setLoading(true)
-        const res = await axios(`https://randomuser.me/api#`);
-
-        if (res.data) {
-            setPerson(res.data.results[0])
-            return res.data.results[0]
-        }
-        setLoading(false)
-        throw new Error("Loading failed, likely rate limit");
-    },[])
-
-    const getPerson = useCallback(()=>{
-        if(loading){
-            throw fetchPerson()
-        }
-
-        return person
-    },[loading, fetchPerson])
-
     return (
         <>
-            <h4>hi</h4>
-            <h4>{getPerson}</h4>
+            <PersonList/>
         </>
     );
 };
+
+
+const PersonList: FC = () => {
+    const person: any = fetchBookLists()
+
+    return (
+        <>
+            <h2>hello</h2>
+            <h3>{person.gender}</h3>
+        </>
+    )
+}
 
 export default TestPageUi;
