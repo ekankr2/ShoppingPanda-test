@@ -7,14 +7,7 @@ import {RootState} from './store';
 import {loginCheck} from "./store/actions/authActions";
 import Navbar from "./components/sections/navbar/Navbar";
 import axios from "axios";
-
-
-// import BuyerIndex from "./components/pages/mypage/buyer/BuyerIndex";
-// import PandaIndex from "./components/pages/mypage/panda/PandaIndex";
-// import PrivateRoute from "./components/auth/PrivateRoute";
-// import PaginationTest from "./components/pages/PaginationTest";
-// import SellerIndex from "./components/pages/mypage/seller/SellerIndex";
-// import TableTestPage from "./components/pages/TableTestPage";
+import TestPage from "./components/pages/TestPage";
 
 const Homepage = React.lazy(() => import('./components/pages/Homepage'));
 const SignUp = React.lazy(() => import('./components/pages/SignIn'));
@@ -24,13 +17,12 @@ const PandaIndex = React.lazy(() => import('./components/pages/mypage/panda/Pand
 const PrivateRoute = React.lazy(() => import('./components/auth/PrivateRoute'));
 const PaginationTest = React.lazy(() => import('./components/pages/SignIn'));
 const SellerIndex = React.lazy(() => import('./components/pages/mypage/seller/SellerIndex'));
-const TableTestPage = React.lazy(() => import('./components/pages/TableTestPage'));
 
 const check = async () => {
     try {
         const res = await axios.post('/api/userauth')
         console.log(res.data)
-    }catch(err){
+    } catch (err) {
         console.error(err)
     }
 }
@@ -50,19 +42,19 @@ const App: FC = () => {
 
     return (
         <>
-        <Navbar/>
-        <Suspense fallback={<Loader/>}>
-        <Switch>
-                <Route path="/" component={Homepage} exact/>
-                <Route path="/signup" component={SignUp} exact/>
-                <Route path="/signin" component={SignIn} exact/>
-                <Route path="/pagination" component={PaginationTest} exact />
-                <PrivateRoute path="/buyer" component={BuyerIndex}/>
-                <PrivateRoute path="/panda" component={PandaIndex}/>
-                <PrivateRoute path="/seller" component={SellerIndex}/>
-                <Route path="/tableTest" component={TableTestPage}/>
-            </Switch>
-        </Suspense>
+            <Navbar/>
+            <Suspense fallback={<Loader/>}>
+                <Switch>
+                    <Route path="/" component={Homepage} exact/>
+                    <Route path="/signup" component={SignUp} exact/>
+                    <Route path="/signin" component={SignIn} exact/>
+                    <Route path="/pagination" component={PaginationTest} exact/>
+                    <PrivateRoute path="/buyer" component={BuyerIndex}/>
+                    <PrivateRoute path="/panda" component={PandaIndex}/>
+                    <PrivateRoute path="/seller" component={SellerIndex}/>
+                    <Route path="/test" component={TestPage}/>
+                </Switch>
+            </Suspense>
         </>
     );
 }
