@@ -4,7 +4,7 @@ import ErrorBoundary from "../ErrorBoundary";
 import axios from "axios";
 import {createResource} from "../../hooks/createResource";
 
-const fetchPerson = async () => {
+const fetchPerson = async (): Promise<string> => {
     const res = await axios.get('https://randomuser.me/api');
     return res.data.results[0];
 };

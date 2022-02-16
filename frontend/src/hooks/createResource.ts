@@ -1,4 +1,4 @@
-const wrapPromise = (promise: any) => {
+const wrapPromise = (promise: Promise<any>) => {
     let status = "pending";
     let result = "";
     let suspender = promise.then(
@@ -25,14 +25,6 @@ const wrapPromise = (promise: any) => {
     };
 };
 
-export const randomNumber = () => {
-    return new Promise(res => setTimeout(() => res(Math.random()), 3000));
-};
-
-export const createResource = (promise: any) => {
+export const createResource = (promise: Promise<any>) => {
     return wrapPromise(promise)
-    // return {
-    //     person: wrapPromise(fetchPerson()),
-    //     num: wrapPromise(randomNumber())
-    // };
 };
