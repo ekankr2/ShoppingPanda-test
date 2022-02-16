@@ -31,10 +31,10 @@ const App: FC = () => {
     const dispatch = useDispatch();
     const {loading} = useSelector((state: RootState) => state.page);
 
-    useEffect(() => {
-        dispatch(loginCheck())
-        check()
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(loginCheck())
+    //     check()
+    // }, [dispatch]);
 
     if (loading) {
         return <Loader/>;

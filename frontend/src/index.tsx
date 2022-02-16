@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux'
+import {Provider} from 'react-redux'
 import App from './App';
 import 'bulma/css/bulma.min.css'
 import store from "./store";
@@ -9,14 +9,24 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/theme.css'
 import './assets/css/index.css'
 
-
-ReactDOM.render(
+const rootElement = document.getElementById("root") as HTMLElement;
+ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
         <BrowserRouter>
             <Provider store={store}>
                 <App />
             </Provider>
         </BrowserRouter>
-    </React.StrictMode>,
-    document.getElementById('root')
+    </React.StrictMode>
 );
+
+// ReactDOM.render(
+//     <React.StrictMode>
+//         <BrowserRouter>
+//             <Provider store={store}>
+//                 <App />
+//             </Provider>
+//         </BrowserRouter>
+//     </React.StrictMode>,
+//     document.getElementById('root')
+// );
