@@ -2,8 +2,14 @@ import React, {FC, Suspense} from 'react';
 import ReactLoading from 'react-loading'
 import ErrorBoundary from "../ErrorBoundary";
 import {createResource} from "../UI/testApi";
+import axios from "axios";
 
-const resource = createResource()
+const fetchPerson = async () => {
+    const res = await axios.get('https://randomuser.me/api');
+    return res.data.results[0];
+};
+
+const resource = createResource(fetchPerson())
 
 const TestPage = () => {
 
@@ -19,7 +25,7 @@ const TestPage = () => {
 };
 
 const Person: FC<any> = ({ resource }) => {
-    const person = resource.person.read();
+    const person = resource.read();
 
     return <div>{person.name.first}</div>;
 };

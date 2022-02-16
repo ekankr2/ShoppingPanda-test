@@ -1,12 +1,5 @@
 import axios from "axios";
 
-const fetchPerson = () => {
-    return axios.get('https://randomuser.me/api')
-        .then(res => res.data.results[0])
-    // return fetch("https://randomuser.me/api")
-    //     .then(x => x.json())
-    //     .then(x => x.results[0]);
-};
 
 const wrapPromise = (promise: any) => {
     let status = "pending";
@@ -39,9 +32,7 @@ export const randomNumber = () => {
     return new Promise(res => setTimeout(() => res(Math.random()), 3000));
 };
 
-export const createResource = () => {
-    return {
-        person: wrapPromise(fetchPerson()),
-        num: wrapPromise(randomNumber())
-    };
+export const createResource = (promise: any) => {
+    return wrapPromise(promise)
+
 };
