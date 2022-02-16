@@ -1,6 +1,3 @@
-import axios from "axios";
-
-
 const wrapPromise = (promise: any) => {
     let status = "pending";
     let result = "";
@@ -34,5 +31,8 @@ export const randomNumber = () => {
 
 export const createResource = (promise: any) => {
     return wrapPromise(promise)
-
+    // return {
+    //     person: wrapPromise(fetchPerson()),
+    //     num: wrapPromise(randomNumber())
+    // };
 };

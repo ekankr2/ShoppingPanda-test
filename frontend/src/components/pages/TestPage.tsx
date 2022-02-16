@@ -1,8 +1,8 @@
 import React, {FC, Suspense} from 'react';
 import ReactLoading from 'react-loading'
 import ErrorBoundary from "../ErrorBoundary";
-import {createResource} from "../UI/testApi";
 import axios from "axios";
+import {createResource} from "../../hooks/createResource";
 
 const fetchPerson = async () => {
     const res = await axios.get('https://randomuser.me/api');
