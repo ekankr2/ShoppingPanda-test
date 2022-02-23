@@ -20,36 +20,46 @@ export const signup = (data: SignUpData, onError: () => void): ThunkAction<void,
 
 // login
 export const signin = (data: SignInData, onError: () => void): ThunkAction<void, RootState, null, AuthAction> => {
-    return async dispatch => {
+    return async (dispatch) => {
         try {
-            dispatch(setLoading(true))
-            const res = await axios.post('/api/authenticate', {
-                username: data.account,
-                password: data.password
-            })
-            const auth = await axios.post('/api/userauth')
+            dispatch(setLoading(true));
+            let form = new FormData();
+            form.append("email", data.account);
+            form.append("password", data.password);
+
+            const res = await axios.post("/api/login", form);
+            console.log("res정보");
+            console.log(res.data.data.accessToken);
+            console.log(res.data.data.refreshToken);
+            console.log(res.data.data.refreshTokenExpirationTime);
+            window.localStorage.setItem("accessToken", res.data.data.accessToken);
+            window.localStorage.setItem("refreshToken", res.data.data.refreshToken);
+            // setCookie("at", res.data.data.accessToken, { path: "/" });
+            // setCookie("rt", res.data.data.refreshToken, { path: "/" });
+            const auth = await axios.post("/api/userauth");
             if (res.data) {
-                const userData = res.data as User
-                console.log(userData)
-                console.log('어스 :', auth.data)
+                const userData = res.data;
+                console.log(userData);
+                console.log("어스 :", auth.data);
                 dispatch({
                     type: SET_USER,
-                    payload: userData
-                })
-                let userId = data.account.split('@')
-                setCookie('loggedIn', 'yes', {path: '/'})
-                setCookie('userId', userId[0], {path: '/'})
-                setCookie('panda', auth.data.panda, {path: '/'})
-                setCookie('seller', auth.data.shop, {path: '/'})
-                dispatch(setLoading(false))
+                    payload: userData,
+                });
+                let userId = data.account.split("@");
+                setCookie("loggedIn", "yes", { path: "/" });
+                setCookie("userId", userId[0], { path: "/" });
+                setCookie("panda", auth.data.panda, { path: "/" });
+                setCookie("seller", auth.data.shop, { path: "/" });
+                dispatch(setLoading(false));
             }
-        } catch (err: any) {
-            console.error(err)
-            onError()
-            dispatch(setLoading(false))
-            dispatch(setError("아이디나 비밀번호를 확인해 주십시오"))
+        } catch (err) {
+            console.log("d어스에러");
+            console.log(err);
+            onError();
+            dispatch(setError("아이디나 비밀번호를 확인해 주십시오"));
+            dispatch(setLoading(false));
         }
-    }
+    };
 }
 
 // signout
@@ -57,7 +67,7 @@ export const signout = (): ThunkAction<void, RootState, null, AuthAction> => {
     return async dispatch => {
         try {
             dispatch(setLoading(true))
-            await axios.get('/api/user/logout')
+            await axios.post('/api/user/logoutv2')
             removeCookie('loggedIn')
             removeCookie('userId')
             removeCookie('panda')

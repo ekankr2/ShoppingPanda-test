@@ -55,7 +55,7 @@ export const fetchSituationList = (): ThunkAction<void, RootState, null, BuyerMy
 export const fetchSituationWithPage = (size: number, page: number): ThunkAction<void, RootState, null, BuyerMyPageAction> => {
     return async dispatch => {
         try {
-            const res = await axios.get(`/api/recentsituation?size=${size}&page=${page}`)
+            const res = await axios.get(`http://localhost:8080/api/recentsituation?size=${size}&page=${page}`)
 
             if (res.data) {
                 const list = res.data as SituationList

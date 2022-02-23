@@ -22,18 +22,8 @@ const SignIn = React.lazy(() => import('./components/pages/SignIn'));
 const BuyerIndex = React.lazy(() => import('./components/pages/mypage/buyer/BuyerIndex'));
 const PandaIndex = React.lazy(() => import('./components/pages/mypage/panda/PandaIndex'));
 const PrivateRoute = React.lazy(() => import('./components/auth/PrivateRoute'));
-const PaginationTest = React.lazy(() => import('./components/pages/SignIn'));
 const SellerIndex = React.lazy(() => import('./components/pages/mypage/seller/SellerIndex'));
 const TableTestPage = React.lazy(() => import('./components/pages/TableTestPage'));
-
-const check = async () => {
-    try {
-        const res = await axios.post('/api/userauth')
-        console.log(res.data)
-    }catch(err){
-        console.error(err)
-    }
-}
 
 const App: FC = () => {
     const dispatch = useDispatch();
@@ -41,7 +31,6 @@ const App: FC = () => {
 
     useEffect(() => {
         dispatch(loginCheck())
-        check()
     }, [dispatch]);
 
     if (loading) {
@@ -56,7 +45,6 @@ const App: FC = () => {
                 <Route path="/" component={Homepage} exact/>
                 <Route path="/signup" component={SignUp} exact/>
                 <Route path="/signin" component={SignIn} exact/>
-                <Route path="/pagination" component={PaginationTest} exact />
                 <PrivateRoute path="/buyer" component={BuyerIndex}/>
                 <PrivateRoute path="/panda" component={PandaIndex}/>
                 <PrivateRoute path="/seller" component={SellerIndex}/>
