@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const baseUrl = 'http://localhost:8080/'
+// const baseUrl = 'http://localhost:8080/'
 
 const request = axios.create({
-    baseURL: baseUrl
+    // baseURL: baseUrl
 })
 // 타임아웃
 request.defaults.timeout = 2500
@@ -20,11 +20,10 @@ request.interceptors.request.use(
     }
 )
 // 응답 인터셉터
-request.interceptors.request.use(
+request.interceptors.response.use(
     response => {
         // 응답 로직 작성
-        const res = response.data
-        return res
+        return response.data
     },
     error => {
         console.log(error)

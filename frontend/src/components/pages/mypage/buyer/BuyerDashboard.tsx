@@ -16,8 +16,6 @@ import {RootState} from "../../../../store";
 import Message from "../../../UI/Message";
 import {setError} from "../../../../store/actions/pageActions";
 import {useGetRecentSituation} from "../../../../api/queryHooks/mypageHooks/buyerMypageHooks";
-import {useQuery} from "react-query";
-import axios from "axios";
 
 const BuyerDashboard: FC = () => {
     const [showModal, setShowModal] = useState(false)
@@ -25,18 +23,17 @@ const BuyerDashboard: FC = () => {
     const {buyerDashboard, buyerSituationDetail} = useSelector((state: RootState) => state.buyer);
     const {error} = useSelector((state: RootState) => state.page);
     const dispatch = useDispatch()
-    // const { data } = useGetRecentSituation();
+    const { data : buyerSituationList } = useGetRecentSituation();
 
-    const { isLoading, data } = useQuery('dogs', () => axios("https://dog.ceo/api/breeds/image/random"))
 
-    console.log('도그: ', data?.data)
+    // console.log('도그: ', data?.data.pageList)
     useEffect(() => {
         // 대쉬보드 값 패치
         if (error) {
             dispatch(setError(''))
         }
         dispatch(fetchBuyerDashBoard())
-        dispatch(fetchSituationWithPage(5, 0))
+        // dispatch(fetchSituationWithPage(5, 0))
     }, [dispatch])
 
     useEffect(() => {
@@ -136,30 +133,30 @@ const BuyerDashboard: FC = () => {
                             </div>
                             {/*table pc*/}
                             <div className="card__body is-hidden-mobile">
-                            {/*    {*/}
-                            {/*        buyerSituationList ?*/}
-                            {/*            <MyPageTable*/}
-                            {/*                limit="5"*/}
-                            {/*                headData={latestOrders.header}*/}
-                            {/*                renderHead={(item: any, index: number) => renderHead(item, index)}*/}
-                            {/*                bodyData={buyerSituationList.pageList}*/}
-                            {/*                renderBody={(item: any, index: number) => renderBody(item, index)}*/}
-                            {/*            /> : null*/}
-                            {/*    }*/}
+                                {
+                                    buyerSituationList ?
+                                        <MyPageTable
+                                            limit="5"
+                                            headData={latestOrders.header}
+                                            renderHead={(item: any, index: number) => renderHead(item, index)}
+                                            bodyData={buyerSituationList.data.pageList}
+                                            renderBody={(item: any, index: number) => renderBody(item, index)}
+                                        /> : null
+                                }
 
-                            {/*</div>*/}
-                            {/*/!*mobile table*!/*/}
-                            {/*<div className="card__body is-hidden-tablet">*/}
-                            {/*    {*/}
-                            {/*        buyerSituationList ?*/}
-                            {/*            <MyPageTable*/}
-                            {/*                limit="5"*/}
-                            {/*                headData={latestOrders.headerMobile}*/}
-                            {/*                renderHead={(item: any, index: number) => renderHead(item, index)}*/}
-                            {/*                bodyData={buyerSituationList.pageList}*/}
-                            {/*                renderBody={(item: any, index: number) => renderBodyMobile(item, index)}*/}
-                            {/*            /> : null*/}
-                            {/*    }*/}
+                            </div>
+                            {/*mobile table*/}
+                            <div className="card__body is-hidden-tablet">
+                                {
+                                    buyerSituationList ?
+                                        <MyPageTable
+                                            limit="5"
+                                            headData={latestOrders.headerMobile}
+                                            renderHead={(item: any, index: number) => renderHead(item, index)}
+                                            bodyData={buyerSituationList.data.pageList}
+                                            renderBody={(item: any, index: number) => renderBodyMobile(item, index)}
+                                        /> : null
+                                }
 
                             </div>
                         </div>

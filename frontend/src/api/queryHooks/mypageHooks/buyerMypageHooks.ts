@@ -1,5 +1,6 @@
 import {useQuery} from "react-query";
 import request from "../../index";
+import axios from "axios";
 
 export enum BuyerEnum {
     Items = 'items'
@@ -8,5 +9,5 @@ export enum BuyerEnum {
 export const useGetRecentSituation = () =>
     useQuery(
         BuyerEnum.Items,
-        () => request('/api/recentsituation'),
+        () => axios.get('/api/recentsituation'),
     )
