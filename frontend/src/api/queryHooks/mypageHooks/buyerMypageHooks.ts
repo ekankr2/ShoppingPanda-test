@@ -6,8 +6,20 @@ export enum BuyerEnum {
     Items = 'items'
 }
 
+interface Response {
+    pageList: RecentList[]
+}
+
+interface RecentList {
+    num: number
+    productName: string
+    price: number
+    orderAt: string
+}
+
 export const useGetRecentSituation = () =>
     useQuery(
         BuyerEnum.Items,
-        () => axios.get('/api/recentsituation'),
+        () => axios.get<Response>('/api/recentsituation')
+            .then((res) => res.data),
     )

@@ -26,7 +26,7 @@ const BuyerDashboard: FC = () => {
     const { data : buyerSituationList } = useGetRecentSituation();
 
 
-    // console.log('도그: ', data?.data.pageList)
+    console.log('도그: ', buyerSituationList?.pageList)
     useEffect(() => {
         // 대쉬보드 값 패치
         if (error) {
@@ -139,7 +139,7 @@ const BuyerDashboard: FC = () => {
                                             limit="5"
                                             headData={latestOrders.header}
                                             renderHead={(item: any, index: number) => renderHead(item, index)}
-                                            bodyData={buyerSituationList.data.pageList}
+                                            bodyData={buyerSituationList.pageList}
                                             renderBody={(item: any, index: number) => renderBody(item, index)}
                                         /> : null
                                 }
@@ -153,7 +153,7 @@ const BuyerDashboard: FC = () => {
                                             limit="5"
                                             headData={latestOrders.headerMobile}
                                             renderHead={(item: any, index: number) => renderHead(item, index)}
-                                            bodyData={buyerSituationList.data.pageList}
+                                            bodyData={buyerSituationList.pageList}
                                             renderBody={(item: any, index: number) => renderBodyMobile(item, index)}
                                         /> : null
                                 }
