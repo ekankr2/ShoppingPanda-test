@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {FC, useCallback, useEffect, useState} from "react";
 import {dashboardCard} from "./buyerTypes";
 import StatusCard from "../../../UI/cards/StatusCard";
 import MyPageTable from "../../../UI/table/MyPageTable";
@@ -7,27 +7,35 @@ import {latestOrders} from "./buyerTypes";
 import Modal from "../../../UI/modal/Modal";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
-import {
-    fetchBuyerDashBoard,
-    fetchSituationDetail,
-    fetchSituationWithPage
-} from "../../../../store/actions/mypageActions/buyerActions";
 import {RootState} from "../../../../store";
 import Message from "../../../UI/Message";
-import {setError} from "../../../../store/actions/pageActions";
-import {useGetBuyerDashboard, useGetRecentSituation} from "../../../../api/queryHooks/mypageHooks/buyerMypageHooks";
+import {
+    useGetBuyerDashboard,
+    useGetRecentSituation,
+    useGetSituationDetail
+} from "../../../../api/queryHooks/mypageHooks/buyerMypageHooks";
+
+const orderStatus: StringObj = {
+    "결제완료": "primary",
+    "준비중": "primary",
+    "완료": "primary",
+    "주문취소": "danger",
+    "배송중": "success",
+    "발송중": "success",
+    "반품": "warning"
+}
 
 const BuyerDashboard: FC = () => {
     const [showModal, setShowModal] = useState(false)
     const [cardItems, setCardItems] = useState(dashboardCard)
-    const {buyerSituationDetail} = useSelector((state: RootState) => state.buyer);
     const {error} = useSelector((state: RootState) => state.page);
-    const dispatch = useDispatch()
-    const { data : buyerSituationList } = useGetRecentSituation();
-    const { data : buyerDashboard } = useGetBuyerDashboard();
+    const {data: buyerSituationList} = useGetRecentSituation();
+    const {data: buyerDashboard} = useGetBuyerDashboard();
+    const [detailId, setDetailId] = useState(0)
+    const {data: buyerSituationDetail} = useGetSituationDetail(detailId)
 
-    console.log('도그: ', buyerSituationList?.pageList)
-    console.log('캣: ', buyerDashboard)
+
+    console.log('도그: ', buyerSituationDetail)
 
     useEffect(() => {
         let copy = [...cardItems]
@@ -40,19 +48,9 @@ const BuyerDashboard: FC = () => {
         }
     }, [buyerDashboard])
 
-    const handleClick = (item: string) => {
-        dispatch(fetchSituationDetail(+item))
+    const handleClick = async (item: string) => {
+        await setDetailId(+item)
         setShowModal(true)
-    }
-
-    const orderStatus: StringObj = {
-        "결제완료": "primary",
-        "준비중": "primary",
-        "완료": "primary",
-        "주문취소": "danger",
-        "배송중": "success",
-        "발송중": "success",
-        "반품": "warning"
     }
 
     const renderHead = (item: any, index: number) => (
@@ -72,6 +70,7 @@ const BuyerDashboard: FC = () => {
             </td>
         </tr>
     )
+
 
     const renderBodyMobile = (item: StringObj, index: number) => (
         <tr key={index}>
