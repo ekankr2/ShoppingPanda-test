@@ -15,26 +15,19 @@ import {
 import {RootState} from "../../../../store";
 import Message from "../../../UI/Message";
 import {setError} from "../../../../store/actions/pageActions";
-import {useGetRecentSituation} from "../../../../api/queryHooks/mypageHooks/buyerMypageHooks";
+import {useGetBuyerDashboard, useGetRecentSituation} from "../../../../api/queryHooks/mypageHooks/buyerMypageHooks";
 
 const BuyerDashboard: FC = () => {
     const [showModal, setShowModal] = useState(false)
     const [cardItems, setCardItems] = useState(dashboardCard)
-    const {buyerDashboard, buyerSituationDetail} = useSelector((state: RootState) => state.buyer);
+    const {buyerSituationDetail} = useSelector((state: RootState) => state.buyer);
     const {error} = useSelector((state: RootState) => state.page);
     const dispatch = useDispatch()
     const { data : buyerSituationList } = useGetRecentSituation();
-
+    const { data : buyerDashboard } = useGetBuyerDashboard();
 
     console.log('도그: ', buyerSituationList?.pageList)
-    useEffect(() => {
-        // 대쉬보드 값 패치
-        if (error) {
-            dispatch(setError(''))
-        }
-        dispatch(fetchBuyerDashBoard())
-        // dispatch(fetchSituationWithPage(5, 0))
-    }, [dispatch])
+    console.log('캣: ', buyerDashboard)
 
     useEffect(() => {
         let copy = [...cardItems]
@@ -46,14 +39,6 @@ const BuyerDashboard: FC = () => {
             setCardItems(copy)
         }
     }, [buyerDashboard])
-
-    useEffect(() => {
-        return () => {
-            if (error) {
-                dispatch(setError(''));
-            }
-        }
-    }, []);
 
     const handleClick = (item: string) => {
         dispatch(fetchSituationDetail(+item))
