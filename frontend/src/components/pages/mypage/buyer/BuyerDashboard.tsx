@@ -1,19 +1,20 @@
-import React, {FC, useCallback, useEffect, useState} from "react";
+import React, {FC, useEffect, useState, Suspense} from "react";
 import {dashboardCard} from "./buyerTypes";
 import StatusCard from "../../../UI/cards/StatusCard";
 import MyPageTable from "../../../UI/table/MyPageTable";
 import Badge from "../../../UI/badge/Badge";
 import {latestOrders} from "./buyerTypes";
 import Modal from "../../../UI/modal/Modal";
-import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
-import {RootState} from "../../../../store";
 import Message from "../../../UI/Message";
 import {
     useGetBuyerDashboard,
     useGetRecentSituation,
     useGetSituationDetail
 } from "../../../../api/queryHooks/mypageHooks/buyerMypageHooks";
+import Loader from "../../../UI/Loader";
+import ReactLoading from "react-loading";
+import LoadingComponent from "../../../UI/LoadingComponent";
 
 const orderStatus: StringObj = {
     "결제완료": "primary",
@@ -28,14 +29,13 @@ const orderStatus: StringObj = {
 const BuyerDashboard: FC = () => {
     const [showModal, setShowModal] = useState(false)
     const [cardItems, setCardItems] = useState(dashboardCard)
-    const {error} = useSelector((state: RootState) => state.page);
-    const {data: buyerSituationList} = useGetRecentSituation();
+    const {data: buyerSituationList, error: situationError} = useGetRecentSituation();
     const {data: buyerDashboard} = useGetBuyerDashboard();
     const [detailId, setDetailId] = useState(0)
-    const {data: buyerSituationDetail} = useGetSituationDetail(detailId)
+    const {data: buyerSituationDetail, isFetching: detailFetching} = useGetSituationDetail(detailId)
 
 
-    console.log('도그: ', buyerSituationDetail)
+    console.log('도그: ', detailFetching)
 
     useEffect(() => {
         let copy = [...cardItems]
@@ -83,88 +83,89 @@ const BuyerDashboard: FC = () => {
 
     return (
         <>
+            <Suspense fallback={<Loader/>}>
+                <div className="container">
+                    <Link to="/">
+                        {/*<h3 className="page-header">마이페이지{data?.data.url}</h3>*/}
+                    </Link>
 
-            <div className="container">
-                <Link to="/">
-                    {/*<h3 className="page-header">마이페이지{data?.data.url}</h3>*/}
-                </Link>
+                    {situationError && <Message type="danger" msg={'통신 에러'}/>}
+                    {/*card*/}
+                    <div className="row">
+                        <div className="col-md-12">
+                            <div className="row">
+                                {
+                                    cardItems.map((item, index) =>
+                                        <div className="col-lg-3 col-md-6" key={index}>
+                                            <StatusCard
+                                                link={item.link}
+                                                icon={item.icon}
+                                                count={item.count}
+                                                title={item.title}/>
+                                        </div>
+                                    )
+                                }
+                            </div>
+                        </div>
+                    </div>
 
-                {error && <Message type="danger" msg={error}/>}
-                {/*card*/}
-                <div className="row">
-                    <div className="col-md-12">
-                        <div className="row">
-                            {
-                                cardItems.map((item, index) =>
-                                    <div className="col-lg-3 col-md-6" key={index}>
-                                        <StatusCard
-                                            link={item.link}
-                                            icon={item.icon}
-                                            count={item.count}
-                                            title={item.title}/>
-                                    </div>
-                                )
-                            }
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="custom-card">
+                                <div className="card__header">
+                                    <h3>최근 주문 현황</h3>
+                                </div>
+                                {/*table pc*/}
+                                <div className="card__body is-hidden-mobile">
+                                    {
+                                        buyerSituationList ?
+                                            <MyPageTable
+                                                limit="5"
+                                                headData={latestOrders.header}
+                                                renderHead={(item: any, index: number) => renderHead(item, index)}
+                                                bodyData={buyerSituationList.pageList}
+                                                renderBody={(item: any, index: number) => renderBody(item, index)}
+                                            /> : null
+                                    }
+
+                                </div>
+                                {/*mobile table*/}
+                                <div className="card__body is-hidden-tablet">
+                                    {
+                                        buyerSituationList ?
+                                            <MyPageTable
+                                                limit="5"
+                                                headData={latestOrders.headerMobile}
+                                                renderHead={(item: any, index: number) => renderHead(item, index)}
+                                                bodyData={buyerSituationList.pageList}
+                                                renderBody={(item: any, index: number) => renderBodyMobile(item, index)}
+                                            /> : null
+                                    }
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="row">
-                    <div className="col-12">
-                        <div className="custom-card">
-                            <div className="card__header">
-                                <h3>최근 주문 현황</h3>
-                            </div>
-                            {/*table pc*/}
-                            <div className="card__body is-hidden-mobile">
-                                {
-                                    buyerSituationList ?
-                                        <MyPageTable
-                                            limit="5"
-                                            headData={latestOrders.header}
-                                            renderHead={(item: any, index: number) => renderHead(item, index)}
-                                            bodyData={buyerSituationList.pageList}
-                                            renderBody={(item: any, index: number) => renderBody(item, index)}
-                                        /> : null
-                                }
+                {
+                    showModal &&
+                    <Modal onClose={() => {
+                        setShowModal(false)
+                    }} title={"주문 상세보기"}>
+                        {
+                            buyerSituationDetail ?
+                                <>
+                                    <>{buyerSituationDetail.detailId}</>
+                                </>
 
-                            </div>
-                            {/*mobile table*/}
-                            <div className="card__body is-hidden-tablet">
-                                {
-                                    buyerSituationList ?
-                                        <MyPageTable
-                                            limit="5"
-                                            headData={latestOrders.headerMobile}
-                                            renderHead={(item: any, index: number) => renderHead(item, index)}
-                                            bodyData={buyerSituationList.pageList}
-                                            renderBody={(item: any, index: number) => renderBodyMobile(item, index)}
-                                        /> : null
-                                }
+                                : detailFetching ? <LoadingComponent type={"spin"}/>
+                                : <></>
+                        }
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {
-                showModal &&
-                <Modal onClose={() => {
-                    setShowModal(false)
-                }} title={"주문 상세보기"}>
-                    {
-                        buyerSituationDetail ?
-                            <>
-                                {/*<RecentOrderCard title={} image={} price={} btnText={}/>*/}
-                            </>
-
-                            : <div>데이터 없음</div>
-                    }
-
-                </Modal>
-            }
-
+                    </Modal>
+                }
+            </Suspense>
         </>
     )
 }

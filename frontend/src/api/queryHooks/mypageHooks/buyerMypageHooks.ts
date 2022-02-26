@@ -1,6 +1,6 @@
 import {useQuery} from "react-query";
 import axios from "axios";
-import {OptionName} from "../../../store/types";
+import {BuyerDashboard, RecentSituation, Situation} from "../types";
 
 export enum BuyerEnum {
     RecentSituation = 'recentSituation',
@@ -8,46 +8,10 @@ export enum BuyerEnum {
     BuyerDashboard = 'buyerDashboard'
 }
 
-interface Response {
-    pageList: {
-        num: number
-        productName: string
-        price: number
-        orderAt: any
-        status: string
-    }[]
-    success: boolean
-    totalElement: number
-    totalpage: number
-}
-
-export interface BuyerDashboard {
-    readyProduct: number
-    finishProduct: number
-    cancelProduct: number
-    cartProduct: number
-}
-
-export interface Situation {
-    address: string
-    allamount: number
-    detailId: number
-    orderDetails: []
-    price: number
-    products: {
-        imgPath: string
-        options: OptionName[]
-    }[]
-    productName: string
-    receiver: string
-    receiverPhone: string
-    shipPrice: number
-}
-
 export const useGetRecentSituation = () =>
     useQuery(
         BuyerEnum.RecentSituation,
-        () => axios.get<Response>('/api/recentsituation')
+        () => axios.get<RecentSituation>('/api/recentsituation')
             .then((res) => res.data),
     )
 
