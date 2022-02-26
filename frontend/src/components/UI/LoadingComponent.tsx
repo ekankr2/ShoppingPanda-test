@@ -3,17 +3,16 @@ import ReactLoading from "react-loading";
 
 interface Props {
     type?: LoadingType
-    color: string
     height?: string | number
     width?: string | number
 }
 
 type LoadingType = "blank" | "balls" | "bars" | "bubbles" | "cubes" | "cylon" | "spin" | "spinningBubbles" | "spokes";
 
-const LoadingComponent: FC<Props> = ({type, color, height, width}) => {
+const LoadingComponent: FC<Props> = ({type, height, width}) => {
     return (
-        <div className="loader-wrapper">
-            <ReactLoading type={type} color={color} height={height} width={width}/>
+        <div className="component-loader-wrapper">
+            <ReactLoading type={type} color={"#00d1b2"} height={height} width={width}/>
         </div>
     );
 };
