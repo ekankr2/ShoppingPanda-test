@@ -12,8 +12,6 @@ import {
     useGetRecentSituation,
     useGetSituationDetail
 } from "../../../../api/queryHooks/mypageHooks/buyerMypageHooks";
-import Loader from "../../../UI/Loader";
-import ReactLoading from "react-loading";
 import LoadingComponent from "../../../UI/LoadingComponent";
 
 const orderStatus: StringObj = {
@@ -25,6 +23,10 @@ const orderStatus: StringObj = {
     "발송중": "success",
     "반품": "warning"
 }
+
+const renderHead = (item: any, index: number) => (
+    <th key={index}>{item}</th>
+)
 
 const BuyerDashboard: FC = () => {
     const [showModal, setShowModal] = useState(false)
@@ -53,10 +55,6 @@ const BuyerDashboard: FC = () => {
         setShowModal(true)
     }
 
-    const renderHead = (item: any, index: number) => (
-        <th key={index}>{item}</th>
-    )
-
     const renderBody = (item: StringObj, index: number) => (
         <tr key={index} onClick={() => {
             handleClick(item.num)
@@ -83,7 +81,7 @@ const BuyerDashboard: FC = () => {
 
     return (
         <>
-            <Suspense fallback={<Loader/>}>
+            <Suspense fallback={<LoadingComponent/>}>
                 <div className="container">
                     <Link to="/">
                         {/*<h3 className="page-header">마이페이지{data?.data.url}</h3>*/}
@@ -160,7 +158,7 @@ const BuyerDashboard: FC = () => {
                                 </>
 
                                 : detailFetching ? <LoadingComponent type={"spin"}/>
-                                : <></>
+                                    : <></>
                         }
 
                     </Modal>
