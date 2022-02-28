@@ -8,29 +8,20 @@ import {setError, setLoading} from "../../../../store/actions/pageActions";
 import {fetchSellerDashboard} from "../../../../store/actions/mypageActions/sellerActions";
 import Button from "../../../UI/Button";
 import SellerChart from "../../../UI/chart/SellerChart";
+import {useGetSellerDashboard} from "../../../../api/queryHooks/mypageHooks/sellerMypageHooks";
 
 
 const SellerDashboard: FC = () => {
     const [cardItems, setCardItems] = useState(sellerDashboardCard)
     const [currentYear] = useState(new Date().getFullYear())
     const [selectedYear, setSelectedYear] = useState(currentYear)
-    const dispatch = useDispatch()
     const [chartMoney, setChartMoney] = useState<any[]>([])
     const [chartQuantity, setChartQuantity] = useState<any[]>([])
     const [chartDate, setChartDate] = useState<any[]>([])
-    const {error} = useSelector((state: RootState) => state.page);
-    const { sellerDashboard } = useSelector((state: any) => state.seller)
+    const { data: sellerDashboard, isError: error } = useGetSellerDashboard(selectedYear)
 
-    useEffect(() => {
-        if (error) {
-            dispatch(setError(''))
-        }
-        dispatch(fetchSellerDashboard(currentYear, () => setLoading(false)))
-    }, [])
-
-    useEffect(() => {
-        dispatch(fetchSellerDashboard(selectedYear, () => setLoading(false)))
-    }, [selectedYear, dispatch])
+    console.log('년도: ',selectedYear)
+    console.log('도그그: ',sellerDashboard)
 
     useEffect(()=>{
         let cardCopy = [...cardItems]
@@ -44,21 +35,13 @@ const SellerDashboard: FC = () => {
             setChartDate(sellerDashboard.day)
         }
         setCardItems(cardCopy)
-    },[sellerDashboard, dispatch])
-
-    useEffect(()=>{
-        return (()=>{
-            if(error) {
-                dispatch(setError(''))
-            }
-        })
-    },[error, dispatch])
+    },[sellerDashboard])
 
     return (
         <>
 
             <div className="container">
-                {error && <Message type="danger" msg={error}/>}
+                {error && <Message type="danger" msg="판매자 대쉬보드 통신에러"/>}
                 <div className="page-header">
                     <span className="mr-3">
                         <Button

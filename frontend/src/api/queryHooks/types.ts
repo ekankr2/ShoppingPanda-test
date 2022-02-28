@@ -1,4 +1,5 @@
 
+// buyer types
 export interface RecentSituation {
     pageList: {
         num: number
@@ -41,4 +42,15 @@ export interface OptionName {
     optionPrice: number
     allAmount: number
     pandaName: string
+}
+
+// seller type
+export interface SellerDashboard {
+    newOrder: number
+    readyOrder: number
+    cancelReturn: number
+    completeBuy: number
+    money: number[]
+    quantity: number[]
+    day: any
 }
