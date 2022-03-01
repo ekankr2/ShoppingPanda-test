@@ -6,15 +6,6 @@ import Loader from './components/UI/Loader';
 import {RootState} from './store';
 import {loginCheck} from "./store/actions/authActions";
 import Navbar from "./components/sections/navbar/Navbar";
-import axios from "axios";
-
-
-// import BuyerIndex from "./components/pages/mypage/buyer/BuyerIndex";
-// import PandaIndex from "./components/pages/mypage/panda/PandaIndex";
-// import PrivateRoute from "./components/auth/PrivateRoute";
-// import PaginationTest from "./components/pages/PaginationTest";
-// import SellerIndex from "./components/pages/mypage/seller/SellerIndex";
-// import TableTestPage from "./components/pages/TableTestPage";
 
 const Homepage = React.lazy(() => import('./components/pages/Homepage'));
 const SignUp = React.lazy(() => import('./components/pages/SignIn'));
