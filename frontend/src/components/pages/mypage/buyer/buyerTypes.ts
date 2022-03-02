@@ -30,8 +30,8 @@ export const buyerSidebarItems = [
         "icon": "bx bx-message-dots"
     },
     {
-        "display_name": "설정",
-        "route": "/discount",
+        "display_name": "개인 설정",
+        "route": "/buyer/infoPage",
         "icon": "bx bx-cog"
     }
 ]

@@ -11,6 +11,7 @@ import PandaSettlementPage from "./panda/PandaSettlementPage";
 import SellerDashboard from "./seller/SellerDashboard";
 import SellerSettlementPage from "./seller/SellerSettlementPage";
 import SellerNewOrderPage from "./seller/SellerNewOrderPage";
+import BuyerInfoPage from "./buyer/BuyerInfoPage";
 
 
 const MyPageRoutes = () => {
@@ -20,6 +21,7 @@ const MyPageRoutes = () => {
             <Route path='/buyer/orderList' exact component={OrderListPage}/>
             <Route path='/buyer/cancelList' exact component={CancelListPage}/>
             <Route path='/buyer/cart' exact component={CartPage}/>
+            <Route path='/buyer/infoPage' exact component={BuyerInfoPage}/>
 
             <Route path='/panda/dashboard' exact component={PandaDashboard}/>
             <Route path='/panda/video' exact component={PandaVideoPage}/>

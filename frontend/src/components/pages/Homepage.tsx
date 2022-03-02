@@ -35,7 +35,7 @@ const Homepage: FC = () => {
 
     return (
         <div>
-            <Carousel activeIndex={index} onSelect={handleSelect}>
+            <Carousel activeIndex={index} onSelect={handleSelect} className="carousel">
                 {
                     items.map((item, index: number) =>
                         <Carousel.Item key={index} className="carousel-item">
