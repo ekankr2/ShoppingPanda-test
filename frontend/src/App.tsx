@@ -14,6 +14,7 @@ const BuyerIndex = React.lazy(() => import('./components/pages/mypage/buyer/Buye
 const PandaIndex = React.lazy(() => import('./components/pages/mypage/panda/PandaIndex'));
 const PrivateRoute = React.lazy(() => import('./components/auth/PrivateRoute'));
 const SellerIndex = React.lazy(() => import('./components/pages/mypage/seller/SellerIndex'));
+const AdminIndex = React.lazy(() => import('./components/pages/mypage/admin/AdminIndex'));
 
 const App: FC = () => {
     const dispatch = useDispatch();
@@ -38,6 +39,7 @@ const App: FC = () => {
                 <PrivateRoute path="/buyer" component={BuyerIndex}/>
                 <PrivateRoute path="/panda" component={PandaIndex}/>
                 <PrivateRoute path="/seller" component={SellerIndex}/>
+                <PrivateRoute path="/admin" component={AdminIndex}/>
             </Switch>
         </Suspense>
         </>

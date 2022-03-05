@@ -12,6 +12,7 @@ import SellerDashboard from "./seller/SellerDashboard";
 import SellerSettlementPage from "./seller/SellerSettlementPage";
 import SellerNewOrderPage from "./seller/SellerNewOrderPage";
 import BuyerInfoPage from "./buyer/BuyerInfoPage";
+import AdminDashboard from "./admin/AdminDashboard";
 
 
 const MyPageRoutes = () => {
@@ -30,6 +31,8 @@ const MyPageRoutes = () => {
             <Route path='/seller/dashboard' exact component={SellerDashboard}/>
             <Route path='/seller/settlement' exact component={SellerSettlementPage}/>
             <Route path='/seller/newOrder' exact component={SellerNewOrderPage}/>
+
+            <Route path='/admin/dashboard' exact component={AdminDashboard}/>
         </Switch>
     )
 }
