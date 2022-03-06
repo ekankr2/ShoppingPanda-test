@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useCallback, useEffect, useState} from 'react';
 import {DataGrid} from '@mui/x-data-grid';
 import Button from "../../../UI/Button";
 import {
@@ -6,7 +6,7 @@ import {
     useGetAdminPandaSettlementList
 } from "../../../../api/queryHooks/mypageHooks/adminPageHooks";
 
-interface Props{
+interface Props {
     selectedMode: string
 }
 
@@ -15,60 +15,70 @@ function confirmOrder(event: React.MouseEvent, cellValues: any) {
     console.log(cellValues)
 }
 
+const columns = [
+    {field: 'id', headerName: '주문번호', flex: 0.5},
+    {field: 'pandaname', headerName: '상점명', flex: 2},
+    {field: 'deposit', headerName: '금액', flex: 0.7},
+    {field: 'enrollSettle', headerName: '정산일자', flex: 1.1},
+    {
+        field: "정산확인",
+        flex: 0.8,
+        renderCell: (cellValues: any) => {
+            return (
+                <Button
+                    text="정산확인"
+                    className="is-danger"
+                    onClick={(event) => {
+                        confirmOrder(event, cellValues);
+                    }}
+                >
+                </Button>
+            );
+        }
+    },
+];
+
 const AdminPandaTable: FC<Props> = ({selectedMode}) => {
     const [page, setPage] = useState(0)
     const [rows, setRows] = useState<any>([])
     const [totalElement, setTotalElement] = useState<any>(0)
     const [selectedRows, setSelectedRows] = useState<any>([]);
-    const {data: pandaSettlementList, isFetching} = useGetAdminPandaSettlementList()
-    const {data: pandaSettlementCompleteList} = useGetAdminPandaSettlementCompleteList()
+    const {data: pandaSettlementList, isFetching, refetch: refetchSettlement} = useGetAdminPandaSettlementList(page)
+    const {data: pandaSettlementCompleteList, refetch: refetchComplete} = useGetAdminPandaSettlementCompleteList()
 
     console.log(pandaSettlementList)
 
     useEffect(() => {
-        if(selectedMode === '정산필요') {
+        if (selectedMode === '정산필요') {
             setRows(pandaSettlementList?.settlePandaDetails)
             setTotalElement(pandaSettlementList?.totalElement)
         }
-        if(selectedMode === '정산완료') {
+        if (selectedMode === '정산완료') {
             setRows(pandaSettlementCompleteList?.settlePandaDetails)
             setTotalElement(pandaSettlementCompleteList?.totalElement)
         }
 
     }, [isFetching, selectedMode])
 
-    const columns = [
-        {field: 'id', headerName: '주문번호', flex: 0.5},
-        {field: 'pandaname', headerName: '상점명', flex: 2},
-        {field: 'deposit', headerName: '금액', flex: 0.7},
-        {field: 'enrollSettle', headerName: '정산일자', flex: 1.1},
-        {
-            field: "정산확인",
-            flex: 0.8,
-            renderCell: (cellValues: any) => {
-                return (
-                    <Button
-                        text="정산확인"
-                        className="is-danger"
-                        onClick={(event) => {
-                            confirmOrder(event, cellValues);
-                        }}
-                    >
-                    </Button>
-                );
-            }
-        },
-    ];
+    const pageChangeAction = useCallback((page: number) => {
+        setPage(page)
+        if (selectedMode === '정산필요') {
+            refetchSettlement()
+        }
+        if (selectedMode === '정산완료') {
+            refetchComplete()
+        }
+    }, [page])
 
-    const confirmSelected = (event: React.MouseEvent) => {
+    const confirmSelected = useCallback((event: React.MouseEvent) => {
         event.preventDefault()
         console.log('선택된 주문 확인', selectedRows)
-    }
+    }, [selectedRows])
 
-    const printList = (event: React.MouseEvent) => {
+    const printList = useCallback((event: React.MouseEvent) => {
         event.preventDefault()
         console.log('인쇄하기')
-    }
+    }, [])
 
     return (
         <>
@@ -102,7 +112,7 @@ const AdminPandaTable: FC<Props> = ({selectedMode}) => {
                             paginationMode="server"
                             rowsPerPageOptions={[10]}
                             onPageChange={(page) => {
-                                setPage(page)
+                                pageChangeAction(page)
                             }}
                             onSelectionModelChange={(ids) => {
                                 const selectedIDs = new Set(ids);

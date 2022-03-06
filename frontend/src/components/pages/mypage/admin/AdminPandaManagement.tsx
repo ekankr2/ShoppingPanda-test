@@ -11,7 +11,7 @@ import AdminPandaTable from "./AdminPandaTable";
 const AdminPandaManagement: FC = () => {
     const [cardItems, setCardItems] = useState(adminDashboardCard)
     const [selectedMode, setSelectedMode] = useState('정산필요')
-    const {data: pandaSettlementList, isError: settlementError} = useGetAdminPandaSettlementList()
+    const {data: pandaSettlementList, isError: settlementError} = useGetAdminPandaSettlementList(0)
     const {data: pandaSettlementCompleteList, isError: settlementCompleteError} = useGetAdminPandaSettlementCompleteList()
 
     console.log('예정목록: ',pandaSettlementList)
