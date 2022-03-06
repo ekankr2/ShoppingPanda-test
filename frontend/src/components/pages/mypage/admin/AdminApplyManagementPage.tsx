@@ -14,9 +14,6 @@ const AdminApplyManagementPage: FC = () => {
     const {data: applyShopList, isError: shopError} = useGetAdminApplyShopList(0)
     const {data: applyPandaList, isError: pandaError} = useGetAdminApplyPandaList(0)
 
-    console.log('상점신청목록: ',applyShopList)
-    console.log('판다신청목록: ',applyPandaList)
-
     useEffect(()=>{
         let cardCopy = [...cardItems]
         if (applyShopList && applyPandaList) {

@@ -6,7 +6,7 @@ import {useGetAdminShopSettlementCompleteList, useGetAdminShopSettlementList
 } from "../../../../api/queryHooks/mypageHooks/adminPageHooks";
 import AdminShopTable from "./AdminShopTable";
 
-const AdminShopManagement: FC = () => {
+const AdminShopManagementPage: FC = () => {
     const [cardItems, setCardItems] = useState(adminDashboardCard)
     const [selectedMode, setSelectedMode] = useState('정산필요')
     const {data: shopSettlementList, isError: settlementError} = useGetAdminShopSettlementList(0)
@@ -66,4 +66,4 @@ const AdminShopManagement: FC = () => {
     )
 }
 
-export default AdminShopManagement
+export default AdminShopManagementPage

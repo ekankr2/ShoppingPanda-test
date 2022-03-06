@@ -12,8 +12,8 @@ import SellerDashboard from "./seller/SellerDashboard";
 import SellerSettlementPage from "./seller/SellerSettlementPage";
 import SellerNewOrderPage from "./seller/SellerNewOrderPage";
 import BuyerInfoPage from "./buyer/BuyerInfoPage";
-import AdminPandaManagement from "./admin/AdminPandaManagement";
-import AdminShopManagement from "./admin/AdminShopManagement";
+import AdminPandaManagementPage from "./admin/AdminPandaManagementPage";
+import AdminShopManagementPage from "./admin/AdminShopManagementPage";
 import AdminApplyManagementPage from "./admin/AdminApplyManagementPage";
 
 
@@ -34,8 +34,8 @@ const MyPageRoutes = () => {
             <Route path='/seller/settlement' exact component={SellerSettlementPage}/>
             <Route path='/seller/newOrder' exact component={SellerNewOrderPage}/>
 
-            <Route path='/admin/pandaManagement' exact component={AdminPandaManagement}/>
-            <Route path='/admin/sellerManagement' exact component={AdminShopManagement}/>
+            <Route path='/admin/pandaManagement' exact component={AdminPandaManagementPage}/>
+            <Route path='/admin/sellerManagement' exact component={AdminShopManagementPage}/>
             <Route path='/admin/applyManagement' exact component={AdminApplyManagementPage}/>
         </Switch>
     )

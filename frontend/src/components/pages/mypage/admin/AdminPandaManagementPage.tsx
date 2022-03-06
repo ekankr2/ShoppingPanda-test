@@ -8,7 +8,7 @@ import {
 } from "../../../../api/queryHooks/mypageHooks/adminPageHooks";
 import AdminPandaTable from "./AdminPandaTable";
 
-const AdminPandaManagement: FC = () => {
+const AdminPandaManagementPage: FC = () => {
     const [cardItems, setCardItems] = useState(adminDashboardCard)
     const [selectedMode, setSelectedMode] = useState('정산필요')
     const {data: pandaSettlementList, isError: settlementError} = useGetAdminPandaSettlementList(0)
@@ -68,4 +68,4 @@ const AdminPandaManagement: FC = () => {
     )
 }
 
-export default AdminPandaManagement
+export default AdminPandaManagementPage
