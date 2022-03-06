@@ -1,27 +1,28 @@
 import {useQuery} from "react-query";
 import axios from "axios";
+import {AdminPandaSettlementList} from "../types";
 
 export enum AdminKeysEnum {
-    PandaSettlementList = 'pandaSettlementList',
-    PandaSettlementCompleteList = 'pandaSettlementCompleteList',
-    ShopSettlementList = 'shopSettlementList',
-    ShopSettlementCompleteList = 'shopSettlementCompleteList',
-    ShopApplyList = 'shopApplyList',
-    pandaApplyList = 'pandaApplyList'
+    AdminPandaSettlementList = 'adminPandaSettlementList',
+    AdminPandaSettlementCompleteList = 'adminPandaSettlementCompleteList',
+    AdminShopSettlementList = 'adminShopSettlementList',
+    AdminShopSettlementCompleteList = 'adminShopSettlementCompleteList',
+    AdminShopApplyList = 'adminShopApplyList',
+    AdminPandaApplyList = 'adminPandaApplyList'
 }
 
-export const useGetPandaSettlementList = () =>
+export const useGetAdminPandaSettlementList = () =>
     useQuery(
-        AdminKeysEnum.PandaSettlementList, async () => {
+        AdminKeysEnum.AdminPandaSettlementList, async () => {
             const res = await axios.get('/api/admin/pandaSettleList')
-            return res.data as any
+            return res.data as AdminPandaSettlementList
         }
     )
 
-export const useGetPandaSettlementCompleteList = () =>
+export const useGetAdminPandaSettlementCompleteList = () =>
     useQuery(
-        AdminKeysEnum.PandaSettlementCompleteList, async () => {
+        AdminKeysEnum.AdminPandaSettlementCompleteList, async () => {
             const res = await axios.get('/api/admin/completepandaSettleList')
-            return res.data as any
+            return res.data as AdminPandaSettlementList
         }
     )

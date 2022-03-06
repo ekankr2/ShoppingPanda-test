@@ -10,7 +10,7 @@ const AdminIndex: FC = () => {
 
     return (
         <Route render={(props) => (
-            <div className={`layout theme-mode-dark theme-color-cyan`}>
+            <div className={`layout theme-mode-dark theme-color-red`}>
                 <Sidebar sidebarItems={adminSidebarItems} {...props}/>
                 <div className="layout__content">
                     <div className="layout__content-main">

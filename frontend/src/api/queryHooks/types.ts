@@ -44,7 +44,7 @@ export interface OptionName {
     pandaName: string
 }
 
-// seller type
+// seller types
 export interface SellerDashboard {
     newOrder: number
     readyOrder: number
@@ -54,3 +54,19 @@ export interface SellerDashboard {
     quantity: number[]
     day: any
 }
+
+// admin types
+export interface AdminPandaSettlementList {
+    settlePandaDetails: {
+        depoistDate: string
+        deposit: number
+        detailIds: any
+        enrollSettle: string
+        id: number
+        isdeposit: boolean
+        pandaname: string
+    }[]
+    totalElement: number
+    totalPage: number
+}
+

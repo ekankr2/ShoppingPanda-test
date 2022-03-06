@@ -26,7 +26,7 @@ export const adminDashboardCard = [
         "link": "/panda/video",
         "icon": "bx bxs-gift",
         "count": 0,
-        "title": "정산예정"
+        "title": "정산필요"
     },
     {
         "link": "/panda/settlement",
