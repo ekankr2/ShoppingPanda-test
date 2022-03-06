@@ -20,6 +20,7 @@
     align-items: center;
     justify-content: center;
     z-index: 1;
+    pointer-events: none;
 }
 
 .status-card__info {
@@ -27,11 +28,13 @@
     text-align: center;
     z-index: 1;
     text-transform: capitalize;
+    pointer-events: none;
 }
 
 .status-card__info > h4 {
     font-size: 2.5rem;
     margin-bottom: 10px;
+    pointer-events: none;
 }
 
 .status-card::before {

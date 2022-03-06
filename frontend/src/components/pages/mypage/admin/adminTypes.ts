@@ -23,13 +23,13 @@ export const adminSidebarItems = [
 
 export const adminDashboardCard = [
     {
-        "link": "/panda/video",
+        "link": "",
         "icon": "bx bxs-gift",
         "count": 0,
         "title": "정산필요"
     },
     {
-        "link": "/panda/settlement",
+        "link": "",
         "icon": "bx bx-won",
         "count": 0,
         "title": "정산완료"

@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {FC, MouseEventHandler, useEffect, useState} from "react";
 import StatusCard from "../../../UI/cards/StatusCard";
 import Message from "../../../UI/Message";
 import {adminDashboardCard} from "./adminTypes";
@@ -10,6 +10,7 @@ import AdminPandaTable from "./AdminPandaTable";
 
 const PandaDashboard: FC = () => {
     const [cardItems, setCardItems] = useState(adminDashboardCard)
+    const [selectedMode, setSelectedMode] = useState('정산필요')
     const {data: pandaSettlementList, isError: settlementError} = useGetAdminPandaSettlementList()
     const {data: pandaSettlementCompleteList, isError: settlementCompleteError} = useGetAdminPandaSettlementCompleteList()
 
@@ -24,6 +25,11 @@ const PandaDashboard: FC = () => {
             setCardItems(cardCopy)
         }
     },[pandaSettlementList, pandaSettlementCompleteList])
+
+    const clickHandler: any = (e: any) => {
+        e.preventDefault()
+        setSelectedMode(e.target.id)
+    }
 
     return (
         <>
@@ -43,7 +49,9 @@ const PandaDashboard: FC = () => {
                                             link={item.link}
                                             icon={item.icon}
                                             count={item.count}
-                                            title={item.title}/>
+                                            title={item.title}
+                                            onClick={clickHandler}
+                                        />
                                     </div>
                                 )
                             }
@@ -53,7 +61,9 @@ const PandaDashboard: FC = () => {
 
                 <div className="row">
                     <div className="col-12">
-                        <AdminPandaTable/>
+                        <AdminPandaTable
+                            selectedMode={selectedMode}
+                        />
                     </div>
                 </div>
             </div>

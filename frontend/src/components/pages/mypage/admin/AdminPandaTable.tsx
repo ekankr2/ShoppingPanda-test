@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {DataGrid} from '@mui/x-data-grid';
 import Button from "../../../UI/Button";
 import {dateFormatter} from "../../../../store/actions/DateFormat";
@@ -7,17 +7,20 @@ import {
     useGetAdminPandaSettlementList
 } from "../../../../api/queryHooks/mypageHooks/adminPageHooks";
 
+interface Props{
+    selectedMode: string
+}
+
 function confirmOrder(event: React.MouseEvent, cellValues: any) {
     event.stopPropagation()
     console.log(cellValues)
 }
 
-const AdminPandaTable = () => {
+const AdminPandaTable: FC<Props> = ({selectedMode}) => {
     const [page, setPage] = useState(0)
     const [rows, setRows] = useState<any>([])
     const [totalElement, setTotalElement] = useState<any>(0)
     const [selectedRows, setSelectedRows] = useState<any>([]);
-    const [selectedMode, setSelectedMode] = useState('needList')
     const {data: pandaSettlementList, isFetching, isError: settlementError} = useGetAdminPandaSettlementList()
     const {
         data: pandaSettlementCompleteList,
@@ -31,11 +34,11 @@ const AdminPandaTable = () => {
             list.enrollSettle = dateFormatter(list.enrollSettle)
         })
 
-        if(selectedMode === 'needList') {
+        if(selectedMode === '정산필요') {
             setRows(pandaSettlementList?.settlePandaDetails)
             setTotalElement(pandaSettlementList?.totalElement)
         }
-        if(selectedMode === 'completeList') {
+        if(selectedMode === '정산완료') {
             setRows(pandaSettlementCompleteList?.settlePandaDetails)
             setTotalElement(pandaSettlementCompleteList?.totalElement)
         }
@@ -78,18 +81,6 @@ const AdminPandaTable = () => {
     return (
         <>
             <div className='custom-card'>
-                <div>
-                    <Button
-                        className="is-info mr-3"
-                        text='정산 필요 목록'
-                        onClick={()=> setSelectedMode('needList')}
-                    />
-                    <Button
-                        className="is-info mr-3"
-                        text='정산 완료 목록'
-                        onClick={()=> setSelectedMode('completeList')}
-                    />
-                </div>
                 <div className="card__header">
                     <Button
                         className="is-danger mr-3"
