@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useCallback, useEffect, useState} from 'react';
 import {DataGrid} from '@mui/x-data-grid';
 import Button from "../../../UI/Button";
 import {useGetAdminShopSettlementCompleteList, useGetAdminShopSettlementList
@@ -13,13 +13,36 @@ function confirmOrder(event: React.MouseEvent, cellValues: any) {
     console.log(cellValues)
 }
 
+const columns = [
+    {field: 'id', headerName: '주문번호', flex: 0.5},
+    {field: 'shopName', headerName: '상점명', flex: 1.5},
+    {field: 'deposit', headerName: '금액', flex: 0.7},
+    {field: 'enrollSettle', headerName: '정산일자', flex: 1.1},
+    {
+        field: "정산확인",
+        flex: 0.8,
+        renderCell: (cellValues: any) => {
+            return (
+                <Button
+                    text="정산확인"
+                    className="is-danger"
+                    onClick={(event) => {
+                        confirmOrder(event, cellValues);
+                    }}
+                >
+                </Button>
+            );
+        }
+    },
+];
+
 const AdminShopTable: FC<Props> = ({selectedMode}) => {
     const [page, setPage] = useState(0)
     const [rows, setRows] = useState<any>([])
     const [totalElement, setTotalElement] = useState<any>(0)
     const [selectedRows, setSelectedRows] = useState<any>([]);
-    const {data: shopSettlementList, isFetching} = useGetAdminShopSettlementList()
-    const {data: shopSettlementCompleteList} = useGetAdminShopSettlementCompleteList()
+    const {data: shopSettlementList, isFetching, refetch: refetchSettlement} = useGetAdminShopSettlementList(page)
+    const {data: shopSettlementCompleteList, refetch: refetchComplete} = useGetAdminShopSettlementCompleteList(page)
 
     console.log(shopSettlementList)
 
@@ -35,38 +58,25 @@ const AdminShopTable: FC<Props> = ({selectedMode}) => {
 
     }, [isFetching, selectedMode])
 
-    const columns = [
-        {field: 'id', headerName: '주문번호', flex: 0.5},
-        {field: 'shopName', headerName: '상점명', flex: 1.5},
-        {field: 'deposit', headerName: '금액', flex: 0.7},
-        {field: 'enrollSettle', headerName: '정산일자', flex: 1.1},
-        {
-            field: "정산확인",
-            flex: 0.8,
-            renderCell: (cellValues: any) => {
-                return (
-                    <Button
-                        text="정산확인"
-                        className="is-danger"
-                        onClick={(event) => {
-                            confirmOrder(event, cellValues);
-                        }}
-                    >
-                    </Button>
-                );
-            }
-        },
-    ];
+    const pageChangeAction = useCallback((page: number) => {
+        setPage(page)
+        if (selectedMode === '정산필요') {
+            refetchSettlement()
+        }
+        if (selectedMode === '정산완료') {
+            refetchComplete()
+        }
+    }, [page])
 
-    const confirmSelected = (event: React.MouseEvent) => {
+    const confirmSelected = useCallback((event: React.MouseEvent) => {
         event.preventDefault()
         console.log('선택된 주문 확인', selectedRows)
-    }
+    }, [selectedRows])
 
-    const printList = (event: React.MouseEvent) => {
+    const printList = useCallback((event: React.MouseEvent) => {
         event.preventDefault()
         console.log('인쇄하기')
-    }
+    }, [])
 
     return (
         <>
@@ -99,9 +109,7 @@ const AdminShopTable: FC<Props> = ({selectedMode}) => {
                             pagination
                             paginationMode="server"
                             rowsPerPageOptions={[10]}
-                            onPageChange={(page) => {
-                                setPage(page)
-                            }}
+                            onPageChange={(page) => {pageChangeAction(page)}}
                             onSelectionModelChange={(ids) => {
                                 const selectedIDs = new Set(ids);
                                 const selectedRows = rows.filter((row: any) =>

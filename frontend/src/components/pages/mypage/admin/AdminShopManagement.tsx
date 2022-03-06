@@ -9,11 +9,8 @@ import AdminShopTable from "./AdminShopTable";
 const AdminShopManagement: FC = () => {
     const [cardItems, setCardItems] = useState(adminDashboardCard)
     const [selectedMode, setSelectedMode] = useState('정산필요')
-    const {data: shopSettlementList, isError: settlementError} = useGetAdminShopSettlementList()
-    const {data: shopSettlementCompleteList, isError: settlementCompleteError} = useGetAdminShopSettlementCompleteList()
-
-    console.log('예정목록: ',shopSettlementList)
-    console.log('완료목록: ',shopSettlementCompleteList)
+    const {data: shopSettlementList, isError: settlementError} = useGetAdminShopSettlementList(0)
+    const {data: shopSettlementCompleteList, isError: settlementCompleteError} = useGetAdminShopSettlementCompleteList(0)
 
     useEffect(()=>{
         let cardCopy = [...cardItems]

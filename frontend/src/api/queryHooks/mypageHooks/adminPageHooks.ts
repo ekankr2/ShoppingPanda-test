@@ -20,27 +20,27 @@ export const useGetAdminPandaSettlementList = (page: number) =>
 )
 
 
-export const useGetAdminPandaSettlementCompleteList = () =>
+export const useGetAdminPandaSettlementCompleteList = (page: number) =>
     useQuery(
         AdminKeysEnum.AdminPandaSettlementCompleteList, async () => {
-            const res = await axios.get('/api/admin/completepandaSettleList')
+            const res = await axios.get(`/api/admin/completepandaSettleList?size=10&page=${page}`)
             return res.data as AdminPandaSettlementList
         }
     )
 
-export const useGetAdminShopSettlementList = () =>
+export const useGetAdminShopSettlementList = (page: number) =>
     useQuery(
         AdminKeysEnum.AdminShopSettlementList, async () => {
-            const res = await axios.get('/api/admin/shopSettleList')
+            const res = await axios.get(`/api/admin/shopSettleList?size=10&page=${page}`)
             return res.data as AdminShopSettlementList
         }
     )
 
 
-export const useGetAdminShopSettlementCompleteList = () =>
+export const useGetAdminShopSettlementCompleteList = (page: number) =>
     useQuery(
         AdminKeysEnum.AdminShopSettlementCompleteList, async () => {
-            const res = await axios.get('/api/admin/completeshopSettleList')
+            const res = await axios.get(`/api/admin/completeshopSettleList?size=10&page=${page}`)
             return res.data as AdminShopSettlementList
         }
     )

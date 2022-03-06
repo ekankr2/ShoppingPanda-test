@@ -44,7 +44,7 @@ const AdminPandaTable: FC<Props> = ({selectedMode}) => {
     const [totalElement, setTotalElement] = useState<any>(0)
     const [selectedRows, setSelectedRows] = useState<any>([]);
     const {data: pandaSettlementList, isFetching, refetch: refetchSettlement} = useGetAdminPandaSettlementList(page)
-    const {data: pandaSettlementCompleteList, refetch: refetchComplete} = useGetAdminPandaSettlementCompleteList()
+    const {data: pandaSettlementCompleteList, refetch: refetchComplete} = useGetAdminPandaSettlementCompleteList(page)
 
     console.log(pandaSettlementList)
 

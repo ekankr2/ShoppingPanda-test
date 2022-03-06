@@ -12,7 +12,7 @@ const AdminPandaManagement: FC = () => {
     const [cardItems, setCardItems] = useState(adminDashboardCard)
     const [selectedMode, setSelectedMode] = useState('정산필요')
     const {data: pandaSettlementList, isError: settlementError} = useGetAdminPandaSettlementList(0)
-    const {data: pandaSettlementCompleteList, isError: settlementCompleteError} = useGetAdminPandaSettlementCompleteList()
+    const {data: pandaSettlementCompleteList, isError: settlementCompleteError} = useGetAdminPandaSettlementCompleteList(0)
 
     console.log('예정목록: ',pandaSettlementList)
     console.log('완료목록: ',pandaSettlementCompleteList)
