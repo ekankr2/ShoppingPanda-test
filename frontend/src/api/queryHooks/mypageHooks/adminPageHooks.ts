@@ -1,7 +1,6 @@
 import {useQuery} from "react-query";
 import axios from "axios";
-import {AdminPandaSettlementList} from "../types";
-import {dateFormatter} from "../../../store/actions/DateFormat";
+import {AdminPandaSettlementList, AdminShopSettlementList} from "../types";
 
 export enum AdminKeysEnum {
     AdminPandaSettlementList = 'adminPandaSettlementList',
@@ -26,5 +25,22 @@ export const useGetAdminPandaSettlementCompleteList = () =>
         AdminKeysEnum.AdminPandaSettlementCompleteList, async () => {
             const res = await axios.get('/api/admin/completepandaSettleList')
             return res.data as AdminPandaSettlementList
+        }
+    )
+
+export const useGetAdminShopSettlementList = () =>
+    useQuery(
+        AdminKeysEnum.AdminShopSettlementList, async () => {
+            const res = await axios.get('/api/admin/shopSettleList')
+            return res.data as AdminShopSettlementList
+        }
+    )
+
+
+export const useGetAdminShopSettlementCompleteList = () =>
+    useQuery(
+        AdminKeysEnum.AdminShopSettlementCompleteList, async () => {
+            const res = await axios.get('/api/admin/completeshopSettleList')
+            return res.data as AdminShopSettlementList
         }
     )

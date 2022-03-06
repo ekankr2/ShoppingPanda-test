@@ -1,4 +1,4 @@
-import React, {FC, MouseEventHandler, useEffect, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import StatusCard from "../../../UI/cards/StatusCard";
 import Message from "../../../UI/Message";
 import {adminDashboardCard} from "./adminTypes";
@@ -8,7 +8,7 @@ import {
 } from "../../../../api/queryHooks/mypageHooks/adminPageHooks";
 import AdminPandaTable from "./AdminPandaTable";
 
-const PandaDashboard: FC = () => {
+const AdminPandaManagement: FC = () => {
     const [cardItems, setCardItems] = useState(adminDashboardCard)
     const [selectedMode, setSelectedMode] = useState('정산필요')
     const {data: pandaSettlementList, isError: settlementError} = useGetAdminPandaSettlementList()
@@ -71,4 +71,4 @@ const PandaDashboard: FC = () => {
     )
 }
 
-export default PandaDashboard
+export default AdminPandaManagement

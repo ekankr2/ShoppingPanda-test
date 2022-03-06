@@ -1,9 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {DataGrid} from '@mui/x-data-grid';
 import Button from "../../../UI/Button";
-import {
-    useGetAdminPandaSettlementCompleteList,
-    useGetAdminPandaSettlementList
+import {useGetAdminShopSettlementCompleteList, useGetAdminShopSettlementList
 } from "../../../../api/queryHooks/mypageHooks/adminPageHooks";
 
 interface Props{
@@ -15,31 +13,31 @@ function confirmOrder(event: React.MouseEvent, cellValues: any) {
     console.log(cellValues)
 }
 
-const AdminPandaTable: FC<Props> = ({selectedMode}) => {
+const AdminShopTable: FC<Props> = ({selectedMode}) => {
     const [page, setPage] = useState(0)
     const [rows, setRows] = useState<any>([])
     const [totalElement, setTotalElement] = useState<any>(0)
     const [selectedRows, setSelectedRows] = useState<any>([]);
-    const {data: pandaSettlementList, isFetching} = useGetAdminPandaSettlementList()
-    const {data: pandaSettlementCompleteList} = useGetAdminPandaSettlementCompleteList()
+    const {data: shopSettlementList, isFetching} = useGetAdminShopSettlementList()
+    const {data: shopSettlementCompleteList} = useGetAdminShopSettlementCompleteList()
 
-    console.log(pandaSettlementList)
+    console.log(shopSettlementList)
 
     useEffect(() => {
         if(selectedMode === '정산필요') {
-            setRows(pandaSettlementList?.settlePandaDetails)
-            setTotalElement(pandaSettlementList?.totalElement)
+            setRows(shopSettlementList?.settleShopDetails)
+            setTotalElement(shopSettlementList?.totalElement)
         }
         if(selectedMode === '정산완료') {
-            setRows(pandaSettlementCompleteList?.settlePandaDetails)
-            setTotalElement(pandaSettlementCompleteList?.totalElement)
+            setRows(shopSettlementCompleteList?.settleShopDetails)
+            setTotalElement(shopSettlementCompleteList?.totalElement)
         }
 
     }, [isFetching, selectedMode])
 
     const columns = [
         {field: 'id', headerName: '주문번호', flex: 0.5},
-        {field: 'pandaname', headerName: '상점명', flex: 2},
+        {field: 'shopName', headerName: '상점명', flex: 1.5},
         {field: 'deposit', headerName: '금액', flex: 0.7},
         {field: 'enrollSettle', headerName: '정산일자', flex: 1.1},
         {
@@ -120,4 +118,4 @@ const AdminPandaTable: FC<Props> = ({selectedMode}) => {
     );
 };
 
-export default AdminPandaTable;
+export default AdminShopTable;

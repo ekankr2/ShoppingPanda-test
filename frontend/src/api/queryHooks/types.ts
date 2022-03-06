@@ -72,3 +72,19 @@ export interface AdminPandaSettlementListDetails{
     pandaname: string
 }
 
+export interface AdminShopSettlementList {
+    settleShopDetails: AdminPandaSettlementListDetails[]
+    totalElement: number
+    totalPage: number
+}
+
+export interface AdminPandaSettlementListDetails{
+    depoistDate: string
+    deposit: number
+    detailIds: any
+    enrollSettle: any
+    id: number
+    isdeposit: boolean
+    shopName: string
+}
+
