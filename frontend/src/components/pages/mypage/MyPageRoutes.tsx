@@ -14,6 +14,7 @@ import SellerNewOrderPage from "./seller/SellerNewOrderPage";
 import BuyerInfoPage from "./buyer/BuyerInfoPage";
 import AdminPandaManagement from "./admin/AdminPandaManagement";
 import AdminShopManagement from "./admin/AdminShopManagement";
+import AdminApplyManagementPage from "./admin/AdminApplyManagementPage";
 
 
 const MyPageRoutes = () => {
@@ -35,6 +36,7 @@ const MyPageRoutes = () => {
 
             <Route path='/admin/pandaManagement' exact component={AdminPandaManagement}/>
             <Route path='/admin/sellerManagement' exact component={AdminShopManagement}/>
+            <Route path='/admin/applyManagement' exact component={AdminApplyManagementPage}/>
         </Switch>
     )
 }

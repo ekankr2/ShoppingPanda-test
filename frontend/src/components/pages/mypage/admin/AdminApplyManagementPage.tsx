@@ -1,27 +1,32 @@
 import React, {FC, useEffect, useState} from "react";
 import StatusCard from "../../../UI/cards/StatusCard";
 import Message from "../../../UI/Message";
-import {adminDashboardCard} from "./adminTypes";
+import {adminApplyListCard} from "./adminTypes";
 import {
+    useGetAdminApplyShopList,
     useGetAdminPandaSettlementCompleteList,
     useGetAdminPandaSettlementList
 } from "../../../../api/queryHooks/mypageHooks/adminPageHooks";
 import AdminPandaTable from "./AdminPandaTable";
+import AdminApplyTable from "./AdminApplyTable";
 
-const AdminPandaManagement: FC = () => {
-    const [cardItems, setCardItems] = useState(adminDashboardCard)
-    const [selectedMode, setSelectedMode] = useState('정산필요')
-    const {data: pandaSettlementList, isError: settlementError} = useGetAdminPandaSettlementList(0)
-    const {data: pandaSettlementCompleteList, isError: settlementCompleteError} = useGetAdminPandaSettlementCompleteList(0)
+const AdminApplyManagementPage: FC = () => {
+    const [cardItems, setCardItems] = useState(adminApplyListCard)
+    const [selectedMode, setSelectedMode] = useState('상점신청')
+    const {data: applyShopList, isError: shopError} = useGetAdminApplyShopList(0)
+    const {data: applyPandaList, isError: pandaError} = useGetAdminApplyShopList(0)
+
+    console.log('상점신청목록: ',applyShopList)
+    console.log('판다신청목록: ',applyPandaList)
 
     useEffect(()=>{
         let cardCopy = [...cardItems]
-        if (pandaSettlementList && pandaSettlementCompleteList) {
-            cardCopy[0].count = pandaSettlementList.totalElement
-            cardCopy[1].count = pandaSettlementCompleteList.totalElement
+        if (applyShopList && applyPandaList) {
+            cardCopy[0].count = applyShopList.totalElement
+            cardCopy[1].count = applyPandaList.totalElement
             setCardItems(cardCopy)
         }
-    },[pandaSettlementList, pandaSettlementCompleteList])
+    },[applyShopList, applyPandaList])
 
     const clickHandler: any = (e: any) => {
         e.preventDefault()
@@ -31,11 +36,8 @@ const AdminPandaManagement: FC = () => {
     return (
         <>
             <div className="container">
-                {settlementError && <Message type="danger" msg="pandaSettlementList 에러"/>}
-                {settlementCompleteError && <Message type="danger" msg="settlementComplete 에러"/>}
-                <div className="page-header">
-
-                </div>
+                {shopError && <Message type="danger" msg="샵 신청 에러"/>}
+                {pandaError && <Message type="danger" msg="판다 신청 에러"/>}
                 <div className="row">
                     <div className="col-md-12">
                         <div className="row">
@@ -58,7 +60,7 @@ const AdminPandaManagement: FC = () => {
 
                 <div className="row">
                     <div className="col-12">
-                        <AdminPandaTable
+                        <AdminApplyTable
                             selectedMode={selectedMode}
                         />
                     </div>
@@ -68,4 +70,4 @@ const AdminPandaManagement: FC = () => {
     )
 }
 
-export default AdminPandaManagement
+export default AdminApplyManagementPage

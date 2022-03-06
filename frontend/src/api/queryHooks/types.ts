@@ -1,4 +1,3 @@
-
 // buyer types
 export interface RecentSituation {
     pageList: {
@@ -62,7 +61,7 @@ export interface AdminPandaSettlementList {
     totalPage: number
 }
 
-export interface AdminPandaSettlementListDetails{
+export interface AdminPandaSettlementListDetails {
     depoistDate: string
     deposit: number
     detailIds: any
@@ -78,7 +77,7 @@ export interface AdminShopSettlementList {
     totalPage: number
 }
 
-export interface AdminPandaSettlementListDetails{
+export interface AdminPandaSettlementListDetails {
     depoistDate: string
     deposit: number
     detailIds: any
@@ -88,3 +87,13 @@ export interface AdminPandaSettlementListDetails{
     shopName: string
 }
 
+export interface AdminApplyList {
+    aplist: {
+        crn: string
+        id: number
+        number: string
+        shopName: string
+    }[]
+    totalElement: number
+    totalPage: number
+}

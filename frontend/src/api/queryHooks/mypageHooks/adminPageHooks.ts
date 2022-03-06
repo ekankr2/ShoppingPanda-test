@@ -1,14 +1,14 @@
 import {useQuery} from "react-query";
 import axios from "axios";
-import {AdminPandaSettlementList, AdminShopSettlementList} from "../types";
+import {AdminApplyList, AdminPandaSettlementList, AdminShopSettlementList} from "../types";
 
 export enum AdminKeysEnum {
     AdminPandaSettlementList = 'adminPandaSettlementList',
     AdminPandaSettlementCompleteList = 'adminPandaSettlementCompleteList',
     AdminShopSettlementList = 'adminShopSettlementList',
     AdminShopSettlementCompleteList = 'adminShopSettlementCompleteList',
-    AdminShopApplyList = 'adminShopApplyList',
-    AdminPandaApplyList = 'adminPandaApplyList'
+    AdminApplyShopList = 'adminApplyShopList',
+    AdminApplyPandaList = 'adminApplyPandaList'
 }
 
 export const useGetAdminPandaSettlementList = (page: number) =>
@@ -42,5 +42,21 @@ export const useGetAdminShopSettlementCompleteList = (page: number) =>
         AdminKeysEnum.AdminShopSettlementCompleteList, async () => {
             const res = await axios.get(`/api/admin/completeshopSettleList?size=10&page=${page}`)
             return res.data as AdminShopSettlementList
+        }
+    )
+
+export const useGetAdminApplyShopList = (page: number) =>
+    useQuery(
+        AdminKeysEnum.AdminApplyShopList, async () => {
+            const res = await axios.get(`/api/admin/applyShopList?size=10&page=${page}`)
+            return res.data as AdminApplyList
+        }
+    )
+
+export const useGetAdminApplyPandaList = (page: number) =>
+    useQuery(
+        AdminKeysEnum.AdminApplyPandaList, async () => {
+            const res = await axios.get(`/api/admin/applyPandaList?size=10&page=${page}`)
+            return res.data as AdminApplyList
         }
     )
