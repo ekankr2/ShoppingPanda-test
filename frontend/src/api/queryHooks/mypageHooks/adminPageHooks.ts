@@ -1,6 +1,11 @@
 import {useQuery} from "react-query";
 import axios from "axios";
-import {AdminApplyList, AdminPandaSettlementList, AdminShopSettlementList} from "../types";
+import {
+    AdminPandaApplyList,
+    AdminPandaSettlementList,
+    AdminShopApplyList,
+    AdminShopSettlementList
+} from "../types";
 
 export enum AdminKeysEnum {
     AdminPandaSettlementList = 'adminPandaSettlementList',
@@ -49,7 +54,7 @@ export const useGetAdminApplyShopList = (page: number) =>
     useQuery(
         AdminKeysEnum.AdminApplyShopList, async () => {
             const res = await axios.get(`/api/admin/applyShopList?size=10&page=${page}`)
-            return res.data as AdminApplyList
+            return res.data as AdminShopApplyList
         }
     )
 
@@ -57,6 +62,6 @@ export const useGetAdminApplyPandaList = (page: number) =>
     useQuery(
         AdminKeysEnum.AdminApplyPandaList, async () => {
             const res = await axios.get(`/api/admin/applyPandaList?size=10&page=${page}`)
-            return res.data as AdminApplyList
+            return res.data as AdminPandaApplyList
         }
     )

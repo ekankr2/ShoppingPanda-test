@@ -3,18 +3,16 @@ import StatusCard from "../../../UI/cards/StatusCard";
 import Message from "../../../UI/Message";
 import {adminApplyListCard} from "./adminTypes";
 import {
+    useGetAdminApplyPandaList,
     useGetAdminApplyShopList,
-    useGetAdminPandaSettlementCompleteList,
-    useGetAdminPandaSettlementList
 } from "../../../../api/queryHooks/mypageHooks/adminPageHooks";
-import AdminPandaTable from "./AdminPandaTable";
 import AdminApplyTable from "./AdminApplyTable";
 
 const AdminApplyManagementPage: FC = () => {
     const [cardItems, setCardItems] = useState(adminApplyListCard)
     const [selectedMode, setSelectedMode] = useState('상점신청')
     const {data: applyShopList, isError: shopError} = useGetAdminApplyShopList(0)
-    const {data: applyPandaList, isError: pandaError} = useGetAdminApplyShopList(0)
+    const {data: applyPandaList, isError: pandaError} = useGetAdminApplyPandaList(0)
 
     console.log('상점신청목록: ',applyShopList)
     console.log('판다신청목록: ',applyPandaList)

@@ -87,13 +87,24 @@ export interface AdminPandaSettlementListDetails {
     shopName: string
 }
 
-export interface AdminApplyList {
+export interface AdminShopApplyList {
     aplist: {
         crn: string
         id: number
         number: string
         shopName: string
     }[]
+    totalElement: number
+    totalPage: number
+}
+
+export interface AdminPandaApplyList {
+    aplist: {
+        category: string
+        id: number
+        mainCH: string
+        pandaName: string
+    }
     totalElement: number
     totalPage: number
 }

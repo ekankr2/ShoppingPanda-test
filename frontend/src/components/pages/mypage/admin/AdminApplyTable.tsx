@@ -14,11 +14,34 @@ function confirmOrder(event: React.MouseEvent, cellValues: any) {
     console.log(cellValues)
 }
 
-const columns = [
+const shopColumns = [
     {field: 'id', headerName: 'id', flex: 0.5},
     {field: 'shopName', headerName: '상점명', flex: 2},
     {field: 'number', headerName: '번호', flex: 0.7},
     {field: 'crn', headerName: 'crn', flex: 1.1},
+    {
+        field: "승인하기",
+        flex: 0.8,
+        renderCell: (cellValues: any) => {
+            return (
+                <Button
+                    text="승인완료"
+                    className="is-danger"
+                    onClick={(event) => {
+                        confirmOrder(event, cellValues);
+                    }}
+                >
+                </Button>
+            );
+        }
+    },
+];
+
+const pandaColumns = [
+    {field: 'id', headerName: 'id', flex: 0.5},
+    {field: 'pandaName', headerName: '판다명', flex: 2},
+    {field: 'mainCH', headerName: '플랫폼', flex: 0.7},
+    {field: 'category', headerName: '카테고리', flex: 1.1},
     {
         field: "승인하기",
         flex: 0.8,
@@ -55,7 +78,7 @@ const AdminApplyTable: FC<Props> = ({selectedMode}) => {
             setTotalElement(pandaApplyList?.totalElement)
         }
 
-    }, [isFetching, selectedMode])
+    }, [shopApplyList,pandaApplyList, selectedMode])
 
     const pageChangeAction = useCallback((page: number) => {
         setPage(page)
@@ -65,7 +88,7 @@ const AdminApplyTable: FC<Props> = ({selectedMode}) => {
         if (selectedMode === '판다신청') {
             refetchPanda()
         }
-    }, [page])
+    }, [selectedMode, page])
 
     const confirmSelected = useCallback((event: React.MouseEvent) => {
         event.preventDefault()
@@ -84,12 +107,12 @@ const AdminApplyTable: FC<Props> = ({selectedMode}) => {
                     <Button
                         className="is-danger mr-3"
                         disabled={selectedRows?.length === 0}
-                        text='선택 정산 확인'
+                        text='선택 확인'
                         onClick={confirmSelected}
                     />
                     <Button
                         className="is-info float-end"
-                        text='주문서 인쇄'
+                        text='목록 인쇄'
                         onClick={printList}
                     />
                 </div>
@@ -100,7 +123,7 @@ const AdminApplyTable: FC<Props> = ({selectedMode}) => {
                             style={{color: "white"}}
                             rows={rows}
                             rowCount={totalElement}
-                            columns={columns}
+                            columns={selectedMode === '상점신청' ? shopColumns : pandaColumns}
                             page={page}
                             pageSize={10}
                             loading={isFetching}
