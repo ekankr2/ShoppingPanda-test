@@ -6,6 +6,7 @@ import {
     useGetAdminPandaSettlementCompleteList,
     useGetAdminPandaSettlementList
 } from "../../../../api/queryHooks/mypageHooks/adminPageHooks";
+import AdminPandaTable from "./AdminPandaTable";
 
 const PandaDashboard: FC = () => {
     const [cardItems, setCardItems] = useState(adminDashboardCard)
@@ -52,9 +53,7 @@ const PandaDashboard: FC = () => {
 
                 <div className="row">
                     <div className="col-12">
-                        <div style={{minHeight: "500px"}} className="custom-card">
-
-                        </div>
+                        <AdminPandaTable/>
                     </div>
                 </div>
             </div>

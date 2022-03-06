@@ -57,16 +57,18 @@ export interface SellerDashboard {
 
 // admin types
 export interface AdminPandaSettlementList {
-    settlePandaDetails: {
-        depoistDate: string
-        deposit: number
-        detailIds: any
-        enrollSettle: string
-        id: number
-        isdeposit: boolean
-        pandaname: string
-    }[]
+    settlePandaDetails: AdminPandaSettlementListDetails[]
     totalElement: number
     totalPage: number
+}
+
+export interface AdminPandaSettlementListDetails{
+    depoistDate: string
+    deposit: number
+    detailIds: any
+    enrollSettle: any
+    id: number
+    isdeposit: boolean
+    pandaname: string
 }
 
