@@ -16,7 +16,7 @@ const TestPage = () => {
     return (
         <>
             <ErrorBoundary>
-                <Suspense fallback={<ReactLoading type="balls"/>}>
+                <Suspense fallback={<ReactLoading type="balls" color='#444'/>}>
                     <Person resource={resource}/>
                 </Suspense>
             </ErrorBoundary>
