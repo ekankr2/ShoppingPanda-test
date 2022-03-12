@@ -4,6 +4,7 @@ import axios from "axios";
 
 const request = axios.create({
     // baseURL: baseUrl
+    withCredentials: true
 })
 // 타임아웃
 request.defaults.timeout = 2500

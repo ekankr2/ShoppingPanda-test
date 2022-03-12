@@ -27,20 +27,13 @@ export const signin = (data: SignInData, onError: () => void): ThunkAction<void,
             form.append("email", data.account);
             form.append("password", data.password);
 
-            const res = await axios.post("/api/login", form);
-            console.log("res정보");
-            console.log(res.data.data.accessToken);
-            console.log(res.data.data.refreshToken);
-            console.log(res.data.data.refreshTokenExpirationTime);
-            window.localStorage.setItem("accessToken", res.data.data.accessToken);
-            window.localStorage.setItem("refreshToken", res.data.data.refreshToken);
-            // setCookie("at", res.data.data.accessToken, { path: "/" });
-            // setCookie("rt", res.data.data.refreshToken, { path: "/" });
-            const auth = await axios.post("/api/userauth");
+            const res = await axios.post("/api/loginv2", form);
+            console.log("res정보 :", res.data);
+            console.log('토큰: ',res.data.accessToken);
+            // const auth = await axios.post("/api/userauth");
             if (res.data) {
                 const userData = res.data;
                 console.log(userData);
-                console.log("어스 :", auth.data);
                 dispatch({
                     type: SET_USER,
                     payload: userData,
@@ -48,8 +41,6 @@ export const signin = (data: SignInData, onError: () => void): ThunkAction<void,
                 let userId = data.account.split("@");
                 setCookie("loggedIn", "yes", { path: "/" });
                 setCookie("userId", userId[0], { path: "/" });
-                setCookie("panda", auth.data.panda, { path: "/" });
-                setCookie("seller", auth.data.shop, { path: "/" });
                 dispatch(setLoading(false));
             }
         } catch (err) {
