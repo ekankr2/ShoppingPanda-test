@@ -1,19 +1,18 @@
-import React, {FC, useState} from 'react'
-
+import React, {FC} from 'react'
 import '../buyer/buyerIndex.css'
-
 import {Redirect, Route} from 'react-router-dom'
 import {sellerSidebarItems} from "./sellerTypes";
 import MyPageRoutes from "../MyPageRoutes";
 import Sidebar from "../../../sections/sidebar/Sidebar";
-import {getCookie} from "../../../../store/actions/Cookie";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../../store";
 
 const SellerIndex:FC = () => {
-    const [seller] = useState(getCookie('seller'))
+    const {user} = useSelector((state: RootState) => state.auth);
 
     return (
         <Route render={(props) => (
-            seller === 'true' ?
+            user?.shop ?
             <div className={`layout theme-mode-light theme-color-blue`}>
                 <Sidebar sidebarItems={sellerSidebarItems} {...props}/>
                 <div className="layout__content">

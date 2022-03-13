@@ -60,10 +60,9 @@ export type PageAction = SetLoadingAction | SetErrorAction | SetSuccessAction | 
 
 // Auth Types
 export interface User {
-    firstName: string
-    email: string
-    id: string
-    createdAt: any
+    accessToken: string
+    panda: boolean
+    shop: boolean
 }
 
 export interface AuthState {

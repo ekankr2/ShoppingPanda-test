@@ -19,10 +19,10 @@ const renderNotificationItem = (item: StringObj, index: number) => (
 const Navbar: FC = () => {
     const history = useHistory();
     const dispatch = useDispatch()
-    const {loggedIn} = useSelector((state: RootState) => state.auth);
+    const {user} = useSelector((state: RootState) => state.auth);
     const [userId] = useState(getCookie('userId'))
-    const [panda] = useState(getCookie('panda'))
-    const [seller] = useState(getCookie('seller'))
+
+    console.log('유저데이타: ',user)
 
     const renderUserToggle = () => (
         <div className="topnav__right-user">
@@ -58,13 +58,13 @@ const Navbar: FC = () => {
     )
 
     const renderAuthMenu = (panda: any, seller: any) => {
-        if(panda === "true" && seller === "true") {
+        if(panda && seller) {
             return user_menu
         }
-        if(panda === "true"){
+        if(panda){
             return panda_menu
         }
-        if(seller === "true"){
+        if(seller){
             return seller_menu
         }
         return user_menu
@@ -76,12 +76,12 @@ const Navbar: FC = () => {
                 <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"/>
             </Link>
 
-            {loggedIn ? <div className="navbar-end">
+            {user ? <div className="navbar-end">
                     <div className="navbar-menu">
                         <span className="mr-3">
                             <Dropdown
                                 customToggle={() => renderUserToggle()}
-                                contentData={renderAuthMenu(panda, seller)}
+                                contentData={renderAuthMenu(user.panda, user.shop)}
                                 renderItems={(item: StringObj, index: number) => renderUserMenu(item, index)}
                             />
                         </span>
