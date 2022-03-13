@@ -1,5 +1,6 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Carousel} from "react-bootstrap";
+import axios from "axios";
 
 const items = [
     {
@@ -32,6 +33,10 @@ const Homepage: FC = () => {
     const handleClick = (e: any) => {
         console.log(e.target.src)
     }
+
+    useEffect(() => {
+        axios.get(`/api/preview?size=8&page=0`)
+    },[])
 
     return (
         <div>

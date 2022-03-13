@@ -34,6 +34,7 @@ export const signin = (data: SignInData, onError: () => void): ThunkAction<void,
             if (res.data) {
                 const userData = res.data;
                 console.log(userData);
+                axios.defaults.headers.common['AccessToken'] = `Bearer ${res.data.accessToken}`
                 dispatch({
                     type: SET_USER,
                     payload: userData,

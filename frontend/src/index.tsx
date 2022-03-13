@@ -11,19 +11,19 @@ import './assets/css/index.css'
 import {QueryClient, QueryClientProvider} from "react-query";
 import axios from "axios";
 
-// axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true
 
 const queryClient = new QueryClient()
 
 ReactDOM.render(
     <React.StrictMode>
-        <Provider store={store}>
-            <QueryClientProvider client={queryClient}>
+        <QueryClientProvider client={queryClient}>
+            <Provider store={store}>
                 <BrowserRouter>
                     <App/>
                 </BrowserRouter>
-            </QueryClientProvider>
-        </Provider>
+            </Provider>
+        </QueryClientProvider>
     </React.StrictMode>,
     document.getElementById('root')
 );
