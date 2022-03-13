@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import Button from "../Button";
 import "./videoCard.css"
-import axios from "axios";
+import request from "../../../api";
 
 interface Props {
     link: string
@@ -20,10 +20,11 @@ function deleteBtnAction(e: React.MouseEvent<HTMLButtonElement>) {
 
 const VideoCard: FC<Props> = ({link, panda}) => {
     const [videoInfo, setVideoInfo] = useState<any>(null)
+    console.log('비디오인포: ',videoInfo)
 
     useEffect(() => {
         const fullUrl = `https://noembed.com/embed?url=${link}`
-        axios.get(fullUrl)
+        request(fullUrl)
             .then((result) => {
                 // console.log(result.data)
                 setVideoInfo(result.data)

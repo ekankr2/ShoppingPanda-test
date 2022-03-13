@@ -3,11 +3,11 @@ import axios from "axios";
 // const baseUrl = 'http://localhost:8080/'
 
 const request = axios.create({
-    // baseURL: baseUrl
-    withCredentials: true
+    withCredentials: false
 })
 // 타임아웃
 request.defaults.timeout = 2500
+delete request.defaults.headers.common["AccessToken"]
 
 // 요청 인터셉터
 request.interceptors.request.use(
