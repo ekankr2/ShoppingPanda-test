@@ -6,6 +6,7 @@ import Loader from './components/UI/Loader';
 import {RootState} from './store';
 import {loginCheck} from "./store/actions/authActions";
 import Navbar from "./components/sections/navbar/Navbar";
+import TestPage from "./components/pages/TestPage";
 
 const Homepage = React.lazy(() => import('./components/pages/Homepage'));
 const SignUp = React.lazy(() => import('./components/pages/SignIn'));
@@ -40,6 +41,7 @@ const App: FC = () => {
                 <PrivateRoute path="/panda" component={PandaIndex}/>
                 <PrivateRoute path="/seller" component={SellerIndex}/>
                 <PrivateRoute path="/admin" component={AdminIndex}/>
+                <Route path="/test" component={TestPage}/>
             </Switch>
         </Suspense>
         </>

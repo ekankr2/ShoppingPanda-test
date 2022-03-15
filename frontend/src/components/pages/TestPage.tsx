@@ -1,33 +1,74 @@
-import React, {FC, Suspense} from 'react';
-import ReactLoading from 'react-loading'
-import ErrorBoundary from "../ErrorBoundary";
-import axios from "axios";
-import {createResource} from "../../hooks/createResource";
+import React, {useState} from 'react';
 
-const fetchPerson = async (): Promise<string> => {
-    const res = await axios.get('https://randomuser.me/api');
-    return res.data.results[0];
-};
-
-const resource = createResource(fetchPerson())
+import {useStore} from '../../hooks/zustandExampleHooks'
+import {
+    Button,
+    Checkbox,
+    Container, IconButton,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemSecondaryAction,
+    ListItemText,
+    TextField
+} from "@mui/material";
 
 const TestPage = () => {
+    const [todoText, setTodoText] = useState("")
+    const {addTodo, removeTodo, toggleCompletedState, todos} = useStore();
 
     return (
-        <>
-            <ErrorBoundary>
-                <Suspense fallback={<ReactLoading type="balls" color='#444'/>}>
-                    <Person resource={resource}/>
-                </Suspense>
-            </ErrorBoundary>
-        </>
+        <Container>
+            <h3>Zustand Test</h3>
+            <TextField
+                label='Todo Description'
+                required
+                variant='outlined'
+                fullWidth
+                onChange={(e) => setTodoText(e.target.value)}
+                value={todoText}
+            />
+            <Button
+                variant='outlined'
+                color='primary'
+                onClick={() => {
+                    if (todoText.length) {
+                        addTodo(todoText);
+                        setTodoText("")
+                    }
+                }}
+            >
+                Add Item
+            </Button>
+            <List>
+                {todos.map((todo) => (
+                    <ListItem key={todo.id}>
+                        <ListItemIcon>
+                            <Checkbox
+                                edge='start'
+                                checked={todo.completed}
+                                onChange={() => toggleCompletedState(todo.id)}
+                            />
+                        </ListItemIcon>
+                        <ListItemText
+                            key={todo.id}
+                        >
+                            {todo.description}
+                        </ListItemText>
+                        <ListItemSecondaryAction>
+                            <IconButton
+                                onClick={() => {
+                                    removeTodo(todo.id);
+                                }}
+                            >
+                                <i className='bx bx-comment-x'></i>
+                            </IconButton>
+                        </ListItemSecondaryAction>
+                    </ListItem>
+                ))}
+            </List>
+        </Container>
     );
-};
-
-const Person: FC<any> = ({ resource }) => {
-    const person = resource.read();
-
-    return <div>{person.name.first}</div>;
 };
 
 export default TestPage;
