@@ -1,72 +1,45 @@
 import React, {useState} from 'react';
 
-import {useStore} from '../../hooks/zustandExampleHooks'
+import {useAuthStore, useStore} from '../../hooks/zustandExampleHooks'
 import {
     Button,
-    Checkbox,
-    Container, IconButton,
-    List,
-    ListItem,
-    ListItemIcon,
-    ListItemSecondaryAction,
-    ListItemText,
-    TextField
+    Container, TextField,
 } from "@mui/material";
 
 const TestPage = () => {
-    const [todoText, setTodoText] = useState("")
+    const [id, setId] = useState("")
+    const [pw, setPw] = useState("")
     const {addTodo, removeTodo, toggleCompletedState, todos} = useStore();
+    const {user, signIn} = useAuthStore();
+
+    console.log('유저:', user)
 
     return (
         <Container>
-            <h3>Zustand Test</h3>
+            <h3>Zustand Login Test</h3>
+            <h3>user: {user?.accessToken}</h3>
             <TextField
-                label='Todo Description'
+                label="아뒤"
                 required
-                variant='outlined'
                 fullWidth
-                onChange={(e) => setTodoText(e.target.value)}
-                value={todoText}
+                onChange={(e) => setId(e.target.value)}
+                value={id}
+            />
+            <TextField
+                label="비번"
+                required
+                fullWidth
+                className='mt-5'
+                onChange={(e) => setPw(e.target.value)}
+                value={pw}
             />
             <Button
                 variant='outlined'
                 color='primary'
-                onClick={() => {
-                    if (todoText.length) {
-                        addTodo(todoText);
-                        setTodoText("")
-                    }
-                }}
+                onClick={() => {signIn(id, pw)}}
             >
-                Add Item
+                로그인
             </Button>
-            <List>
-                {todos.map((todo) => (
-                    <ListItem key={todo.id}>
-                        <ListItemIcon>
-                            <Checkbox
-                                edge='start'
-                                checked={todo.completed}
-                                onChange={() => toggleCompletedState(todo.id)}
-                            />
-                        </ListItemIcon>
-                        <ListItemText
-                            key={todo.id}
-                        >
-                            {todo.description}
-                        </ListItemText>
-                        <ListItemSecondaryAction>
-                            <IconButton
-                                onClick={() => {
-                                    removeTodo(todo.id);
-                                }}
-                            >
-                                <i className='bx bx-comment-x'></i>
-                            </IconButton>
-                        </ListItemSecondaryAction>
-                    </ListItem>
-                ))}
-            </List>
         </Container>
     );
 };
