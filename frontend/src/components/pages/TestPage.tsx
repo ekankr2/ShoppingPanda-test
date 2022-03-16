@@ -9,7 +9,6 @@ import {
 const TestPage = () => {
     const [id, setId] = useState("")
     const [pw, setPw] = useState("")
-    const {addTodo, removeTodo, toggleCompletedState, todos} = useStore();
     const {user, signIn} = useAuthStore();
 
     console.log('유저:', user)
