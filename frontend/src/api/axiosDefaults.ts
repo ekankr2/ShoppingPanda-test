@@ -1,16 +1,12 @@
 import axios from "axios";
 
-// const baseUrl = 'http://localhost:8080/'
+const TOKEN_EXPIRE_TIME = 1000 * 1800
 
-const request = axios.create({
-    withCredentials: false
-})
 // 타임아웃
-request.defaults.timeout = 2500
-delete request.defaults.headers.common["AccessToken"]
+axios.defaults.timeout = 2500
 
 // 요청 인터셉터
-request.interceptors.request.use(
+axios.interceptors.request.use(
     config => {
         // 요청 보내기 전
         return config
@@ -21,7 +17,7 @@ request.interceptors.request.use(
     }
 )
 // 응답 인터셉터
-request.interceptors.response.use(
+axios.interceptors.response.use(
     response => {
         // 응답 로직 작성
         return response.data
@@ -31,5 +27,3 @@ request.interceptors.response.use(
         return Promise.reject(error)
     }
 )
-
-export default request;

@@ -1,15 +1,14 @@
 import React, {useState} from 'react';
-
-import {useAuthStore, useStore} from '../../hooks/zustandExampleHooks'
-import {
-    Button,
-    Container, TextField,
-} from "@mui/material";
+import {Button, Container, TextField,} from "@mui/material";
+import {useAuthStore} from "../../store/authHooks";
 
 const TestPage = () => {
     const [id, setId] = useState("")
     const [pw, setPw] = useState("")
-    const {user, signIn} = useAuthStore();
+    const user = useAuthStore(state => state.user);
+    const signIn = useAuthStore(state => state.signIn);
+    const signOut = useAuthStore(state => state.signOut);
+    const reIssue = useAuthStore(state => state.reIssue);
 
     console.log('유저:', user)
 
@@ -38,6 +37,20 @@ const TestPage = () => {
                 onClick={() => {signIn(id, pw)}}
             >
                 로그인
+            </Button>
+            <Button
+                variant='outlined'
+                color='primary'
+                onClick={reIssue}
+            >
+                리이슈
+            </Button>
+            <Button
+                variant='outlined'
+                color='warning'
+                onClick={signOut}
+            >
+                로그아웃
             </Button>
         </Container>
     );

@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import Button from "../Button";
 import "./videoCard.css"
-import request from "../../../api";
+import request from "../../../api/request";
 
 interface Props {
     link: string

@@ -1,5 +1,4 @@
 import create from "zustand";
-import axios from "axios";
 
 export interface Todo {
     id: string;
@@ -39,37 +38,9 @@ export const useStore = create<TodoState>((set) => ({
         set((state) => ({
             todos: state.todos.map((todo) =>
                 todo.id === id
-                    ? ({ ...todo, completed: !todo.completed } as Todo)
+                    ? ({...todo, completed: !todo.completed} as Todo)
                     : todo
             ),
         }));
     },
 }));
-
-export interface User {
-    id: string;
-    accessToken: string;
-}
-
-interface AuthState {
-    user: User | null;
-    signIn: (id: string, pw: string) => void;
-    signOut: () => void;
-}
-
-export const useAuthStore = create<AuthState>(set => ({
-    user: null,
-    signIn: async (id: string, pw: string) => {
-
-        let form = new FormData();
-        form.append("email", id);
-        form.append("password", pw);
-
-        const res = await axios.post('/api/loginv2', form)
-        console.log(res.data)
-        set({ user: res.data})
-    },
-    signOut: async () => {
-        await axios.post('logout')
-    }
-}))
