@@ -1,7 +1,5 @@
 import axios from "axios";
 
-const TOKEN_EXPIRE_TIME = 1000 * 1800
-
 // 타임아웃
 axios.defaults.timeout = 2500
 

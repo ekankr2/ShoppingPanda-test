@@ -312,4 +312,16 @@ interface fetchSellerSettlementListAction {
 export type SellerMyPageAction = fetchSellerDashboardAction | fetchSellerSettlementListAction
 
 
+// zustand types
 
+// authStore
+export interface User {
+    id: string;
+    accessToken: string;
+}
+
+export interface AuthStore {
+    user: User | null;
+    signIn: (id: string, pw: string) => void;
+    signOut: () => void;
+}
