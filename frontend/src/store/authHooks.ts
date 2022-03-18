@@ -2,7 +2,7 @@ import create from "zustand";
 import axios from "axios";
 import {AuthStore, User} from "./types";
 
-const TOKEN_EXPIRE_TIME = 1000 * 60 * 30 - 60000 // 30분 - 1분
+const TOKEN_REFRESH_TIME = 1000 * 60 * 30 - 60000 // 30분 - 1분
 
 export const useAuthStore = create<AuthStore>(set => ({
     user: null,
@@ -21,25 +21,32 @@ export const useAuthStore = create<AuthStore>(set => ({
         }
     },
     signOut: async () => {
-        await axios.get('/api/user/logoutv2')
-        set({user: null})
-        delete axios.defaults.headers.common['accessToken'];
+        try {
+            await axios.get('/api/user/logoutv2')
+            set({user: null})
+            delete axios.defaults.headers.common['accessToken'];
+        } catch (err) {
+            console.error(err)
+            alert('로그아웃 실패')
+        }
     }
 }))
 
-const onRefresh = async () => {
+// 토큰 재발급 함수
+const onTokenRefresh = async () => {
     try {
         const res = await axios.post('/api/reissuev2')
-        if(res.data){
+        if (res.data) {
             await onLoginSuccess(res.data)
         }
-    } catch (err){
+    } catch (err) {
         console.error(err)
         // 로그인 실패 처리
     }
 }
 
-const onLoginSuccess = async (data:User) => {
+// 로그인 성공시 실행
+const onLoginSuccess = async (data: User) => {
     axios.defaults.headers.common['accessToken'] = data.accessToken
-    setTimeout(onRefresh, TOKEN_EXPIRE_TIME)
+    setTimeout(onTokenRefresh, TOKEN_REFRESH_TIME)
 }
