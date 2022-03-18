@@ -12,9 +12,11 @@ export const useAuthStore = create<AuthStore>(set => ({
             form.append("email", id);
             form.append("password", pw);
 
-            const res = await axios.post('/api/loginv2', form)
-            set({user: res.data})
-            await onLoginSuccess(res.data)
+            const {data} = await axios.post('/api/loginv2', form)
+            if(data){
+                set({user: data})
+                await onLoginSuccess(data)
+            }
         } catch (err) {
             console.error(err)
             // 로그인 실패 처리
@@ -35,9 +37,12 @@ export const useAuthStore = create<AuthStore>(set => ({
 // 토큰 재발급 함수
 const onTokenRefresh = async () => {
     try {
-        const res = await axios.post('/api/reissuev2')
-        if (res.data) {
-            await onLoginSuccess(res.data)
+        const {data} = await axios.post('/api/reissuev2')
+        if (data) {
+            await onLoginSuccess(data)
+            useAuthStore.setState({
+                user: data
+            })
         }
     } catch (err) {
         console.error(err)
