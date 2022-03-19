@@ -31,6 +31,14 @@ export const useAuthStore = create<AuthStore>(set => ({
             console.error(err)
             alert('로그아웃 실패')
         }
+    },
+    reIssue: async () => {
+        try {
+            const {data} = await axios.get('/api/reissuev2')
+            set({user: data})
+        } catch (err){
+            console.error(err)
+        }
     }
 }))
 
