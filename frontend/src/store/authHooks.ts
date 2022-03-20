@@ -1,6 +1,6 @@
 import create from "zustand";
-import axios from "axios";
 import {AuthStore, User} from "./types";
+import axios from '../api/axiosDefaults';
 
 const TOKEN_REFRESH_TIME = 1000 * 60 * 30 - 60000 // 30분 - 1분
 
@@ -13,6 +13,8 @@ export const useAuthStore = create<AuthStore>(set => ({
             form.append("password", pw);
 
             const {data} = await axios.post('/api/loginv2', form)
+            const res = await axios.post('/api/loginv2', form)
+            console.log('레스:', res)
             if(data){
                 set({user: data})
                 await onLoginSuccess(data)
@@ -24,7 +26,7 @@ export const useAuthStore = create<AuthStore>(set => ({
     },
     signOut: async () => {
         try {
-            await axios.get('/api/user/logoutv2')
+            await axios.post('/api/user/logoutv2')
             set({user: null})
             delete axios.defaults.headers.common['accessToken'];
         } catch (err) {
@@ -34,7 +36,7 @@ export const useAuthStore = create<AuthStore>(set => ({
     },
     reIssue: async () => {
         try {
-            const {data} = await axios.get('/api/reissuev2')
+            const {data} = await axios.post('/api/reissuev2')
             set({user: data})
         } catch (err){
             console.error(err)

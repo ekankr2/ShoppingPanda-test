@@ -18,10 +18,13 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
     response => {
         // 응답 로직 작성
-        return response.data
+        console.log('리스폰스: ',response)
+        return response
     },
     error => {
-        console.log(error)
+        console.error(error)
         return Promise.reject(error)
     }
 )
+
+export default axios
