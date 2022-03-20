@@ -316,8 +316,9 @@ export type SellerMyPageAction = fetchSellerDashboardAction | fetchSellerSettlem
 
 // authStore
 export interface User {
-    id: string;
-    accessToken: string;
+    userName: string;
+    panda: boolean
+    shop: boolean
 }
 
 export interface AuthStore {

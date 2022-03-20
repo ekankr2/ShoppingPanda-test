@@ -1,4 +1,4 @@
-import React, {FC, Suspense, useEffect} from 'react';
+import React, {FC, Suspense, useLayoutEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Route, Switch} from 'react-router-dom';
 import './App.css';
@@ -7,6 +7,7 @@ import {RootState} from './store';
 import {loginCheck} from "./store/actions/authActions";
 import Navbar from "./components/sections/navbar/Navbar";
 import TestPage from "./components/pages/TestPage";
+import {useAuthStore} from "./store/authHooks";
 
 const Homepage = React.lazy(() => import('./components/pages/Homepage'));
 const SignUp = React.lazy(() => import('./components/pages/SignIn'));
@@ -20,8 +21,10 @@ const AdminIndex = React.lazy(() => import('./components/pages/mypage/admin/Admi
 const App: FC = () => {
     const dispatch = useDispatch();
     const {loading} = useSelector((state: RootState) => state.page);
+    const reIssue = useAuthStore(state => state.reIssue)
 
-    useEffect(() => {
+    useLayoutEffect(() => {
+        reIssue()
         dispatch(loginCheck())
     }, [dispatch]);
 

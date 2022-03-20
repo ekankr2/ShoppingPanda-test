@@ -15,7 +15,7 @@ const TestPage = () => {
     return (
         <Container>
             <h3>Zustand Login Test</h3>
-            <h3>user: {user?.accessToken}</h3>
+            <h3>user: {user?.userName}</h3>
             <TextField
                 label="아뒤"
                 required

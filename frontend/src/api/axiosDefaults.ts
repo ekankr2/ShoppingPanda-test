@@ -34,6 +34,9 @@ axios.interceptors.response.use(
                 return axios(config)
             } catch (err) {
                 console.error('재발급 실패', err)
+                if (window.confirm('로그인이 필요한 서비스입니다. 이동하실래요?')) {
+                    window.location.replace('/signin')
+                }
             }
         }
 
