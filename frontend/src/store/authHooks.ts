@@ -45,7 +45,7 @@ export const useAuthStore = create<AuthStore>(set => ({
 }))
 
 // 토큰 재발급 함수
-const onTokenRefresh = async () => {
+export const onTokenRefresh = async () => {
     try {
         const {data} = await axios.post('/api/reissuev2')
         if (data) {
@@ -61,7 +61,7 @@ const onTokenRefresh = async () => {
 }
 
 // 로그인 성공시 실행
-const onLoginSuccess = async (data: User) => {
+export const onLoginSuccess = async (data: User) => {
     axios.defaults.headers.common['accessToken'] = data.accessToken
     setTimeout(onTokenRefresh, TOKEN_REFRESH_TIME)
 }

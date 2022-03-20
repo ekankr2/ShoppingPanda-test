@@ -1,4 +1,5 @@
 import axios from "axios";
+import {onTokenRefresh} from "../store/authHooks";
 
 // 타임아웃
 axios.defaults.timeout = 2500
@@ -14,15 +15,31 @@ axios.interceptors.request.use(
         return Promise.reject(error)
     }
 )
+
 // 응답 인터셉터
 axios.interceptors.response.use(
     response => {
         // 응답 로직 작성
-        console.log('리스폰스: ',response)
         return response
     },
-    error => {
-        console.error(error)
+    async error => {
+        const {
+            config,
+            response: {status}
+        } = error
+
+        if (status === 406) {
+            try {
+                await onTokenRefresh()
+                return axios(config)
+            } catch (err) {
+                console.error('재발급 실패', err)
+            }
+        }
+
+        if (status === 401) {
+            // 추후에 401 필요하면 추가
+        }
         return Promise.reject(error)
     }
 )
