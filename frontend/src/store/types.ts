@@ -323,7 +323,7 @@ export interface User {
 
 export interface AuthStore {
     user: User | null;
-    signIn: (id: string, pw: string) => void;
+    signIn: (data: SignInData, onError: () => void) => void;
     signOut: () => void;
     reIssue: () => void;
 }

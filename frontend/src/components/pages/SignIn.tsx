@@ -8,6 +8,7 @@ import Message from '../UI/Message';
 import { signin } from '../../store/actions/authActions';
 import { RootState } from '../../store';
 import {setError} from "../../store/actions/pageActions";
+import {useAuthStore} from "../../store/authHooks";
 
 interface Props{
   history: RouteComponentProps["history"];
@@ -26,6 +27,8 @@ const SignIn: FC<Props> = (props) => {
   const dispatch = useDispatch();
   const { error } = useSelector((state: RootState) => state.page);
   const { user } = useSelector((state: RootState) => state.auth);
+  const signIn = useAuthStore(state => state.signIn);
+
 
   console.log(props)
 

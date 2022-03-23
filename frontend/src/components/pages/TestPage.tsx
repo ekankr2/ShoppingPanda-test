@@ -34,7 +34,6 @@ const TestPage = () => {
             <Button
                 variant='outlined'
                 color='primary'
-                onClick={() => {signIn(id, pw)}}
             >
                 로그인
             </Button>
