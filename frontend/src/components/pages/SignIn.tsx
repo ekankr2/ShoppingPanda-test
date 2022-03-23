@@ -3,7 +3,6 @@ import {Link, RouteComponentProps} from 'react-router-dom';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 import Message from '../UI/Message';
-import {setError} from "../../store/actions/pageActions";
 import {useAuthStore} from "../../store/authHooks";
 import {useWindowStore} from "../../store/windowHooks";
 
@@ -24,6 +23,7 @@ const SignIn: FC<Props> = (props) => {
     const signIn = useAuthStore(state => state.signIn);
     const user = useAuthStore(state => state.user);
     const error = useWindowStore(state => state.error);
+    const setError = useWindowStore(state => state.setError);
 
     useEffect(() => {
         return () => {

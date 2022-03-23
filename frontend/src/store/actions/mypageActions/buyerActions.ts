@@ -9,7 +9,7 @@ import {
     Situation,
     SituationList
 } from "../../types";
-import axios from "axios";
+import axios from '../../../api/axiosDefaults';
 import {setError} from "../pageActions";
 
 export const fetchBuyerDashBoard = (): ThunkAction<void, RootState, null, BuyerMyPageAction> => {

@@ -30,6 +30,9 @@ export const useAuthStore = create<AuthStore>(set => ({
             alert('로그아웃 실패')
         }
     },
+    signUp: () => {
+
+    },
     reIssue: () => onTokenRefresh()
 }))
 

@@ -7,7 +7,7 @@ import {
     SellerSettlementList,
     SellerSettlementRequestData
 } from "../../types";
-import axios from "axios";
+import axios from '../../../api/axiosDefaults';
 import {setError} from "../pageActions";
 
 export const fetchSellerDashboard = (year: number, onError: () => void): ThunkAction<void, RootState, null, SellerMyPageAction> => {

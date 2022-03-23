@@ -7,7 +7,7 @@ import {
     PandaSettlementList,
     PandaSettlementRequestData, PandaVideoList,
 } from "../../types";
-import axios from "axios";
+import axios from '../../../api/axiosDefaults';
 import {setError, setLoading} from "../pageActions";
 
 export const fetchPandaDashBoard = (year: number, onError: () => void): ThunkAction<void, RootState, null, PandaMyPageAction> => {

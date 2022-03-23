@@ -1,37 +1,31 @@
 import React, { FC, useState, FormEvent, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 import Message from '../UI/Message';
-import { signup } from '../../store/actions/authActions';
-
-import { RootState } from '../../store';
-import {setError} from "../../store/actions/pageActions";
+import {useWindowStore} from "../../store/windowHooks";
 
 const SignUp: FC = () => {
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
-  const { error } = useSelector((state: RootState) => state.page);
+  const error = useWindowStore(state => state.error);
+  const setError = useWindowStore(state => state.setError);
 
   useEffect(() => {
     return () => {
       if(error) {
-        dispatch(setError(''));
+        setError('')
       }
     }
-  }, [error, dispatch]);
+  }, [error]);
 
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
     if(error) {
-      dispatch(setError(''));
+      setError('')
     }
     setLoading(true);
-    dispatch(signup({ email, password, firstName }, () => setLoading(false)));
   }
 
   return(
