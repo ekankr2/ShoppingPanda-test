@@ -1,6 +1,7 @@
 import create from "zustand";
 import {AuthStore, SignInData} from "./types";
 import axios from '../api/axiosDefaults';
+import {setError} from "./actions/pageActions";
 
 export const useAuthStore = create<AuthStore>(set => ({
     user: null,
@@ -17,6 +18,7 @@ export const useAuthStore = create<AuthStore>(set => ({
         } catch (err) {
             console.error(err)
             onError()
+            setError('아이디 비번 다시 확인바람')
         }
     },
     signOut: async () => {

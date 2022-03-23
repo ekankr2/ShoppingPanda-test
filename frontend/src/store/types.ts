@@ -327,3 +327,10 @@ export interface AuthStore {
     signOut: () => void;
     reIssue: () => void;
 }
+
+export interface WindowStore {
+    loading: boolean
+    error: string
+    setLoading: (loading: boolean) => void
+    setError: (error: string) => void
+}

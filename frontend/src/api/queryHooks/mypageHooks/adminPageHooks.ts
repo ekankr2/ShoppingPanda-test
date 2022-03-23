@@ -22,7 +22,7 @@ export const useGetAdminPandaSettlementList = (page: number) =>
             const res = await axios.get(`/api/admin/pandaSettleList?size=10&page=${page}`)
             return res.data as AdminPandaSettlementList
         }
-)
+    )
 
 
 export const useGetAdminPandaSettlementCompleteList = (page: number) =>
