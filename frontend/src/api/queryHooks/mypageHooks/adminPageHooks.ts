@@ -1,11 +1,11 @@
 import {useQuery} from "react-query";
-import axios from "axios";
 import {
     AdminPandaApplyList,
     AdminPandaSettlementList,
     AdminShopApplyList,
     AdminShopSettlementList
 } from "../types";
+import axios from '../../axiosDefaults';
 
 export enum AdminKeysEnum {
     AdminPandaSettlementList = 'adminPandaSettlementList',

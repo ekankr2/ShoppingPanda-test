@@ -1,5 +1,5 @@
 import {useQuery} from "react-query";
-import axios from "axios";
+import axios from '../../axiosDefaults';
 import {BuyerDashboard, RecentSituation, Situation} from "../types";
 
 export enum BuyerKeysEnum {

@@ -1,5 +1,6 @@
 import {QueryClient, useMutation, useQuery} from "react-query";
-import axios from "axios";
+import axios from '../../axiosDefaults';
+
 
 export enum ResearchKeysEnum {
     ResearchList = 'researchList',

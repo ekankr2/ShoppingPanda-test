@@ -1,22 +1,22 @@
 import create from "zustand";
-import {AuthStore} from "./types";
+import {AuthStore, SignInData} from "./types";
 import axios from '../api/axiosDefaults';
 
 export const useAuthStore = create<AuthStore>(set => ({
     user: null,
-    signIn: async (id: string, pw: string) => {
+    signIn: async (signInData: SignInData, onError: () => void) => {
         try {
             let form = new FormData();
-            form.append("email", id);
-            form.append("password", pw);
+            form.append("email", signInData.account);
+            form.append("password", signInData.password);
 
             const {data} = await axios.post('/api/loginv2', form)
-            if(data){
+            if (data) {
                 set({user: data})
             }
         } catch (err) {
             console.error(err)
-            // 로그인 실패 처리
+            onError()
         }
     },
     signOut: async () => {
@@ -42,7 +42,8 @@ export const onTokenRefresh = async () => {
             })
         }
     } catch (err) {
-        console.error(err)
+        console.error('토큰 재발급 실패',err)
         // 실패 처리
     }
 }
+
