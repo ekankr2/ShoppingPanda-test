@@ -7,6 +7,9 @@ export const useAuthStore = create<AuthStore>(set => ({
     user: null,
     signIn: async (signInData: SignInData, onError: () => void) => {
         try {
+            useWindowStore.setState({
+                loading: true
+            })
             let form = new FormData();
             form.append("email", signInData.account);
             form.append("password", signInData.password);
@@ -14,12 +17,16 @@ export const useAuthStore = create<AuthStore>(set => ({
             const {data} = await axios.post('/api/loginv2', form)
             if (data) {
                 set({user: data})
+                useWindowStore.setState({
+                    loading: false
+                })
             }
         } catch (err) {
             console.error(err)
             onError()
             useWindowStore.setState({
-                error: '아이디 비번 다시 확인바람'
+                error: '아이디 비번 다시 확인바람',
+                loading: false
             })
         }
     },
