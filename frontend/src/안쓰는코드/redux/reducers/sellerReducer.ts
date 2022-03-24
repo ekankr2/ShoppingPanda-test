@@ -1,4 +1,4 @@
-import {FETCH_SELLER_DASHBOARD, FETCH_SELLER_SETTLEMENT_LIST, SellerMyPageAction, SellerMyPageState} from "../../types";
+import {FETCH_SELLER_DASHBOARD, FETCH_SELLER_SETTLEMENT_LIST, SellerMyPageAction, SellerMyPageState} from "../types";
 
 const initialState: SellerMyPageState = {
     sellerDashboard: null,

@@ -1,10 +1,11 @@
 import {
     FETCH_PANDA_DASHBOARD,
     FETCH_PANDA_SETTLEMENT,
-    FETCH_PANDA_SETTLEMENT_LIST, FETCH_PANDA_VIDEO_LIST,
-    PandaMyPageAction,
+    FETCH_PANDA_SETTLEMENT_LIST,
+    FETCH_PANDA_VIDEO_LIST, PandaMyPageAction,
     PandaMyPageState
-} from "../../types";
+} from "../types";
+
 
 const initialState: PandaMyPageState = {
     pandaDashboard: null,

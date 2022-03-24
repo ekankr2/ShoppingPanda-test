@@ -2,20 +2,10 @@ import React, {FC, FormEvent, useEffect, useState} from 'react';
 import Panel from "./Panel";
 import {settlementSearchByDate, settlementSearchByStatus} from "../../pages/mypage/seller/sellerTypes";
 import Button from "../Button";
-import {setError, setLoading} from "../../../store/actions/pageActions";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../store";
 import DatePicker from "react-datepicker";
-import {
-    fetchSellerSettlementList,
-    fetchSellerSettlementListWithOrderNum
-} from "../../../store/actions/mypageActions/sellerActions";
 
 
 const SellerSettlementPanel: FC = () => {
-    const dispatch = useDispatch();
-    const {error} = useSelector((state: RootState) => state.page);
-    const {sellerSettlementList} = useSelector((state: RootState) => state.seller)
     const [searchMode, setSearchMode] = useState('date')
     const [startDate, setStartDate] = useState<any>(new Date())
     const [endDate, setEndDate] = useState<any>(new Date())

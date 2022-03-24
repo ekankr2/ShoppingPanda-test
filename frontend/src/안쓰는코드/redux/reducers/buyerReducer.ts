@@ -1,4 +1,11 @@
-import {BuyerMyPageAction, BuyerMyPageState, FETCH_BUYER_DASHBOARD, FETCH_BUYER_SITUATION, FETCH_BUYER_SITUATION_LIST} from "../../types";
+import {
+    BuyerMyPageAction,
+    BuyerMyPageState,
+    FETCH_BUYER_DASHBOARD,
+    FETCH_BUYER_SITUATION,
+    FETCH_BUYER_SITUATION_LIST
+} from "../types";
+
 
 const initialState: BuyerMyPageState = {
     buyerDashboard: null,

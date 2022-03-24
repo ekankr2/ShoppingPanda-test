@@ -1,14 +1,15 @@
 import {ThunkAction} from "redux-thunk";
-import {RootState} from "../../index";
+import axios from '../../../api/axiosDefaults';
+import {RootState} from "../index";
 import {
-    FETCH_SELLER_DASHBOARD, FETCH_SELLER_SETTLEMENT_LIST,
-    SellerDashboard,
+    FETCH_SELLER_DASHBOARD,
+    FETCH_SELLER_SETTLEMENT_LIST, SellerDashboard,
     SellerMyPageAction,
     SellerSettlementList,
     SellerSettlementRequestData
-} from "../../types";
-import axios from '../../../api/axiosDefaults';
-import {setError} from "../pageActions";
+} from "../types";
+import {setError} from "./pageActions";
+
 
 export const fetchSellerDashboard = (year: number, onError: () => void): ThunkAction<void, RootState, null, SellerMyPageAction> => {
     return async dispatch => {

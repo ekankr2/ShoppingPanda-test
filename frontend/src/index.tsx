@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux'
 import App from './App';
 import 'bulma/css/bulma.min.css'
-import store from "./store";
 import {BrowserRouter} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/theme.css'
@@ -18,11 +17,9 @@ const queryClient = new QueryClient()
 ReactDOM.render(
     <React.StrictMode>
         <QueryClientProvider client={queryClient}>
-            <Provider store={store}>
-                <BrowserRouter>
-                    <App/>
-                </BrowserRouter>
-            </Provider>
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
         </QueryClientProvider>
     </React.StrictMode>,
     document.getElementById('root')
