@@ -15,23 +15,23 @@ const SellerSettlementPanel: FC = () => {
 
     console.log('검색기준: ', searchDateMode, '검색상태 :',searchStatus)
 
-    useEffect(() => {
-        if (sellerSettlementList) {
-            setLoading(false)
-        }
-    }, [sellerSettlementList])
+    // useEffect(() => {
+    //     if (sellerSettlementList) {
+    //         setLoading(false)
+    //     }
+    // }, [sellerSettlementList])
 
     const submitHandler = (e: FormEvent) => {
-        e.preventDefault();
-        if (error) {
-            dispatch(setError(''));
-        }
-        setLoading(true);
-        if(searchMode === 'date') {
-            dispatch(fetchSellerSettlementList({searchDateMode, startDate, endDate, searchStatus}, () => setLoading(false)))
-        } else {
-            dispatch(fetchSellerSettlementListWithOrderNum({orderId}, () => setLoading(false)))
-        }
+        // e.preventDefault();
+        // if (error) {
+        //     dispatch(setError(''));
+        // }
+        // setLoading(true);
+        // if(searchMode === 'date') {
+        //     dispatch(fetchSellerSettlementList({searchDateMode, startDate, endDate, searchStatus}, () => setLoading(false)))
+        // } else {
+        //     dispatch(fetchSellerSettlementListWithOrderNum({orderId}, () => setLoading(false)))
+        // }
     }
 
     const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {

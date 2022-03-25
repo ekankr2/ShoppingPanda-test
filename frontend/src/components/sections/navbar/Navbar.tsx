@@ -4,10 +4,8 @@ import {Link, useHistory} from "react-router-dom";
 import Dropdown from "../../UI/dropdown/Dropdown";
 import {notification_dummy, user_menu, panda_menu, seller_menu} from "./navbarTypes";
 import {useDispatch, useSelector} from "react-redux";
-import {signout} from "../../../store/actions/authActions";
-import {RootState} from "../../../store";
 import Button from "../../UI/Button";
-import {getCookie} from "../../../store/actions/Cookie";
+import {useAuthStore} from "../../../store/authHooks";
 
 const renderNotificationItem = (item: StringObj, index: number) => (
     <div className="notification-item" key={index}>
@@ -19,8 +17,8 @@ const renderNotificationItem = (item: StringObj, index: number) => (
 const Navbar: FC = () => {
     const history = useHistory();
     const dispatch = useDispatch()
-    const {user} = useSelector((state: RootState) => state.auth);
-    const [userId] = useState(getCookie('userId'))
+    const user = useAuthStore(state => state.user)
+    const signOut = useAuthStore(state => state.signOut)
 
     console.log('유저데이타: ',user)
 
@@ -30,7 +28,7 @@ const Navbar: FC = () => {
                 {/*<img src={user.image} alt=""/>*/}
             </div>
             <div className="topnav__right-user__name">
-                {userId}
+                {'안녕하세요'}
             </div>
         </div>
     )
@@ -40,7 +38,7 @@ const Navbar: FC = () => {
                 {
                     item.link === "/logout" ?
                         <a onClick={() => {
-                            dispatch(signout())
+                            signOut()
                         }} key={index}>
                             <div className="notification-item">
                                 <i className={item.icon}></i>

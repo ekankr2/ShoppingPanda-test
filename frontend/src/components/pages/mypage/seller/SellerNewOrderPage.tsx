@@ -2,11 +2,9 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {DataGrid} from '@mui/x-data-grid';
 import Button from "../../../UI/Button";
 import axios from "axios";
-import {dateFormatter} from "../../../../store/actions/DateFormat";
 import Modal from "../../../UI/modal/Modal";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../../store";
-import {fetchSituationDetail} from "../../../../store/actions/mypageActions/buyerActions";
+import {dateFormatter} from "../../../../store/DateFormat";
 
 interface rowsType {
     id: number

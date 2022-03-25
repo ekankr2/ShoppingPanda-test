@@ -54,6 +54,35 @@ export interface SellerDashboard {
     day: any
 }
 
+// panda types
+export interface PandaDashboard {
+    salse: number[]
+    expect: number
+    finish: number
+}
+
+export interface PandaSettlementList {
+    expectMoney: number
+    finMoney: number
+    pandaDashboardDtoList: any
+}
+
+interface VideoDetails{
+    link: string
+    panda: string
+    pandaId: number
+}
+
+export interface PandaVideoList {
+    details: VideoDetails[]
+}
+
+export interface PandaSettlementRequestData {
+    startDate: any
+    endDate: any
+    searchStatus: string
+}
+
 // admin types
 export interface AdminPandaSettlementList {
     settlePandaDetails: AdminPandaSettlementListDetails[]

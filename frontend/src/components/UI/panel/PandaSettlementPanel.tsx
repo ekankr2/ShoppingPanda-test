@@ -2,19 +2,19 @@ import React, {FC, FormEvent, useEffect, useState} from 'react';
 import Panel from "./Panel";
 import {settlementSearchByStatus} from "../../pages/mypage/seller/sellerTypes";
 import Button from "../Button";
-import {setError} from "../../../store/actions/pageActions";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../store";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {fetchPandaSettlementList} from "../../../store/actions/mypageActions/pandaActions";
+import {useWindowStore} from "../../../store/windowHooks";
+import {useGetPandaSettlementList} from "../../../api/queryHooks/mypageHooks/pandaMypageHooks";
 
 
 const PandaSettlementPanel: FC = () => {
     const dispatch = useDispatch();
-    const {error} = useSelector((state: RootState) => state.page);
-    const {pandaSettlementList} = useSelector((state: RootState) => state.panda)
-
+    const error = useWindowStore(state => state.error)
+    const setError = useWindowStore(state => state.setError)
+    // const {data: pandaSettlementList} = useGetPandaSettlementList();
+    // const {pandaSettlementList} = useSelector((state: RootState) => state.panda)
     const [startDate, setStartDate] = useState<any>(new Date())
     const [endDate, setEndDate] = useState<any>(new Date())
     const [searchStatus, setSearchStatus] = useState('all')
@@ -23,19 +23,19 @@ const PandaSettlementPanel: FC = () => {
     console.log('시작날짜 : ,', startDate, '끝나는 날짜 : ', endDate)
     console.log(` 상태모드: ${searchStatus}`)
 
-    useEffect(() => {
-        if (pandaSettlementList) {
-            setLoading(false)
-        }
-    }, [pandaSettlementList])
+    // useEffect(() => {
+    //     if (pandaSettlementList) {
+    //         setLoading(false)
+    //     }
+    // }, [pandaSettlementList])
 
     const submitHandler = (e: FormEvent) => {
         e.preventDefault();
         if (error) {
-            dispatch(setError(''));
+            setError('');
         }
         setLoading(true);
-        dispatch(fetchPandaSettlementList({startDate, endDate, searchStatus}, () => setLoading(false)))
+        // dispatch(fetchPandaSettlementList({startDate, endDate, searchStatus}, () => setLoading(false)))
     }
 
     const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {

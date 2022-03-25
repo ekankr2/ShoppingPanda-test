@@ -1,18 +1,15 @@
 import React, { FC } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-
 import Button from '../UI/Button';
-import { RootState } from '../../store';
-import {signout} from '../../store/actions/authActions';
+import {useAuthStore} from "../../store/authHooks";
 
 const Header: FC = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
-  const { loggedIn } = useSelector((state: RootState) => state.auth);
+  const signOut = useAuthStore(state => state.signOut)
+  const user = useAuthStore(state => state.user)
 
   const logoutClickHandler = () => {
-    dispatch(signout());
+    signOut()
   }
 
   return(
@@ -28,7 +25,7 @@ const Header: FC = () => {
 
         <div className="navbar-end">
           <div className="navbar-items">
-            {!loggedIn ? <div className="buttons">
+            {!user ? <div className="buttons">
                 <Button text="Sign up" onClick={() => history.push('/signup')} className="is-primary" />
                 <Button text="Sign in" onClick={() => history.push('/signin')} />
               </div>

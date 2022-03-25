@@ -1,14 +1,13 @@
 import {ThunkAction} from "redux-thunk";
-import {RootState} from "../../index";
+import axios from '../../../api/axiosDefaults';
+import {RootState} from "../index";
 import {
     FETCH_PANDA_DASHBOARD,
-    FETCH_PANDA_SETTLEMENT_LIST, FETCH_PANDA_VIDEO_LIST, PandaDashboard,
-    PandaMyPageAction,
-    PandaSettlementList,
-    PandaSettlementRequestData, PandaVideoList,
-} from "../../types";
-import axios from '../../../api/axiosDefaults';
-import {setError, setLoading} from "../pageActions";
+    FETCH_PANDA_SETTLEMENT_LIST,
+    FETCH_PANDA_VIDEO_LIST, PandaDashboard, PandaMyPageAction,
+    PandaSettlementList, PandaSettlementRequestData, PandaVideoList
+} from "../types";
+import {setError, setLoading} from "./pageActions";
 
 export const fetchPandaDashBoard = (year: number, onError: () => void): ThunkAction<void, RootState, null, PandaMyPageAction> => {
     return async dispatch => {

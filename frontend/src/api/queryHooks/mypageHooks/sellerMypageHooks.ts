@@ -3,7 +3,8 @@ import axios from '../../axiosDefaults';
 import {SellerDashboard} from "../types";
 
 export enum SellerKeysEnum {
-    SellerDashboard = 'sellerDashboard'
+    SellerDashboard = 'sellerDashboard',
+    SellerSettlementList = 'sellerSettlementList'
 }
 
 export const useGetSellerDashboard = (year: number) =>
