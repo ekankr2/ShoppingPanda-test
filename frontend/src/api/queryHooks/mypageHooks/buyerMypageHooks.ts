@@ -3,15 +3,15 @@ import axios from '../../axiosDefaults';
 import {BuyerDashboard, RecentSituation, Situation} from "../types";
 
 export enum BuyerKeysEnum {
-    RecentSituation = 'recentSituation',
+    RecentSituationList = 'recentSituationList',
     RecentSituationDetail = 'recentSituationDetail',
-    BuyerDashboard = 'buyerDashboard'
+    BuyerDashboard = 'buyerDashboard',
 }
 
-export const useGetRecentSituation = () =>
+export const useGetRecentSituationList = (size: number, page: number) =>
     useQuery(
-        BuyerKeysEnum.RecentSituation, async () => {
-            const res = await axios.get('/api/recentsituation')
+        [BuyerKeysEnum.RecentSituationList, page], async () => {
+            const res = await axios.get(`http://localhost:8080/api/recentsituation?size=${size}&page=${page}`)
             return res.data as RecentSituation
         }
     )

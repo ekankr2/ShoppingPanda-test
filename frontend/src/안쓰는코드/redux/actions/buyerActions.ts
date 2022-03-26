@@ -1,16 +1,16 @@
 import {ThunkAction} from "redux-thunk";
-import {RootState} from "../../index";
+import { RootState } from "..";
 import {
-    BuyerMyPageAction,
     BuyerDashboard,
+    BuyerMyPageAction,
     FETCH_BUYER_DASHBOARD,
     FETCH_BUYER_SITUATION,
-    FETCH_BUYER_SITUATION_LIST,
-    Situation,
+    FETCH_BUYER_SITUATION_LIST, Situation,
     SituationList
-} from "../../types";
-import axios from '../../../api/axiosDefaults';
-import {setError} from "../pageActions";
+} from "../types";
+import {setError} from "./pageActions";
+import axios from "axios";
+
 
 export const fetchBuyerDashBoard = (): ThunkAction<void, RootState, null, BuyerMyPageAction> => {
     return async dispatch => {

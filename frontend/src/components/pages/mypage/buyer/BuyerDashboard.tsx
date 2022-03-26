@@ -8,8 +8,7 @@ import Modal from "../../../UI/modal/Modal";
 import {Link} from "react-router-dom";
 import Message from "../../../UI/Message";
 import {
-    useGetBuyerDashboard,
-    useGetRecentSituation,
+    useGetBuyerDashboard, useGetRecentSituationList,
     useGetSituationDetail
 } from "../../../../api/queryHooks/mypageHooks/buyerMypageHooks";
 import LoadingComponent from "../../../UI/LoadingComponent";
@@ -31,7 +30,7 @@ const renderHead = (item: any, index: number) => (
 const BuyerDashboard: FC = () => {
     const [showModal, setShowModal] = useState(false)
     const [cardItems, setCardItems] = useState(dashboardCard)
-    const {data: buyerSituationList, error: situationError} = useGetRecentSituation();
+    const {data: buyerSituationList, error: situationError} = useGetRecentSituationList(5, 0);
     const {data: buyerDashboard} = useGetBuyerDashboard();
     const [detailId, setDetailId] = useState(0)
     const {data: buyerSituationDetail, isFetching: detailFetching} = useGetSituationDetail(detailId)

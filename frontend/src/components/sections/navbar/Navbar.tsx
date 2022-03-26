@@ -1,9 +1,8 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import './navbar.css'
 import {Link, useHistory} from "react-router-dom";
 import Dropdown from "../../UI/dropdown/Dropdown";
 import {notification_dummy, user_menu, panda_menu, seller_menu} from "./navbarTypes";
-import {useDispatch, useSelector} from "react-redux";
 import Button from "../../UI/Button";
 import {useAuthStore} from "../../../store/authHooks";
 
@@ -16,7 +15,6 @@ const renderNotificationItem = (item: StringObj, index: number) => (
 
 const Navbar: FC = () => {
     const history = useHistory();
-    const dispatch = useDispatch()
     const user = useAuthStore(state => state.user)
     const signOut = useAuthStore(state => state.signOut)
 
