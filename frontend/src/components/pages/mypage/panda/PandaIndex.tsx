@@ -1,14 +1,13 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import '../buyer/buyerIndex.css'
 import MyPageRoutes from "../MyPageRoutes";
 import {Redirect, Route} from "react-router-dom";
 import {pandaSidebarItems} from "./pandaTypes";
 import Sidebar from "../../../sections/sidebar/Sidebar";
-import {useSelector} from "react-redux";
-import {RootState} from "../../../../store";
+import {useAuthStore} from "../../../../store/authHooks";
 
 const PandaIndex: FC = () => {
-    const {user} = useSelector((state: RootState) => state.auth);
+    const user = useAuthStore(state => state.user)
 
     return (
         <Route render={(props) => (

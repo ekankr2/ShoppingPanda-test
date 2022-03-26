@@ -10,7 +10,7 @@ export enum PandaMypageKeysEnum {
 
 export const useGetPandaDashboard = (year: number) =>
     useQuery(
-        PandaMypageKeysEnum.PandaDashboard, async () => {
+        [PandaMypageKeysEnum.PandaDashboard, year], async () => {
             const {data} = await axios.post('/api/pandadashboardmain', {
                 year: year
             })

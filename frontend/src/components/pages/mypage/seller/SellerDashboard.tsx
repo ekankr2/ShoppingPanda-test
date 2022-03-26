@@ -1,11 +1,7 @@
 import React, {FC, useEffect, useState} from "react";
 import StatusCard from "../../../UI/cards/StatusCard";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../../store";
 import Message from "../../../UI/Message";
 import {sellerDashboardCard} from "./sellerTypes";
-import {setError, setLoading} from "../../../../store/actions/pageActions";
-import {fetchSellerDashboard} from "../../../../store/actions/mypageActions/sellerActions";
 import Button from "../../../UI/Button";
 import SellerChart from "../../../UI/chart/SellerChart";
 import {useGetSellerDashboard} from "../../../../api/queryHooks/mypageHooks/sellerMypageHooks";

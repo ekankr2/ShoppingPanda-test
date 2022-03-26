@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Provider} from 'react-redux'
 import App from './App';
 import 'bulma/css/bulma.min.css'
 import {BrowserRouter} from "react-router-dom";

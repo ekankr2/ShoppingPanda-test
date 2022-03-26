@@ -4,11 +4,10 @@ import {Redirect, Route} from 'react-router-dom'
 import {sellerSidebarItems} from "./sellerTypes";
 import MyPageRoutes from "../MyPageRoutes";
 import Sidebar from "../../../sections/sidebar/Sidebar";
-import {useSelector} from "react-redux";
-import {RootState} from "../../../../store";
+import {useAuthStore} from "../../../../store/authHooks";
 
 const SellerIndex:FC = () => {
-    const {user} = useSelector((state: RootState) => state.auth);
+    const user = useAuthStore(state => state.user)
 
     return (
         <Route render={(props) => (

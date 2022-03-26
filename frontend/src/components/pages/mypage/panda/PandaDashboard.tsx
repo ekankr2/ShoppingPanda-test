@@ -1,35 +1,19 @@
 import React, {FC, useEffect, useState} from "react";
 import StatusCard from "../../../UI/cards/StatusCard";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../../store";
 import Message from "../../../UI/Message";
 import {pandaDashboardCard} from "./pandaTypes";
 import Button from "../../../UI/Button";
-import {setError, setLoading} from "../../../../store/actions/pageActions";
-import {fetchPandaDashBoard} from "../../../../store/actions/mypageActions/pandaActions";
 import PandaChart from "../../../UI/chart/PandaChart";
+import {useGetPandaDashboard} from "../../../../api/queryHooks/mypageHooks/pandaMypageHooks";
 
 const PandaDashboard: FC = () => {
-    const {error} = useSelector((state: RootState) => state.page);
     const [cardItems, setCardItems] = useState(pandaDashboardCard)
     const [currentYear] = useState(new Date().getFullYear())
     const [selectedYear, setSelectedYear] = useState(currentYear)
     const [chartSeries, setChartSeries] = useState<number[]>([])
-    const {pandaDashboard} = useSelector((state: RootState) => state.panda)
-    const dispatch = useDispatch()
+    const {data: pandaDashboard, error} = useGetPandaDashboard(selectedYear)
 
     useEffect(() => {
-        if (error) {
-            dispatch(setError(''))
-        }
-        dispatch(fetchPandaDashBoard(currentYear, () => setLoading(false)))
-    }, [])
-
-    useEffect(()=>{
-        dispatch(fetchPandaDashBoard(selectedYear, () => setLoading(false)))
-    },[selectedYear, dispatch])
-
-    useEffect(()=>{
         let cardCopy = [...cardItems]
         if (pandaDashboard) {
             cardCopy[0].count = pandaDashboard.expect
@@ -37,20 +21,12 @@ const PandaDashboard: FC = () => {
             setCardItems(cardCopy)
             setChartSeries(pandaDashboard.salse)
         }
-    },[pandaDashboard, dispatch])
-
-    useEffect(() => {
-        return (() => {
-            if (error) {
-                dispatch(setError(''))
-            }
-        })
-    }, [error, dispatch])
+    }, [pandaDashboard])
 
     return (
         <>
             <div className="container">
-                {error && <Message type="danger" msg={error}/>}
+                {error && <Message type="danger" msg='판다 대쉬보드 이상'/>}
                 <div className="page-header">
                     <span className="mr-3">
                         <Button

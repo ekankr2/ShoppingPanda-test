@@ -1,35 +1,15 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC} from 'react';
 import VideoCard from "../../../UI/cards/VideoCard";
-import {useDispatch, useSelector} from "react-redux";
-import {setError, setLoading} from "../../../../store/actions/pageActions";
-import {RootState} from "../../../../store";
-import {fetchPandaVideoList} from "../../../../store/actions/mypageActions/pandaActions";
 import Message from "../../../UI/Message";
+import {useGetPandaVideoList} from "../../../../api/queryHooks/mypageHooks/pandaMypageHooks";
 
 
 const PandaVideoPage: FC = () => {
-    const {error} = useSelector((state: RootState) => state.page);
-    const {pandaVideoList} = useSelector((state: RootState) => state.panda);
-    const dispatch = useDispatch()
-
-    useEffect(()=>{
-        return(()=>{
-            if(error){
-                dispatch(setError(''))
-            }
-        })
-    },[error, dispatch])
-
-    useEffect(() => {
-        if(error) {
-            dispatch(setError(''));
-        }
-        dispatch(fetchPandaVideoList(() => setLoading(false)))
-    }, [dispatch])
+    const {data: pandaVideoList, error} = useGetPandaVideoList()
 
     return (
         <>
-            {error ? <Message msg={error} type="danger" /> : null}
+            {error ? <Message msg='동영상 리스트 통신이상' type="danger" /> : null}
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">

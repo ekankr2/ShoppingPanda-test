@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {DataGrid} from '@mui/x-data-grid';
 import Button from "../../../UI/Button";
-import axios from "axios";
+import axios from "../../../../api/axiosDefaults";
 import Modal from "../../../UI/modal/Modal";
 import {useDispatch, useSelector} from "react-redux";
 import {dateFormatter} from "../../../../store/DateFormat";
@@ -30,7 +30,7 @@ const SellerNewOrderPage = () => {
     const [rows, setRows] = useState<rowsType[]>([])
     const [totalElement, setTotalElement] = useState(0)
     const [selectedRows, setSelectedRows] = useState<any>([]);
-    const {buyerSituationDetail} = useSelector((state: RootState) => state.buyer);
+    // const {buyerSituationDetail} = useSelector((state: RootState) => state.buyer);
     const dispatch = useDispatch()
 
     console.log(rows)
@@ -92,7 +92,7 @@ const SellerNewOrderPage = () => {
 
     const fetchOrderDetail = (event: React.MouseEvent, cellValues: any) => {
         event.stopPropagation()
-        dispatch(fetchSituationDetail(cellValues.id))
+        // dispatch(fetchSituationDetail(cellValues.id))
         setShowModal(true)
     }
 
@@ -187,14 +187,14 @@ const SellerNewOrderPage = () => {
                 <Modal onClose={() => {
                     setShowModal(false)
                 }} title={"주문 상세보기"}>
-                    {
-                        buyerSituationDetail ?
-                            <>
-                                여기 안에 모달 내용
-                            </>
+                    {/*{*/}
+                    {/*    buyerSituationDetail ?*/}
+                    {/*        <>*/}
+                    {/*            여기 안에 모달 내용*/}
+                    {/*        </>*/}
 
-                            : <div>데이터 없음</div>
-                    }
+                    {/*        : <div>데이터 없음</div>*/}
+                    {/*}*/}
 
                 </Modal>
             }
