@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState, Suspense, ChangeEvent, useCallback} from "react";
+import React, {FC, useEffect, useState, Suspense, useCallback} from "react";
 import {dashboardCard} from "./buyerTypes";
 import StatusCard from "../../../UI/cards/StatusCard";
 import MyPageTable from "../../../UI/table/MyPageTable";
@@ -12,7 +12,7 @@ import {
     useGetSituationDetail
 } from "../../../../api/queryHooks/mypageHooks/buyerMypageHooks";
 import LoadingComponent from "../../../UI/LoadingComponent";
-import {Pagination, Stack} from "@mui/material";
+import {Pagination} from "@mui/material";
 
 const orderStatus: StringObj = {
     "결제완료": "primary",
@@ -37,8 +37,6 @@ const BuyerDashboard: FC = () => {
     const {data: buyerSituationDetail, isFetching: detailFetching} = useGetSituationDetail(detailId)
     const {data: buyerSituationList, error: situationError} = useGetRecentSituationList(5, page);
 
-    console.log('도그: ', buyerSituationList)
-
     useEffect(() => {
         let copy = [...cardItems]
         if (buyerDashboard) {
@@ -57,7 +55,7 @@ const BuyerDashboard: FC = () => {
 
     const handlePageChange = useCallback((e: any) => {
         e.preventDefault()
-        setPage(+e.target.textContent)
+        setPage(+e.target.textContent - 1)
     },[page])
 
     const renderBody = (item: StringObj, index: number) => (
