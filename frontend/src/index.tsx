@@ -11,7 +11,15 @@ import axios from "axios";
 
 axios.defaults.withCredentials = true
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            refetchOnWindowFocus: false,
+            retry: false,
+            staleTime: 30000
+        }
+    }
+})
 
 ReactDOM.render(
     <React.StrictMode>
