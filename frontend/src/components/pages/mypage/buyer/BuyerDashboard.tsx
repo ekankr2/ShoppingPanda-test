@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState, Suspense} from "react";
+import React, {FC, useEffect, useState, Suspense, ChangeEvent, useCallback} from "react";
 import {dashboardCard} from "./buyerTypes";
 import StatusCard from "../../../UI/cards/StatusCard";
 import MyPageTable from "../../../UI/table/MyPageTable";
@@ -12,6 +12,7 @@ import {
     useGetSituationDetail
 } from "../../../../api/queryHooks/mypageHooks/buyerMypageHooks";
 import LoadingComponent from "../../../UI/LoadingComponent";
+import {Pagination, Stack} from "@mui/material";
 
 const orderStatus: StringObj = {
     "결제완료": "primary",
@@ -30,13 +31,13 @@ const renderHead = (item: any, index: number) => (
 const BuyerDashboard: FC = () => {
     const [showModal, setShowModal] = useState(false)
     const [cardItems, setCardItems] = useState(dashboardCard)
-    const {data: buyerSituationList, error: situationError} = useGetRecentSituationList(5, 0);
-    const {data: buyerDashboard} = useGetBuyerDashboard();
     const [detailId, setDetailId] = useState(0)
+    const [page, setPage] = useState(0)
+    const {data: buyerDashboard} = useGetBuyerDashboard();
     const {data: buyerSituationDetail, isFetching: detailFetching} = useGetSituationDetail(detailId)
+    const {data: buyerSituationList, error: situationError} = useGetRecentSituationList(5, page);
 
-
-    console.log('도그: ', detailFetching)
+    console.log('도그: ', buyerSituationList)
 
     useEffect(() => {
         let copy = [...cardItems]
@@ -49,10 +50,15 @@ const BuyerDashboard: FC = () => {
         }
     }, [buyerDashboard])
 
-    const handleClick = async (item: string) => {
+    const handleClick = useCallback(async (item: string) => {
         await setDetailId(+item)
         setShowModal(true)
-    }
+    },[detailId])
+
+    const handlePageChange = useCallback((e: any) => {
+        e.preventDefault()
+        setPage(+e.target.textContent)
+    },[page])
 
     const renderBody = (item: StringObj, index: number) => (
         <tr key={index} onClick={() => {
@@ -139,6 +145,12 @@ const BuyerDashboard: FC = () => {
                                             /> : null
                                     }
 
+                                </div>
+                                <div className='card__footer'>
+                                    <Pagination count={buyerSituationList?.totalpage} sx={{maxWidth: 350}}
+                                                className='mx-auto'
+                                                onChange={handlePageChange}
+                                    />
                                 </div>
                             </div>
                         </div>

@@ -11,8 +11,10 @@ export enum BuyerKeysEnum {
 export const useGetRecentSituationList = (size: number, page: number) =>
     useQuery(
         [BuyerKeysEnum.RecentSituationList, page], async () => {
-            const res = await axios.get(`http://localhost:8080/api/recentsituation?size=${size}&page=${page}`)
+            const res = await axios.get(`/api/recentsituation?size=${size}&page=${page}`)
             return res.data as RecentSituation
+        },{
+            keepPreviousData: true
         }
     )
 
