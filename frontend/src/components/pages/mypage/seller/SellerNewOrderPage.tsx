@@ -3,8 +3,8 @@ import {DataGrid} from '@mui/x-data-grid';
 import Button from "../../../UI/Button";
 import axios from "../../../../api/axiosDefaults";
 import Modal from "../../../UI/modal/Modal";
-import {useDispatch, useSelector} from "react-redux";
 import {dateFormatter} from "../../../../store/DateFormat";
+import {useGetSellerOrderList} from "../../../../api/queryHooks/mypageHooks/sellerMypageHooks";
 
 interface rowsType {
     id: number
@@ -30,10 +30,10 @@ const SellerNewOrderPage = () => {
     const [rows, setRows] = useState<rowsType[]>([])
     const [totalElement, setTotalElement] = useState(0)
     const [selectedRows, setSelectedRows] = useState<any>([]);
+    const {data: orderList} = useGetSellerOrderList(10, page)
     // const {buyerSituationDetail} = useSelector((state: RootState) => state.buyer);
-    const dispatch = useDispatch()
 
-    console.log(rows)
+    console.log(orderList)
 
     const columns = [
         {field: 'id', headerName: '주문번호', flex: 0.5},
