@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 import {DataGrid} from '@mui/x-data-grid';
 import Button from "../../../UI/Button";
 import Modal from "../../../UI/modal/Modal";
@@ -20,7 +20,7 @@ const SellerNewOrderPage = () => {
     const [selectedRows, setSelectedRows] = useState<any>([]);
     const {data: orderList, isFetching} = useGetSellerOrderList(10, page)
 
-    const columns = [
+    const columns = useMemo(()=>[
         {field: 'id', headerName: '주문번호', flex: 0.5},
         {field: 'name', headerName: '상품명', flex: 2},
         {field: 'price', headerName: '가격', flex: 0.7},
@@ -73,7 +73,7 @@ const SellerNewOrderPage = () => {
                 );
             }
         },
-    ]
+    ],[])
 
     const fetchOrderDetail = useCallback((event: React.MouseEvent, cellValues: any) => {
         event.stopPropagation()
