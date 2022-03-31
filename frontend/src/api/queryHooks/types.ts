@@ -54,6 +54,19 @@ export interface SellerDashboard {
     day: any
 }
 
+export interface SellerNewOrderList {
+    pageList: SellerNewOrder[]
+    totalElement: number
+    totalpage: number
+}
+
+export interface SellerNewOrder {
+    id: number,
+    name: string,
+    orderAt: any,
+    price: number
+}
+
 // panda types
 export interface PandaDashboard {
     salse: number[]
@@ -137,3 +150,4 @@ export interface AdminPandaApplyList {
     totalElement: number
     totalPage: number
 }
+

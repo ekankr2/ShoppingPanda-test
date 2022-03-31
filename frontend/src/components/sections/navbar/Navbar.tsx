@@ -84,7 +84,7 @@ const Navbar: FC = () => {
                         <span className="mr-3">
                             <Dropdown
                                 customToggle={() => renderUserToggle()}
-                                contentData={renderAuthMenu(user.panda, user.shop)}
+                                contentData={renderAuthMenu(user.panda, user.seller)}
                                 renderItems={(item: StringObj, index: number) => renderUserMenu(item, index)}
                             />
                         </span>

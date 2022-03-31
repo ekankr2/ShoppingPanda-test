@@ -26,12 +26,8 @@ function cancelOrder(event: React.MouseEvent, cellValues: any) {
 const SellerNewOrderPage = () => {
     const [page, setPage] = useState(0)
     const [showModal, setShowModal] = useState(false)
-    const [loading, setLoading] = useState(false)
-    const [rows, setRows] = useState<rowsType[]>([])
-    const [totalElement, setTotalElement] = useState(0)
     const [selectedRows, setSelectedRows] = useState<any>([]);
-    const {data: orderList} = useGetSellerOrderList(10, page)
-    // const {buyerSituationDetail} = useSelector((state: RootState) => state.buyer);
+    const {data: orderList, isFetching} = useGetSellerOrderList(10, page)
 
     console.log(orderList)
 
@@ -111,27 +107,6 @@ const SellerNewOrderPage = () => {
         console.log('인쇄하기')
     }
 
-    const fetchTableData = useCallback(
-        async () => {
-            try {
-                setLoading(true)
-                const response = await axios.get(`/api/shop/shoporderlist?type=recent&size=10&page=${page}`)
-                const data = response.data;
-                setLoading(false)
-                data.pageList.forEach((data: any) => {
-                    data.orderAt = dateFormatter(data.orderAt)
-                })
-                setRows(data.pageList)
-                setTotalElement(data.totalElement)
-            } catch (err) {
-                console.log('테이블 요청 오류');
-            }
-        }, [page])
-
-    useEffect(() => {
-        fetchTableData()
-    }, [page])
-
     return (
         <>
             <div className='container'>
@@ -156,28 +131,31 @@ const SellerNewOrderPage = () => {
                         />
                     </div>
                     <div style={{width: "100%", height: '650px'}}>
-                        <DataGrid
-                            rows={rows}
-                            rowCount={totalElement}
-                            columns={columns}
-                            page={page}
-                            pageSize={10}
-                            loading={loading}
-                            checkboxSelection
-                            pagination
-                            paginationMode="server"
-                            rowsPerPageOptions={[10]}
-                            onPageChange={(page) => {
-                                setPage(page)
-                            }}
-                            onSelectionModelChange={(ids) => {
-                                const selectedIDs = new Set(ids);
-                                const selectedRows = rows.filter((row) =>
-                                    selectedIDs.has(row.id),
-                                );
-                                setSelectedRows(selectedRows);
-                            }}
-                        />
+                        {orderList &&
+                            <DataGrid
+                                rows={orderList.pageList}
+                                rowCount={orderList.totalElement}
+                                columns={columns}
+                                page={page}
+                                pageSize={10}
+                                loading={isFetching}
+                                checkboxSelection
+                                pagination
+                                paginationMode="server"
+                                rowsPerPageOptions={[10]}
+                                onPageChange={(page) => {
+                                    setPage(page)
+                                }}
+                                onSelectionModelChange={(ids) => {
+                                    const selectedIDs = new Set(ids);
+                                    const selectedRows = orderList.pageList.filter((row) =>
+                                        selectedIDs.has(row.id),
+                                    );
+                                    setSelectedRows(selectedRows);
+                                }}
+                            />
+                        }
+
                     </div>
                 </div>
             </div>

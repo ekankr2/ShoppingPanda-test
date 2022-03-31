@@ -11,7 +11,7 @@ const SellerIndex:FC = () => {
 
     return (
         <Route render={(props) => (
-            user?.shop ?
+            user?.seller ?
             <div className={`layout theme-mode-light theme-color-blue`}>
                 <Sidebar sidebarItems={sellerSidebarItems} {...props}/>
                 <div className="layout__content">

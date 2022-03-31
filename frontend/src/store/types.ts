@@ -4,7 +4,7 @@
 export interface User {
     userName: string;
     panda: boolean
-    shop: boolean
+    seller: boolean
 }
 
 export interface SignInData {
