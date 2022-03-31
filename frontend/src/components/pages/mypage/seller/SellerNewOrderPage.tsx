@@ -1,17 +1,8 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {DataGrid} from '@mui/x-data-grid';
 import Button from "../../../UI/Button";
-import axios from "../../../../api/axiosDefaults";
 import Modal from "../../../UI/modal/Modal";
-import {dateFormatter} from "../../../../store/DateFormat";
 import {useGetSellerOrderList} from "../../../../api/queryHooks/mypageHooks/sellerMypageHooks";
-
-interface rowsType {
-    id: number
-    productName: string
-    price: number
-    orderAt: any
-}
 
 function confirmOrder(event: React.MouseEvent, cellValues: any) {
     event.stopPropagation()
@@ -28,8 +19,6 @@ const SellerNewOrderPage = () => {
     const [showModal, setShowModal] = useState(false)
     const [selectedRows, setSelectedRows] = useState<any>([]);
     const {data: orderList, isFetching} = useGetSellerOrderList(10, page)
-
-    console.log(orderList)
 
     const columns = [
         {field: 'id', headerName: '주문번호', flex: 0.5},
@@ -84,28 +73,28 @@ const SellerNewOrderPage = () => {
                 );
             }
         },
-    ];
+    ]
 
-    const fetchOrderDetail = (event: React.MouseEvent, cellValues: any) => {
+    const fetchOrderDetail = useCallback((event: React.MouseEvent, cellValues: any) => {
         event.stopPropagation()
         // dispatch(fetchSituationDetail(cellValues.id))
         setShowModal(true)
-    }
+    },[showModal])
 
-    const confirmSelected = (event: React.MouseEvent) => {
+    const confirmSelected = useCallback((event: React.MouseEvent) => {
         event.preventDefault()
         console.log('선택된 주문 확인', selectedRows)
-    }
+    },[selectedRows])
 
-    const cancelSelected = (event: React.MouseEvent) => {
+    const cancelSelected = useCallback((event: React.MouseEvent) => {
         event.preventDefault()
         console.log('선택된 주문 확인', selectedRows)
-    }
+    },[selectedRows])
 
-    const printList = (event: React.MouseEvent) => {
+    const printList = useCallback((event: React.MouseEvent) => {
         event.preventDefault()
         console.log('인쇄하기')
-    }
+    },[selectedRows])
 
     return (
         <>
