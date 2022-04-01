@@ -3,6 +3,7 @@ import {DataGrid} from '@mui/x-data-grid';
 import Button from "../../../UI/Button";
 import Modal from "../../../UI/modal/Modal";
 import {useGetSellerOrderList} from "../../../../api/queryHooks/mypageHooks/sellerMypageHooks";
+import {useGetSituationDetail} from "../../../../api/queryHooks/mypageHooks/buyerMypageHooks";
 
 function confirmOrder(event: React.MouseEvent, cellValues: any) {
     event.stopPropagation()
@@ -17,8 +18,10 @@ function cancelOrder(event: React.MouseEvent, cellValues: any) {
 const SellerNewOrderPage = () => {
     const [page, setPage] = useState(0)
     const [showModal, setShowModal] = useState(false)
+    const [detailId, setDetailId] = useState(0)
     const [selectedRows, setSelectedRows] = useState<any>([]);
     const {data: orderList, isFetching} = useGetSellerOrderList(10, page)
+    const {data: situationDetail} = useGetSituationDetail(detailId)
 
     const columns = useMemo(()=>[
         {field: 'id', headerName: '주문번호', flex: 0.5},
@@ -77,9 +80,9 @@ const SellerNewOrderPage = () => {
 
     const fetchOrderDetail = useCallback((event: React.MouseEvent, cellValues: any) => {
         event.stopPropagation()
-        // dispatch(fetchSituationDetail(cellValues.id))
+        setDetailId(cellValues.id)
         setShowModal(true)
-    },[showModal])
+    },[])
 
     const confirmSelected = useCallback((event: React.MouseEvent) => {
         event.preventDefault()
