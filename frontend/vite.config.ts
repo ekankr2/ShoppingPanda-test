@@ -10,12 +10,11 @@ export default defineConfig({
         outDir: 'build',
     },
     plugins: [
-        reactRefresh(),
-        svgrPlugin({
-            svgrOptions: {
-                icon: true,
-                // ...svgr options (https://react-svgr.com/docs/options/)
-            },
-        }),
+        reactRefresh()
     ],
+    server: {
+        proxy: {
+            '/api': 'http://localhost:8080',
+        }
+    }
 })

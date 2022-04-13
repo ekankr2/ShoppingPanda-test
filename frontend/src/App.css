@@ -3,6 +3,25 @@
     margin: 0 auto;
 }
 
+.navbar {
+    margin: 0 20px;
+}
+
+.navbar-logo {
+    user-select: none;
+    text-decoration: none;
+}
+
+.navbar-logo span{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 35px;
+}
+
+.navbar-logo:hover {
+    color: black;
+}
+
 .wrapper{
     margin-bottom: 100px;
 }

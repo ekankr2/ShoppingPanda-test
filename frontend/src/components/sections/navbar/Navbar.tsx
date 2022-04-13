@@ -6,12 +6,12 @@ import {notification_dummy, user_menu, panda_menu, seller_menu} from "./navbarTy
 import Button from "../../UI/Button";
 import {useAuthStore} from "../../../store/authHooks";
 
-const renderNotificationItem = (item: StringObj, index: number) => (
-    <div className="notification-item" key={index}>
-        <i className={item.icon}/>
-        <span>{item.content}</span>
-    </div>
-)
+// const renderNotificationItem = (item: StringObj, index: number) => (
+//     <div className="notification-item" key={index}>
+//         <i className={item.icon}/>
+//         <span>{item.content}</span>
+//     </div>
+// )
 
 const Navbar: FC = () => {
     const history = useHistory();
@@ -19,7 +19,7 @@ const Navbar: FC = () => {
     const user = useAuthStore(state => state.user)
     const signOut = useAuthStore(state => state.signOut)
 
-    console.log('유저데이타: ', location)
+    console.log('회원: ',user)
 
     const renderUserToggle = useCallback(() => (
         <div className="topnav__right-user">
@@ -27,10 +27,10 @@ const Navbar: FC = () => {
                 {/*<img src={user.image} alt=""/>*/}
             </div>
             <div className="topnav__right-user__name">
-                {'안녕하세요'}
+                {user?.userName}
             </div>
         </div>
-    ), [])
+    ), [user])
 
     const renderUserMenu = useCallback((item: StringObj, index: number) => (
         <div key={index}>
@@ -68,13 +68,21 @@ const Navbar: FC = () => {
     }, [user])
 
     return (
-        <nav className="navbar is-spaced has-shadow">
+        <nav className="navbar">
+            {/*{location.pathname === '/' ?*/}
+            {/*    <a className="navbar-item" href='/'>*/}
+            {/*        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"/>*/}
+            {/*    </a>*/}
+            {/*    : <Link className="navbar-item" to={'/'}>*/}
+            {/*        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"/>*/}
+            {/*    </Link>*/}
+            {/*}*/}
             {location.pathname === '/' ?
-                <a className="navbar-item" href='/'>
-                    <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"/>
+                <a className="navbar-brand navbar-logo" href='/'>
+                    <span>Panda</span>
                 </a>
-                : <Link className="navbar-item" to={'/'}>
-                    <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"/>
+                : <Link className="navbar-brand" to={'/'}>
+                    <span>Panda</span>
                 </Link>
             }
 
@@ -88,15 +96,15 @@ const Navbar: FC = () => {
                                 renderItems={(item: StringObj, index: number) => renderUserMenu(item, index)}
                             />
                         </span>
-                        <span className="mr-3">
-                            <Dropdown
-                                icon='bx bx-bell'
-                                badge='0'
-                                contentData={notification_dummy}
-                                renderItems={(item: StringObj, index: number) => renderNotificationItem(item, index)}
-                                renderFooter={() => <Link to='/'>View All</Link>}
-                            />
-                        </span>
+                        {/*<span className="mr-3">*/}
+                        {/*    <Dropdown*/}
+                        {/*        icon='bx bx-bell'*/}
+                        {/*        badge='0'*/}
+                        {/*        contentData={notification_dummy}*/}
+                        {/*        renderItems={(item: StringObj, index: number) => renderNotificationItem(item, index)}*/}
+                        {/*        renderFooter={() => <Link to='/'>View All</Link>}*/}
+                        {/*    />*/}
+                        {/*</span>*/}
 
                     </div>
                 </div> :
