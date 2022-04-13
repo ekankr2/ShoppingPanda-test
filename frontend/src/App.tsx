@@ -2,10 +2,10 @@ import React, {FC, Suspense, useLayoutEffect} from 'react';
 import {Route, Switch} from 'react-router-dom';
 import './App.css';
 import Loader from './components/UI/Loader';
-import Navbar from "./components/sections/navbar/Navbar";
 import TestPage from "./components/pages/TestPage";
 import {useAuthStore} from "./store/authHooks";
 import {useWindowStore} from "./store/windowHooks";
+import Navbar from "./components/sections/navbar/Navbar";
 
 const Homepage = React.lazy(() => import('./components/pages/Homepage'));
 const SignUp = React.lazy(() => import('./components/pages/SignIn'));

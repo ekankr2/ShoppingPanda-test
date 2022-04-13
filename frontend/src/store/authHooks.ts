@@ -33,6 +33,7 @@ export const useAuthStore = create<AuthStore>(set => ({
     signOut: async () => {
         try {
             await axios.post('/api/user/logoutv2')
+            window.location.href = '/'
             set({user: null})
         } catch (err) {
             console.error(err)
