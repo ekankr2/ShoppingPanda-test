@@ -19,8 +19,8 @@ export enum AdminKeysEnum {
 export const useGetAdminPandaSettlementList = (page: number) =>
     useQuery(
         AdminKeysEnum.AdminPandaSettlementList, async () => {
-            const res = await axios.get(`/api/admin/pandaSettleList?size=10&page=${page}`)
-            return res.data as AdminPandaSettlementList
+            const res = await axios.get<AdminPandaSettlementList>(`/api/admin/pandaSettleList?size=10&page=${page}`)
+            return res.data
         }
     )
 
