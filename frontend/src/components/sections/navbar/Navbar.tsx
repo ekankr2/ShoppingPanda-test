@@ -7,14 +7,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import {useCallback} from "react";
-import {Link, useHistory, useLocation} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {alpha, styled} from "@mui/material/styles";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import {Divider} from "@mui/material";
 import {useAuthStore} from "../../../store/authHooks";
 import {panda_menu, seller_menu, user_menu} from "./navbarTypes";
-import {useWindowStore} from "../../../store/windowHooks";
 import Button from "../../UI/Button";
 
 const StyledMenu = styled((props) => (
@@ -63,7 +62,6 @@ const ResponsiveAppBar = () => {
     const history = useHistory();
     const user = useAuthStore(state => state.user)
     const signOut = useAuthStore(state => state.signOut)
-    const loading = useWindowStore(state => state.loading)
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
@@ -120,9 +118,7 @@ const ResponsiveAppBar = () => {
                             {
                                 user &&
                                 <Box sx={{flexGrow: 0}}>
-                                    <IconButton onClick={handleClick} sx={{p: 0}}>
-                                        <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
-                                    </IconButton>
+                                    <Button text={user.userName} className='is-inverted' onClick={handleClick}/>
                                     <StyledMenu
                                         // @ts-ignore
                                         id="demo-customized-menu"
