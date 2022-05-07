@@ -11,10 +11,10 @@ export enum PandaMypageKeysEnum {
 export const useGetPandaDashboard = (year: number) =>
     useQuery(
         [PandaMypageKeysEnum.PandaDashboard, year], async () => {
-            const {data} = await axios.post('/api/pandadashboardmain', {
+            const {data} = await axios.post<PandaDashboard>('/api/pandadashboardmain', {
                 year: year
             })
-            return data as PandaDashboard
+            return data
         }
     )
 
@@ -37,7 +37,7 @@ export const useGetPandaSettlementList = (requestData: PandaSettlementRequestDat
 export const useGetPandaVideoList = () =>
     useQuery(
         PandaMypageKeysEnum.PandaVideoList, async () => {
-            const {data} = await axios.get('/api/pandadashboardmovie')
-            return data as PandaVideoList
+            const {data} = await axios.get<PandaVideoList>('/api/pandadashboardmovie')
+            return data
         }
     )
