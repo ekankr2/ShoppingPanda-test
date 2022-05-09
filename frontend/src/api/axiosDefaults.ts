@@ -1,6 +1,11 @@
 import axios from "axios";
 import {onTokenRefresh} from "../store/authHooks";
 
+// export const APIADDRESS = 'http://192.168.1.50:3000'
+export const APIADDRESS = "http://localhost:3000";
+
+axios.defaults.baseURL = APIADDRESS
+
 // 타임아웃
 axios.defaults.timeout = 2500
 
