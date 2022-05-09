@@ -28,16 +28,16 @@ export const useGetAdminPandaSettlementList = (page: number) =>
 export const useGetAdminPandaSettlementCompleteList = (page: number) =>
     useQuery(
         AdminKeysEnum.AdminPandaSettlementCompleteList, async () => {
-            const res = await axios.get(`/api/admin/completepandaSettleList?size=10&page=${page}`)
-            return res.data as AdminPandaSettlementList
+            const res = await axios.get<AdminPandaSettlementList>(`/api/admin/completepandaSettleList?size=10&page=${page}`)
+            return res.data
         }
     )
 
 export const useGetAdminShopSettlementList = (page: number) =>
     useQuery(
         AdminKeysEnum.AdminShopSettlementList, async () => {
-            const res = await axios.get(`/api/admin/shopSettleList?size=10&page=${page}`)
-            return res.data as AdminShopSettlementList
+            const res = await axios.get<AdminShopSettlementList>(`/api/admin/shopSettleList?size=10&page=${page}`)
+            return res.data
         }
     )
 
@@ -45,23 +45,23 @@ export const useGetAdminShopSettlementList = (page: number) =>
 export const useGetAdminShopSettlementCompleteList = (page: number) =>
     useQuery(
         AdminKeysEnum.AdminShopSettlementCompleteList, async () => {
-            const res = await axios.get(`/api/admin/completeshopSettleList?size=10&page=${page}`)
-            return res.data as AdminShopSettlementList
+            const res = await axios.get<AdminShopSettlementList>(`/api/admin/completeshopSettleList?size=10&page=${page}`)
+            return res.data
         }
     )
 
 export const useGetAdminApplyShopList = (page: number) =>
     useQuery(
         AdminKeysEnum.AdminApplyShopList, async () => {
-            const res = await axios.get(`/api/admin/applyShopList?size=10&page=${page}`)
-            return res.data as AdminShopApplyList
+            const res = await axios.get<AdminShopApplyList>(`/api/admin/applyShopList?size=10&page=${page}`)
+            return res.data
         }
     )
 
 export const useGetAdminApplyPandaList = (page: number) =>
     useQuery(
         AdminKeysEnum.AdminApplyPandaList, async () => {
-            const res = await axios.get(`/api/admin/applyPandaList?size=10&page=${page}`)
-            return res.data as AdminPandaApplyList
+            const res = await axios.get<AdminPandaApplyList>(`/api/admin/applyPandaList?size=10&page=${page}`)
+            return res.data
         }
     )

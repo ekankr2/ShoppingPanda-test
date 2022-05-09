@@ -11,8 +11,8 @@ export enum BuyerKeysEnum {
 export const useGetRecentSituationList = (size: number, page: number) =>
     useQuery(
         [BuyerKeysEnum.RecentSituationList, page], async () => {
-            const res = await axios.get(`/api/recentsituation?size=${size}&page=${page}`)
-            return res.data as RecentSituation
+            const res = await axios.get<RecentSituation>(`/api/recentsituation?size=${size}&page=${page}`)
+            return res.data
         },{
             keepPreviousData: true
         }
@@ -21,18 +21,18 @@ export const useGetRecentSituationList = (size: number, page: number) =>
 export const useGetBuyerDashboard = () =>
     useQuery(
         BuyerKeysEnum.BuyerDashboard, async () => {
-            const res = await axios.get('/api/dashboard')
-            return res.data as BuyerDashboard
+            const res = await axios.get<BuyerDashboard>('/api/dashboard')
+            return res.data
         }
     )
 
 export const useGetSituationDetail = (detailId: number) =>
     useQuery(
         [BuyerKeysEnum.RecentSituationDetail, detailId], async () => {
-            const res = await axios.post('/api/situationdetail', {
+            const res = await axios.post<Situation>('/api/situationdetail', {
                     detailId: detailId
                 })
-            return res.data as Situation
+            return res.data
         }, {
             enabled: !!detailId
         })

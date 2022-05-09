@@ -12,10 +12,10 @@ export enum SellerKeysEnum {
 export const useGetSellerDashboard = (year: number) =>
     useQuery(
         SellerKeysEnum.SellerDashboard, async () => {
-            const res = await axios.post('/api/shopdashboardmainv2', {
+            const res = await axios.post<SellerDashboard>('/api/shopdashboardmainv2', {
                 year: year
             })
-            return res.data as SellerDashboard
+            return res.data
         }, {
             enabled: !!year
         }
