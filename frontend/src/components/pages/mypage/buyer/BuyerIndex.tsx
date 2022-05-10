@@ -1,25 +1,27 @@
 import React, {FC} from 'react'
-
 import './buyerIndex.css'
-
-import { Route } from 'react-router-dom'
+import {Route, Routes} from 'react-router-dom'
 import {buyerSidebarItems} from "./buyerTypes";
 import MyPageRoutes from "../MyPageRoutes";
 import Sidebar from "../../../sections/sidebar/Sidebar";
 
-const BuyerIndex:FC = () => {
+const BuyerIndex: FC = () => {
 
     return (
-            <Route render={(props) => (
-                <div className={`layout theme-mode-light theme-color-cyan`}>
-                    <Sidebar sidebarItems={buyerSidebarItems} {...props}/>
-                    <div className="layout__content">
-                        <div className="layout__content-main">
-                            <MyPageRoutes/>
+        <>
+            <Routes>
+                <Route element={
+                    <div className={`layout theme-mode-light theme-color-cyan`}>
+                        <Sidebar sidebarItems={buyerSidebarItems}/>
+                        <div className="layout__content">
+                            <div className="layout__content-main">
+                                <MyPageRoutes/>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            )}/>
+                    </div>}
+                />
+            </Routes>
+        </>
     )
 }
 

@@ -1,12 +1,9 @@
 import React, {FC} from 'react'
-import { Link } from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 import './sidebar.css'
 import logo from '../../../assets/images/logo.png'
 
 export interface SidebarProps {
-    location: {
-        pathname: string
-    }
     sidebarItems: any
 }
 
@@ -14,7 +11,8 @@ export interface StringObj{
     [key:string]:string
 }
 
-const Sidebar : FC<SidebarProps> = ({location, sidebarItems}) => {
+const Sidebar : FC<SidebarProps> = ({sidebarItems}) => {
+    const location = useLocation()
 
     const activeItem = sidebarItems.findIndex((item: StringObj) => item.route === location.pathname)
 
