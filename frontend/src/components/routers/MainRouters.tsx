@@ -17,15 +17,23 @@ const MainRouters = () => {
     return (
         <>
             <Navbar/>
-            <Suspense fallback={<Loader />}>
+            <Suspense fallback={<Loader/>}>
                 <Routes>
-                    <Route path="" element={<Homepage/>} />
+                    <Route index element={<Homepage/>}/>
                     <Route path="/signup" element={<SignUp/>}/>
                     <Route path="/signin" element={<SignIn/>}/>
-                    {/*<PrivateRoute path="/buyer" component={BuyerIndex}/>*/}
-                    {/*<PrivateRoute path="/panda" component={PandaIndex}/>*/}
-                    {/*<PrivateRoute path="/seller" component={SellerIndex}/>*/}
-                    {/*<PrivateRoute path="/admin" component={AdminIndex}/>*/}
+                    <Route element={<PrivateRoute/>}>
+                        <Route path="/buyer" element={<BuyerIndex/>}/>
+                    </Route>
+                    <Route element={<PrivateRoute/>}>
+                        <Route path="/panda" element={<PandaIndex/>}/>
+                    </Route>
+                    <Route element={<PrivateRoute/>}>
+                        <Route path="/seller" element={<SellerIndex/>}/>
+                    </Route>
+                    <Route element={<PrivateRoute/>}>
+                        <Route path="/admin" element={<AdminIndex/>}/>
+                    </Route>
                     <Route path="/test" element={<TestPage/>}/>
                 </Routes>
             </Suspense>

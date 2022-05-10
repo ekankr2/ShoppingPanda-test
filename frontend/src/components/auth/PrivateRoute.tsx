@@ -1,20 +1,16 @@
-import React, {FC, ReactElement} from 'react';
-import {RouteProps, Navigate} from 'react-router-dom';
+import React, {FC} from 'react';
+import {RouteProps, Navigate, Outlet} from 'react-router-dom';
 
 import {useAuthStore} from "../../store/authHooks";
 
-interface Props extends RouteProps {
-  children: ReactElement
-}
-
-const PrivateRoute: FC<Props> = ({ children }) => {
+const PrivateRoute: FC = ( ) => {
   const user = useAuthStore(state => state.user);
 
   if(!user){
     return <Navigate to={'signIn'} />
   }
 
-  return children
+  return <Outlet/>
 }
 
 export default PrivateRoute;
