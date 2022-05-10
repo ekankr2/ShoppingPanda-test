@@ -1,19 +1,20 @@
-import React, { FC } from 'react';
-import { Route, Redirect, RouteProps } from 'react-router-dom';
+import React, {FC, ReactElement} from 'react';
+import {RouteProps, Navigate} from 'react-router-dom';
 
 import {useAuthStore} from "../../store/authHooks";
 
 interface Props extends RouteProps {
-  component: any;
+  children: ReactElement
 }
 
-const PrivateRoute: FC<Props> = ({ component: Component, ...rest }) => {
+const PrivateRoute: FC<Props> = ({ children }) => {
   const user = useAuthStore(state => state.user);
 
-  return(
-    <Route {...rest} render={props => user ? <Component {...props} /> :
-        <Redirect to={{pathname:"/signin", state: { next: props.location.pathname } }} />} />
-  );
+  if(!user){
+    return <Navigate to={'signIn'} />
+  }
+
+  return children
 }
 
 export default PrivateRoute;
