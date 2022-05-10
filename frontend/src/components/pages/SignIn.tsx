@@ -1,22 +1,12 @@
 import React, {FC, useState, FormEvent, useEffect} from 'react';
-import {Link, RouteComponentProps} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 import Message from '../UI/Message';
 import {useAuthStore} from "../../store/authHooks";
 import {useWindowStore} from "../../store/windowHooks";
 
-interface Props {
-    history: RouteComponentProps["history"];
-    location: {
-        state: {
-            next: string
-        }
-    }
-    match: RouteComponentProps['match'];
-}
-
-const SignIn: FC<Props> = (props) => {
+const SignIn: FC = () => {
     const [account, setAccount] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -32,17 +22,6 @@ const SignIn: FC<Props> = (props) => {
             }
         }
     }, [error]);
-
-    useEffect(() => {
-        const {history, location: {state}} = props
-        if (user) {
-            if (state && state.next) {
-                history.push(state.next)
-            } else {
-                history.goBack()
-            }
-        }
-    }, [user, props])
 
     const submitHandler = (e: FormEvent) => {
         e.preventDefault();

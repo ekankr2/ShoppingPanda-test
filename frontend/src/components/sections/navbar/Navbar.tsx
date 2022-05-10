@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import {useCallback} from "react";
-import {Link, useHistory} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {alpha, styled} from "@mui/material/styles";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -59,7 +59,7 @@ const StyledMenu = styled((props) => (
 }));
 
 const ResponsiveAppBar = () => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const user = useAuthStore(state => state.user)
     const signOut = useAuthStore(state => state.signOut)
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -155,9 +155,9 @@ const ResponsiveAppBar = () => {
                                 !user &&
                                 <Box sx={{flexGrow: 0}}>
                                     <div className="buttons">
-                                        <Button text="회원가입" onClick={() => history.push('/signup')}
+                                        <Button text="회원가입" onClick={() => navigate('/signup')}
                                                 className="is-primary"/>
-                                        <Button text="로그인" onClick={() => history.push('/signin')}/>
+                                        <Button text="로그인" onClick={() => navigate('/signin')}/>
                                     </div>
                                 </Box>
                             }
