@@ -130,8 +130,8 @@ const ResponsiveAppBar = () => {
                                         onClose={handleClose}
                                     >
                                         {
-                                            renderAuthMenu(user.panda, user.seller).map((data) =>
-                                                <MenuItem sx={{fontSize: 18}} onClick={handleClose} disableRipple>
+                                            renderAuthMenu(user.panda, user.seller).map((data, idx) =>
+                                                <MenuItem key={idx} sx={{fontSize: 18}} onClick={handleClose} disableRipple>
                                                     <Link to={data.link} className='ml-1'>
                                                         <i className={data.icon}/>
                                                         <span className='ml-4'>{data.content}</span>

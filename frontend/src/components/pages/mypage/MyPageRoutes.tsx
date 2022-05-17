@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Route, Switch } from 'react-router-dom'
+import {Route, Routes} from 'react-router-dom'
 import BuyerDashboard from "./buyer/BuyerDashboard";
 import OrderListPage from "./buyer/OrderListPage";
 import CartPage from "./buyer/CartPage";
@@ -19,25 +19,19 @@ import AdminApplyManagementPage from "./admin/AdminApplyManagementPage";
 
 const MyPageRoutes = () => {
     return (
-        <Switch>
-            <Route path='/buyer/dashboard' exact component={BuyerDashboard}/>
-            <Route path='/buyer/orderList' exact component={OrderListPage}/>
-            <Route path='/buyer/cancelList' exact component={CancelListPage}/>
-            <Route path='/buyer/cart' exact component={CartPage}/>
-            <Route path='/buyer/infoPage' exact component={BuyerInfoPage}/>
+        <Routes>
+            <Route path='/panda/dashboard' element={PandaDashboard}/>
+            <Route path='/panda/video' element={PandaVideoPage}/>
+            <Route path='/panda/settlement' element={PandaSettlementPage}/>
 
-            <Route path='/panda/dashboard' exact component={PandaDashboard}/>
-            <Route path='/panda/video' exact component={PandaVideoPage}/>
-            <Route path='/panda/settlement' exact component={PandaSettlementPage}/>
+            <Route path='/seller/dashboard' element={SellerDashboard}/>
+            <Route path='/seller/settlement' element={SellerSettlementPage}/>
+            <Route path='/seller/newOrder' element={SellerNewOrderPage}/>
 
-            <Route path='/seller/dashboard' exact component={SellerDashboard}/>
-            <Route path='/seller/settlement' exact component={SellerSettlementPage}/>
-            <Route path='/seller/newOrder' exact component={SellerNewOrderPage}/>
-
-            <Route path='/admin/pandaManagement' exact component={AdminPandaManagementPage}/>
-            <Route path='/admin/sellerManagement' exact component={AdminShopManagementPage}/>
-            <Route path='/admin/applyManagement' exact component={AdminApplyManagementPage}/>
-        </Switch>
+            <Route path='/admin/pandaManagement' element={AdminPandaManagementPage}/>
+            <Route path='/admin/sellerManagement' element={AdminShopManagementPage}/>
+            <Route path='/admin/applyManagement' element={AdminApplyManagementPage}/>
+        </Routes>
     )
 }
 

@@ -23,7 +23,7 @@ const MainRouters = () => {
                     <Route path="/signup" element={<SignUp/>}/>
                     <Route path="/signin" element={<SignIn/>}/>
                     <Route element={<PrivateRoute/>}>
-                        <Route path="/buyer" element={<BuyerIndex/>}/>
+                        <Route path="/buyer/*" element={<BuyerIndex/>}/>
                     </Route>
                     <Route element={<PrivateRoute/>}>
                         <Route path="/panda" element={<PandaIndex/>}/>
