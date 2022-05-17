@@ -24,10 +24,6 @@ const MyPageRoutes = () => {
             <Route path='/panda/video' element={PandaVideoPage}/>
             <Route path='/panda/settlement' element={PandaSettlementPage}/>
 
-            <Route path='/seller/dashboard' element={SellerDashboard}/>
-            <Route path='/seller/settlement' element={SellerSettlementPage}/>
-            <Route path='/seller/newOrder' element={SellerNewOrderPage}/>
-
             <Route path='/admin/pandaManagement' element={AdminPandaManagementPage}/>
             <Route path='/admin/sellerManagement' element={AdminShopManagementPage}/>
             <Route path='/admin/applyManagement' element={AdminApplyManagementPage}/>
