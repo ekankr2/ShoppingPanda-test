@@ -26,7 +26,7 @@ const MainRouters = () => {
                         <Route path="/buyer/*" element={<BuyerIndex/>}/>
                     </Route>
                     <Route element={<PrivateRoute/>}>
-                        <Route path="/panda" element={<PandaIndex/>}/>
+                        <Route path="/panda/*" element={<PandaIndex/>}/>
                     </Route>
                     <Route element={<PrivateRoute/>}>
                         <Route path="/seller/*" element={<SellerIndex/>}/>

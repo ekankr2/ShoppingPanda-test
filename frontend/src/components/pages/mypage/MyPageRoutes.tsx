@@ -20,9 +20,7 @@ import AdminApplyManagementPage from "./admin/AdminApplyManagementPage";
 const MyPageRoutes = () => {
     return (
         <Routes>
-            <Route path='/panda/dashboard' element={PandaDashboard}/>
-            <Route path='/panda/video' element={PandaVideoPage}/>
-            <Route path='/panda/settlement' element={PandaSettlementPage}/>
+
 
             <Route path='/admin/pandaManagement' element={AdminPandaManagementPage}/>
             <Route path='/admin/sellerManagement' element={AdminShopManagementPage}/>
