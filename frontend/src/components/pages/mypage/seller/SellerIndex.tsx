@@ -2,7 +2,6 @@ import React, {FC} from 'react'
 import '../buyer/buyerIndex.css'
 import {Navigate, Route, Routes} from 'react-router-dom'
 import {sellerSidebarItems} from "./sellerTypes";
-import MyPageRoutes from "../MyPageRoutes";
 import Sidebar from "../../../sections/sidebar/Sidebar";
 import {useAuthStore} from "../../../../store/authHooks";
 import SellerDashboard from "./SellerDashboard";

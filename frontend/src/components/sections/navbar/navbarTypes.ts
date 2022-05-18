@@ -55,11 +55,6 @@ export const seller_menu =[
         "content": "장바구니",
         "link":"/buyer/cart"
     },
-    {
-        "icon": "bx bx-log-out-circle bx-rotate-180",
-        "content": "로그아웃",
-        "link":"/logout"
-    }
 ]
 
 export const notification_dummy = [

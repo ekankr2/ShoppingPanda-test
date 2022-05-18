@@ -32,7 +32,7 @@ const MainRouters = () => {
                         <Route path="/seller/*" element={<SellerIndex/>}/>
                     </Route>
                     <Route element={<PrivateRoute/>}>
-                        <Route path="/admin" element={<AdminIndex/>}/>
+                        <Route path="/admin/*" element={<AdminIndex/>}/>
                     </Route>
                     <Route path="/test" element={<TestPage/>}/>
                 </Routes>
