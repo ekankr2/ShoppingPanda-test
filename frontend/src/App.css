@@ -8,6 +8,11 @@
     text-decoration: none;
 }
 
+.form__logo {
+    width: 150px;
+    margin: auto;
+}
+
 .navbar-logo span{
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;

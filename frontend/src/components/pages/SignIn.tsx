@@ -1,66 +1,103 @@
-import React, {FC, useState, FormEvent, useEffect} from 'react';
-import {Link} from 'react-router-dom';
-import Input from '../UI/Input';
-import Button from '../UI/Button';
-import Message from '../UI/Message';
+import React, {useEffect, useState} from 'react';
+import {
+    Alert,
+    Box,
+    Button,
+    Center,
+    Checkbox,
+    Group,
+    Image,
+    PasswordInput,
+    Space,
+    TextInput,
+} from "@mantine/core";
+import {useForm} from "@mantine/form";
 import {useAuthStore} from "../../store/authHooks";
 import {useWindowStore} from "../../store/windowHooks";
+import {AlertCircle} from 'tabler-icons-react';
+import {useNavigate} from 'react-router-dom';
 
-const SignIn: FC = () => {
-    const [account, setAccount] = useState('');
-    const [password, setPassword] = useState('');
-    const [loading, setLoading] = useState(false);
-    const signIn = useAuthStore(state => state.signIn);
-    const user = useAuthStore(state => state.user);
-    const error = useWindowStore(state => state.error);
-    const setError = useWindowStore(state => state.setError);
+const SignIn = () => {
+    const signIn = useAuthStore(state => state.signIn)
+    const user = useAuthStore(state => state.user)
+    const loading = useWindowStore(state => state.loading)
+    const setLoading = useWindowStore(state => state.setLoading)
+    const error = useWindowStore(state => state.error)
+    const setError = useWindowStore(state => state.setError)
+    const [userEmail] = useState(localStorage.getItem('userEmail'))
+    const navigate = useNavigate()
 
     useEffect(() => {
-        return () => {
-            if (error) {
-                setError('')
-            }
+        if (user) {
+            navigate(-1)
         }
-    }, [error]);
+    }, [user])
 
-    const submitHandler = (e: FormEvent) => {
-        e.preventDefault();
+    const form = useForm({
+        initialValues: {
+            email: userEmail ? userEmail : '',
+            password: '',
+            rememberMe: !!userEmail,
+        },
+        validate: {
+            email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+        },
+    });
+
+    const handleSubmit = (values: typeof form.values) => {
         if (error) {
             setError('')
         }
-        setLoading(true);
-        signIn({account, password}, () => setLoading(false))
+        const {rememberMe, ...rest} = values
+        localStorage.removeItem('userEmail')
+        if (rememberMe) {
+            localStorage.setItem('userEmail', rest.email)
+        }
+        signIn(rest, () => setLoading(false))
     }
 
     return (
-        <section className="section">
-            <div className="container">
-                <h2 className="has-text-centered is-size-2 mb-3">Sign In</h2>
-                <form className="form" onSubmit={submitHandler}>
-                    {error && <Message type="danger" msg={error}/>}
-                    <Input
-                        type="email"
-                        name="email"
-                        value={account}
-                        onChange={(e) => setAccount(e.currentTarget.value)}
-                        placeholder="Email address"
-                        label="Email address"
+        <Center sx={{height: '93vh', backgroundColor: 'gray'}}>
+            <Box sx={{minWidth: 500, backgroundColor: 'white', padding: 30, borderRadius: 5}}>
+                <form onSubmit={form.onSubmit((handleSubmit))}>
+                    <div className='form__logo'>
+                        <Image src="https://user-images.githubusercontent.com/83811729/169019704-8fca547c-4f68-479c-b2dc-3611360988d3.png"
+                               alt="Random unsplash image"/>
+                    </div>
+                    {error &&
+                        <Alert icon={<AlertCircle size={16}/>} title="Login Failed" color="red">
+                            Please check your email or password
+                        </Alert>
+                    }
+                    <Space h="md"/>
+                    <TextInput
+                        required
+                        label="이메일"
+                        placeholder="your@email.com"
+                        size="md"
+                        {...form.getInputProps('email')}
                     />
-                    <Input
-                        type="password"
-                        name="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.currentTarget.value)}
-                        placeholder="Password"
-                        label="Password"
+                    <Space h="lg"/>
+                    <PasswordInput
+                        required
+                        label="비밀번호"
+                        size="md"
+                        placeholder="password"
+                        {...form.getInputProps('password')}
                     />
-                    <p><Link to="/forgot-password">Forgot password ?</Link></p>
-                    <Button text={loading ? "Loading..." : "Sign In"} className="is-primary is-fullwidth mt-5"
-                            disabled={loading}/>
+                    <Space h="md"/>
+                    <Checkbox
+                        mt="md"
+                        label="ID 저장"
+                        {...form.getInputProps('rememberMe', {type: 'checkbox'})}
+                    />
+                    <Group position="right">
+                        <Button my="sm" type="submit" loading={loading}>로그인</Button>
+                    </Group>
                 </form>
-            </div>
-        </section>
+            </Box>
+        </Center>
     );
-}
+};
 
 export default SignIn;
