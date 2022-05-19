@@ -11,7 +11,7 @@ export const useAuthStore = create<AuthStore>(set => ({
                 loading: true
             })
             let form = new FormData();
-            form.append("email", signInData.account);
+            form.append("email", signInData.email);
             form.append("password", signInData.password);
 
             const {data} = await axios.post('/api/loginv2', form)
