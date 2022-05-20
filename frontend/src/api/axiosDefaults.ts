@@ -1,5 +1,5 @@
 import axios from "axios";
-import {onTokenRefresh} from "../store/authHooks";
+import {useAuthStore} from "../store/authHooks";
 
 // // export const APIADDRESS = 'http://192.168.1.50:3000'
 // export const APIADDRESS = "http://localhost:8080";
@@ -35,7 +35,7 @@ axios.interceptors.response.use(
 
         if (status === 406) {
             try {
-                await onTokenRefresh()
+                await useAuthStore.getState().tokenRefresh()
                 return axios(config)
             } catch (err) {
                 console.error('재발급 실패', err)
