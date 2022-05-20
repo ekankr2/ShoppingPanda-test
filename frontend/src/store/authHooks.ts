@@ -43,22 +43,16 @@ export const useAuthStore = create<AuthStore>(set => ({
     signUp: () => {
 
     },
-    reIssue: () => onTokenRefresh()
+    tokenRefresh: async () => {
+        try {
+            const {data} = await axios.post('api/reissuev2')
+            if (data) {
+                set({user: data})
+            }
+        } catch (err: any) {
+            console.log(err.data)
+        }
+    }
 }))
 
-// 토큰 재발급 함수
-export const onTokenRefresh = async () => {
-    try {
-        console.log('리프래시중임')
-        const {data} = await axios.post('/api/reissuev2')
-        if (data) {
-            useAuthStore.setState({
-                user: data
-            })
-        }
-    } catch (err) {
-        console.error('토큰 재발급 실패', err)
-        // 실패 처리
-    }
-}
 

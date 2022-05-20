@@ -17,7 +17,7 @@ export interface AuthStore {
     signIn: (data: SignInData, onError: () => void) => void;
     signOut: () => void;
     signUp: () => void;
-    reIssue: () => void;
+    tokenRefresh: () => void;
 }
 
 export interface WindowStore {
