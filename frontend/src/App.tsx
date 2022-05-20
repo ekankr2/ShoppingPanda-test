@@ -8,11 +8,11 @@ import MainRouters from "./components/routers/MainRouters";
 
 
 const App: FC = () => {
-    const reIssue = useAuthStore(state => state.reIssue)
+    const tokenRefresh = useAuthStore(state => state.tokenRefresh)
     const loading = useWindowStore(state => state.loading)
 
     useLayoutEffect(() => {
-        reIssue()
+        tokenRefresh()
     }, []);
 
     if (loading) {
